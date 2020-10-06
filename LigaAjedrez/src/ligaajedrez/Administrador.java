@@ -66,7 +66,8 @@ public class Administrador extends javax.swing.JFrame {
 
         jB_AsignarResponsable.setText("Asignar Responsable a Menor");
 
-        jL_Admin.setText("ADMINISTRACION");
+        jL_Admin.setText("ADMINISTRADOR");
+        jL_Admin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jL_Nombre.setText("nombre");
 

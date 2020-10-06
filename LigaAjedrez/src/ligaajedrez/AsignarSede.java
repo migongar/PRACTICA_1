@@ -41,7 +41,7 @@ public class AsignarSede extends javax.swing.JFrame {
 
         jCB_Sede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jL_Sede.setText("sede:");
+        jL_Sede.setText("Sede:");
 
         jB_Asignar.setText("Asignar");
 
@@ -49,7 +49,7 @@ public class AsignarSede extends javax.swing.JFrame {
 
         jCB_Equipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jL_Equipo.setText("equipo:");
+        jL_Equipo.setText("Equipo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

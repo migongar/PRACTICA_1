@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jL_Sede">
       <Properties>
-        <Property name="text" type="java.lang.String" value="sede:"/>
+        <Property name="text" type="java.lang.String" value="Sede:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jB_Asignar">
@@ -128,7 +128,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jL_Equipo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="equipo:"/>
+        <Property name="text" type="java.lang.String" value="Equipo:"/>
       </Properties>
     </Component>
   </SubComponents>
