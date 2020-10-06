@@ -5,11 +5,15 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
  */
 public class AsignarSede extends javax.swing.JFrame {
+    private Administrador administrador;
 
     /**
      * Creates new form AsignarSede
@@ -17,6 +21,7 @@ public class AsignarSede extends javax.swing.JFrame {
     public AsignarSede() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,8 +49,18 @@ public class AsignarSede extends javax.swing.JFrame {
         jL_Sede.setText("Sede:");
 
         jB_Asignar.setText("Asignar");
+        jB_Asignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_AsignarActionPerformed(evt);
+            }
+        });
 
         jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
 
         jCB_Equipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -98,6 +113,16 @@ public class AsignarSede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        this.setVisible(false);
+        administrador = new Administrador();
+        administrador.setVisible(true);
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jB_AsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarActionPerformed
+        JOptionPane.showMessageDialog(null, "Asignacion realizada con exito\n ", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jB_AsignarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

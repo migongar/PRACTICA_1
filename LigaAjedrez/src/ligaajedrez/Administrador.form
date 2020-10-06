@@ -107,6 +107,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Introducir Resultado"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_IntroducirResActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_Inscribirse">
       <Properties>
@@ -128,11 +131,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignar Sede"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_AsignarSedeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_AsignarResponsable">
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignar Responsable a Menor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_AsignarResponsableActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jL_Admin">
       <Properties>

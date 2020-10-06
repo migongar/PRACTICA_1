@@ -10,6 +10,12 @@ package ligaajedrez;
  * @author angel
  */
 public class Administrador extends javax.swing.JFrame {
+    private InscribirseTorneo inscribirseTorneo;
+    private AsignarSede asignarSede;
+    private AsignarResponsable asignarResponsable;
+    private ReservarSede reservarSede;
+    private Resultado resultado;
+    private Historial historial;
 
     /**
      * Creates new form Administrador
@@ -47,6 +53,11 @@ public class Administrador extends javax.swing.JFrame {
         });
 
         jB_IntroducirRes.setText("Introducir Resultado");
+        jB_IntroducirRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_IntroducirResActionPerformed(evt);
+            }
+        });
 
         jB_Inscribirse.setText("Incribirse Torneo");
         jB_Inscribirse.addActionListener(new java.awt.event.ActionListener() {
@@ -63,8 +74,18 @@ public class Administrador extends javax.swing.JFrame {
         });
 
         jB_AsignarSede.setText("Asignar Sede");
+        jB_AsignarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_AsignarSedeActionPerformed(evt);
+            }
+        });
 
         jB_AsignarResponsable.setText("Asignar Responsable a Menor");
+        jB_AsignarResponsable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_AsignarResponsableActionPerformed(evt);
+            }
+        });
 
         jL_Admin.setText("ADMINISTRADOR");
         jL_Admin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -133,16 +154,40 @@ public class Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        reservarSede = new ReservarSede();
+        reservarSede.setVisible(true);
     }//GEN-LAST:event_jB_ReservarSedeActionPerformed
 
     private void jB_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_HistorialActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        historial = new Historial();
+        historial.setVisible(true);
     }//GEN-LAST:event_jB_HistorialActionPerformed
 
     private void jB_InscribirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirseActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        inscribirseTorneo = new InscribirseTorneo();
+        inscribirseTorneo.setVisible(true);
     }//GEN-LAST:event_jB_InscribirseActionPerformed
+
+    private void jB_IntroducirResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirResActionPerformed
+        this.setVisible(false);
+        resultado = new Resultado();
+        resultado.setVisible(true);
+    }//GEN-LAST:event_jB_IntroducirResActionPerformed
+
+    private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
+        this.setVisible(false);
+        asignarResponsable = new AsignarResponsable();
+        asignarResponsable.setVisible(true);
+    }//GEN-LAST:event_jB_AsignarResponsableActionPerformed
+
+    private void jB_AsignarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarSedeActionPerformed
+        this.setVisible(false);
+        asignarSede = new AsignarSede();
+        asignarSede.setVisible(true);
+    }//GEN-LAST:event_jB_AsignarSedeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

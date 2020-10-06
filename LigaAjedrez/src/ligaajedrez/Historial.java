@@ -5,11 +5,14 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author angel
  */
 public class Historial extends javax.swing.JFrame {
+    private Administrador administrador;
 
     /**
      * Creates new form Historial
@@ -17,6 +20,7 @@ public class Historial extends javax.swing.JFrame {
     public Historial() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +35,7 @@ public class Historial extends javax.swing.JFrame {
         jTA_Historial = new javax.swing.JTextArea();
         jTF_DNI = new javax.swing.JTextField();
         jB_Buscar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jB_Salir = new javax.swing.JButton();
         jL_Historial = new javax.swing.JLabel();
         jRB_Gerente = new javax.swing.JRadioButton();
         jRB_entrenador = new javax.swing.JRadioButton();
@@ -50,7 +54,12 @@ public class Historial extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("salir");
+        jB_Salir.setText("salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
 
         jL_Historial.setText("HISTORIAL");
 
@@ -84,7 +93,7 @@ public class Historial extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jButton2))
+                        .addComponent(jB_Salir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(jL_Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -106,7 +115,7 @@ public class Historial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jB_Salir)
                 .addGap(10, 10, 10))
         );
 
@@ -117,10 +126,16 @@ public class Historial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jB_BuscarActionPerformed
 
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        this.setVisible(false);
+        administrador = new Administrador();
+        administrador.setVisible(true);
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Buscar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jB_Salir;
     private javax.swing.JLabel jL_Historial;
     private javax.swing.JRadioButton jRB_Gerente;
     private javax.swing.JRadioButton jRB_Jugador;
