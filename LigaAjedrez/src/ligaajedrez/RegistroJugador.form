@@ -127,6 +127,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTF_Nombre">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Miguel"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
