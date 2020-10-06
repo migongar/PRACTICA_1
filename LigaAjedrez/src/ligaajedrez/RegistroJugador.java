@@ -48,8 +48,6 @@ public class RegistroJugador extends javax.swing.JFrame {
 
         jL_Nombre.setText("Nombre");
 
-        jTF_Nombre.setText("Miguel");
-
         jLabel2.setText("fecha nacimiento");
 
         jL_club.setText("Club");
