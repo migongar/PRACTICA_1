@@ -5,6 +5,8 @@
  */
 package ligaajedrez;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -14,6 +16,12 @@ public class Jugador extends javax.swing.JFrame {
     /**
      * Creates new form Jugador
      */
+    private AsignarResponsable resp;
+    private ReservarSede resSede;
+    private Resultado resultado;
+    private InscribirseTorneo inscribir_torneo;
+    private Login login;
+    
     public Jugador() {
         initComponents();
     }
@@ -42,8 +50,18 @@ public class Jugador extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jB_ReservarSede.setText("Reservar Sede");
+        jB_ReservarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ReservarSedeActionPerformed(evt);
+            }
+        });
 
         jB_IntroducirRes.setText("Introducir Resultado");
+        jB_IntroducirRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_IntroducirResActionPerformed(evt);
+            }
+        });
 
         jB_InscribirseTorneo.setText("Inscribirse Torneo");
         jB_InscribirseTorneo.addActionListener(new java.awt.event.ActionListener() {
@@ -66,8 +84,18 @@ public class Jugador extends javax.swing.JFrame {
         jL_Club.setText("club");
 
         jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
 
         jB_Historial.setText("Historial Jugador");
+        jB_Historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_HistorialActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,11 +164,47 @@ public class Jugador extends javax.swing.JFrame {
 
     private void jB_InscribirseTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirseTorneoActionPerformed
         // TODO add your handling code here:
+        inscribir_torneo = new InscribirseTorneo();
+        inscribir_torneo.setVisible(true);
+        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jB_InscribirseTorneoActionPerformed
 
     private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:4
+        resp = new AsignarResponsable();
+        resp.setVisible(true);
+        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jB_AsignarResponsableActionPerformed
+
+    private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
+        // TODO add your handling code here:
+        resSede = new ReservarSede();
+        resSede.setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jB_ReservarSedeActionPerformed
+
+    private void jB_IntroducirResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirResActionPerformed
+        // TODO add your handling code here:
+        resultado = new Resultado();
+        resultado.setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jB_IntroducirResActionPerformed
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        // TODO add your handling code here:
+        login = new Login();
+        login.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jB_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_HistorialActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Historial Jugador:");
+    }//GEN-LAST:event_jB_HistorialActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -103,11 +103,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reservar Sede"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_ReservarSedeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_IntroducirRes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Introducir Resultado"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_IntroducirResActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_InscribirseTorneo">
       <Properties>
@@ -148,11 +154,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_SalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_Historial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Historial Jugador"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_HistorialActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

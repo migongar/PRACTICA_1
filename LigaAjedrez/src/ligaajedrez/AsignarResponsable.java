@@ -5,6 +5,8 @@
  */
 package ligaajedrez;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -14,6 +16,8 @@ public class AsignarResponsable extends javax.swing.JFrame {
     /**
      * Creates new form AsignarResponsable
      */
+    private Jugador jugador;
+    
     public AsignarResponsable() {
         initComponents();
     }
@@ -64,8 +68,18 @@ public class AsignarResponsable extends javax.swing.JFrame {
         jL_DatosRes.setText("Datos del responsable");
 
         jB_Asignar.setText("Asignar");
+        jB_Asignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_AsignarActionPerformed(evt);
+            }
+        });
 
         jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
 
         jL_DniM.setText("DNI del menor");
 
@@ -169,6 +183,19 @@ public class AsignarResponsable extends javax.swing.JFrame {
     private void jT_ApellidosResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_ApellidosResActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jT_ApellidosResActionPerformed
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        // TODO add your handling code here:
+        jugador = new Jugador();
+        jugador.setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jB_AsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Responsable asignado:");
+    }//GEN-LAST:event_jB_AsignarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

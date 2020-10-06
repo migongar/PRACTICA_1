@@ -5,6 +5,8 @@
  */
 package ligaajedrez;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -14,6 +16,8 @@ public class ReservarSede extends javax.swing.JFrame {
     /**
      * Creates new form ReservarSede
      */
+    private Jugador jugador;
+    
     public ReservarSede() {
         initComponents();
     }
@@ -50,8 +54,18 @@ public class ReservarSede extends javax.swing.JFrame {
         jB_Buscar.setText("Buscar");
 
         jB_Reservar.setText("Reservar");
+        jB_Reservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ReservarActionPerformed(evt);
+            }
+        });
 
         jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
 
         jL_ReservarSede.setText("RESERVAR SEDE");
 
@@ -115,6 +129,19 @@ public class ReservarSede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        // TODO add your handling code here:
+        jugador = new Jugador();
+        jugador.setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jB_ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Sede Reservada:");
+    }//GEN-LAST:event_jB_ReservarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

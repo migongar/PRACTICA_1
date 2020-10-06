@@ -5,6 +5,8 @@
  */
 package ligaajedrez;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -14,6 +16,8 @@ public class Resultado extends javax.swing.JFrame {
     /**
      * Creates new form Resultado
      */
+    private Jugador jugador;
+    
     public Resultado() {
         initComponents();
     }
@@ -52,6 +56,11 @@ public class Resultado extends javax.swing.JFrame {
         jL_TiempoPartida.setText("Tiempo Partida");
 
         jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
 
         jB_Introducir.setText("Introducir");
         jB_Introducir.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +150,17 @@ public class Resultado extends javax.swing.JFrame {
 
     private void jB_IntroducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Resultado guardado correctamente.");
     }//GEN-LAST:event_jB_IntroducirActionPerformed
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        // TODO add your handling code here:
+        
+        jugador = new Jugador();
+        jugador.setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jB_SalirActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

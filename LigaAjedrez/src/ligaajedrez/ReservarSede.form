@@ -127,11 +127,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reservar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_ReservarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_Salir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_SalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jL_ReservarSede">
       <Properties>
