@@ -5,11 +5,15 @@
  */
 package ligaajedrez;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
  */
 public class Login extends javax.swing.JFrame {
+    private Administrador administrador;
+    private Jugador jugador;
 
     /**
      * Creates new form Login
@@ -126,7 +130,18 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTF_UserActionPerformed
 
     private void jB_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EntrarActionPerformed
-        // TODO add your handling code here:
+        if((jTF_User.getText()).equals("administrador")){
+            this.setVisible(false);
+            administrador = new Administrador();
+            administrador.setVisible(true);
+        }
+        else if((jTF_User.getText()).equals("jugador")){   
+            this.setVisible(false);
+            jugador = new Jugador();
+            jugador.setVisible(true);
+        }
+        else 
+            JOptionPane.showMessageDialog(null, "El usuario debe ser: \"administrador\"  o: \"jugador\"", "AVISO",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jB_EntrarActionPerformed
 
     private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
