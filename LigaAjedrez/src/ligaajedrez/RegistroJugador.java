@@ -5,19 +5,25 @@
  */
 package ligaajedrez;
 
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import modelo.Usuario;
 
 /**
  *
  * @author angel
  */
 public class RegistroJugador extends javax.swing.JFrame {
-
+    private Login login;
+    private Usuario usuario;
     /**
      * Creates new form RegistroJugador
      */
-    public RegistroJugador() {
-        initComponents();
+    public RegistroJugador(Usuario user) {
+        initComponents();        
+        this.setLocationRelativeTo(null);
+        this.usuario = user;
+        
     }
 
     /**
@@ -31,7 +37,6 @@ public class RegistroJugador extends javax.swing.JFrame {
 
         jL_Nombre = new javax.swing.JLabel();
         jTF_Nombre = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jL_club = new javax.swing.JLabel();
         jCB_club = new javax.swing.JComboBox<>();
@@ -45,6 +50,7 @@ public class RegistroJugador extends javax.swing.JFrame {
         jTF_DNI = new javax.swing.JTextField();
         jL_Apellidos = new javax.swing.JLabel();
         jTF_Apellidos = new javax.swing.JTextField();
+        jDC_fnac = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,38 +95,42 @@ public class RegistroJugador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jL_club)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jL_Cuota))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jCB_club, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField2))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jL_Dni)
-                                        .addGap(17, 17, 17))
-                                    .addComponent(jTF_Dinero, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jL_Mes)
-                                    .addComponent(jTF_DNI)))
+                                .addComponent(jL_club)
+                                .addGap(79, 79, 79)
+                                .addComponent(jCB_club, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jL_Nombre)
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jL_Apellidos)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTF_Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jDC_fnac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jL_Dni)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTF_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jL_Cuota)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jL_Nombre)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jL_Apellidos)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jTF_Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(7, 7, 7)
+                                            .addComponent(jTF_Dinero, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jL_Mes)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jL_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,11 +144,12 @@ public class RegistroJugador extends javax.swing.JFrame {
                     .addComponent(jL_Apellidos)
                     .addComponent(jTF_Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jL_Dni)
-                    .addComponent(jTF_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jL_Dni)
+                        .addComponent(jTF_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDC_fnac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jL_club)
@@ -159,8 +170,35 @@ public class RegistroJugador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Registrado correctamente:");
+        String dni, nom, ape, dir, email, club;
+        int edad;
+        Calendar hoy = Calendar.getInstance();
+
+        int diff_year = hoy.get(Calendar.YEAR) -  jDC_fnac.getCalendar().get(Calendar.YEAR);
+        int diff_month = hoy.get(Calendar.MONTH) - jDC_fnac.getCalendar().get(Calendar.MONTH);
+        int diff_day = hoy.get(Calendar.DAY_OF_MONTH) - jDC_fnac.getCalendar().get(Calendar.DAY_OF_MONTH);
+
+        //Si está en ese año pero todavía no los ha cumplido
+        if (diff_month < 0 || (diff_month == 0 && diff_day < 0)) {
+            diff_year = diff_year - 1; //no aparecían los dos guiones del postincremento :|
+        }
+        
+        edad = diff_year;
+        
+        dni = jTF_DNI.getText();     
+        nom = jTF_Nombre.getText();
+        ape = jTF_Apellidos.getText();
+        club = jCB_club.getSelectedItem().toString();
+        
+        if(!usuario.registrarJugador(nom, ape, dni, club, edad)){
+            JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Registrado correctamente.\nNombre de Usuario: " + usuario.getLogin() + "\nContaraseña: " + usuario.getPassword(), "AVISO",JOptionPane.INFORMATION_MESSAGE);
+            login = new Login();
+            login.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -168,6 +206,7 @@ public class RegistroJugador extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCB_club;
+    private com.toedter.calendar.JDateChooser jDC_fnac;
     private javax.swing.JLabel jL_Apellidos;
     private javax.swing.JLabel jL_Cuota;
     private javax.swing.JLabel jL_Dni;
@@ -180,6 +219,5 @@ public class RegistroJugador extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_DNI;
     private javax.swing.JTextField jTF_Dinero;
     private javax.swing.JTextField jTF_Nombre;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

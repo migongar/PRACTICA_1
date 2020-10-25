@@ -13,13 +13,15 @@ import javax.swing.JOptionPane;
  * @author angel
  */
 public class AsignarSede extends javax.swing.JFrame {
-    private Administrador administrador;
+    private JFrame pganterior;
 
     /**
      * Creates new form AsignarSede
      */
-    public AsignarSede() {
+    public AsignarSede(JFrame anterior) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        pganterior = anterior;
     }
 
 
@@ -115,9 +117,8 @@ public class AsignarSede extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        this.setVisible(false);
-        administrador = new Administrador();
-        administrador.setVisible(true);
+        pganterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_AsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarActionPerformed

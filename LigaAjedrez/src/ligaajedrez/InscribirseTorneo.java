@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,13 +13,15 @@ import javax.swing.JOptionPane;
  * @author angel
  */
 public class InscribirseTorneo extends javax.swing.JFrame {
-
+    private JFrame pganterior;
     /**
      * Creates new form IncribirseTorneo
      */
-    private Jugador jugador;
-    public InscribirseTorneo() {
+    
+    public InscribirseTorneo(JFrame anterior) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        pganterior = anterior;
     }
 
     /**
@@ -104,11 +107,9 @@ public class InscribirseTorneo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jugador = new Jugador();
-        jugador.setVisible(true);
-        setVisible(false);
-        dispose();
+        // TODO add your handling code here:        
+        pganterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

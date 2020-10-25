@@ -12,13 +12,16 @@ import javax.swing.JFrame;
  * @author angel
  */
 public class Historial extends javax.swing.JFrame {
-    private Administrador administrador;
+    private JFrame pganterior;
 
     /**
      * Creates new form Historial
+     * @param anterior
      */
-    public Historial() {
+    public Historial(JFrame anterior) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        pganterior = anterior;
     }
 
 
@@ -127,9 +130,8 @@ public class Historial extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_BuscarActionPerformed
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        this.setVisible(false);
-        administrador = new Administrador();
-        administrador.setVisible(true);
+        pganterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
 

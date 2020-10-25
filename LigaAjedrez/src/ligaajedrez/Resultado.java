@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,14 +13,16 @@ import javax.swing.JOptionPane;
  * @author angel
  */
 public class Resultado extends javax.swing.JFrame {
-
+    private JFrame pganterior;
+    
     /**
      * Creates new form Resultado
      */
-    private Jugador jugador;
     
-    public Resultado() {
+    public Resultado(JFrame anterior) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        pganterior = anterior;
     }
 
     /**
@@ -36,7 +39,6 @@ public class Resultado extends javax.swing.JFrame {
         jL_Ganador = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jL_Fecha = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jL_TiempoPartida = new javax.swing.JLabel();
         jTF_TiempoPartida = new javax.swing.JTextField();
         jB_Salir = new javax.swing.JButton();
@@ -44,6 +46,7 @@ public class Resultado extends javax.swing.JFrame {
         jL_Resultado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList_PartidasDisp = new javax.swing.JList<>();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,10 +109,10 @@ public class Resultado extends javax.swing.JFrame {
                                     .addComponent(jL_TiempoPartida)
                                     .addComponent(jL_Ganador))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTF_TiempoPartida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTF_TiempoPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -131,9 +134,9 @@ public class Resultado extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jL_Ganador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_Fecha))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jL_Fecha)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTF_TiempoPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,18 +157,15 @@ public class Resultado extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_IntroducirActionPerformed
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        // TODO add your handling code here:
-        
-        jugador = new Jugador();
-        jugador.setVisible(true);
-        setVisible(false);
-        dispose();
+        pganterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Introducir;
     private javax.swing.JButton jB_Salir;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jL_Fecha;
     private javax.swing.JLabel jL_Ganador;
     private javax.swing.JLabel jL_Resultado;
@@ -176,6 +176,5 @@ public class Resultado extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_TiempoPartida;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

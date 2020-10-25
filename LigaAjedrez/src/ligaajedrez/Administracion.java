@@ -5,23 +5,28 @@
  */
 package ligaajedrez;
 
+import modelo.Administrador;
+
 /**
  *
  * @author angel
  */
-public class Administrador extends javax.swing.JFrame {
+public class Administracion extends javax.swing.JFrame {
     private InscribirseTorneo inscribirseTorneo;
     private AsignarSede asignarSede;
     private AsignarResponsable asignarResponsable;
     private ReservarSede reservarSede;
     private Resultado resultado;
     private Historial historial;
+    private Administrador administrador;
 
     /**
      * Creates new form Administrador
      */
-    public Administrador() {
+    public Administracion(Administrador admin) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.administrador = admin;
     }
 
     /**
@@ -155,37 +160,37 @@ public class Administrador extends javax.swing.JFrame {
 
     private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
         this.setVisible(false);
-        reservarSede = new ReservarSede();
+        reservarSede = new ReservarSede(this);
         reservarSede.setVisible(true);
     }//GEN-LAST:event_jB_ReservarSedeActionPerformed
 
     private void jB_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_HistorialActionPerformed
         this.setVisible(false);
-        historial = new Historial();
+        historial = new Historial(this);
         historial.setVisible(true);
     }//GEN-LAST:event_jB_HistorialActionPerformed
 
     private void jB_InscribirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirseActionPerformed
         this.setVisible(false);
-        inscribirseTorneo = new InscribirseTorneo();
+        inscribirseTorneo = new InscribirseTorneo(this);
         inscribirseTorneo.setVisible(true);
     }//GEN-LAST:event_jB_InscribirseActionPerformed
 
     private void jB_IntroducirResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirResActionPerformed
         this.setVisible(false);
-        resultado = new Resultado();
+        resultado = new Resultado(this);
         resultado.setVisible(true);
     }//GEN-LAST:event_jB_IntroducirResActionPerformed
 
     private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
         this.setVisible(false);
-        asignarResponsable = new AsignarResponsable();
+        asignarResponsable = new AsignarResponsable(this);
         asignarResponsable.setVisible(true);
     }//GEN-LAST:event_jB_AsignarResponsableActionPerformed
 
     private void jB_AsignarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarSedeActionPerformed
         this.setVisible(false);
-        asignarSede = new AsignarSede();
+        asignarSede = new AsignarSede(this);
         asignarSede.setVisible(true);
     }//GEN-LAST:event_jB_AsignarSedeActionPerformed
 

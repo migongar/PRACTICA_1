@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,14 +13,15 @@ import javax.swing.JOptionPane;
  * @author angel
  */
 public class AsignarResponsable extends javax.swing.JFrame {
-
+    private JFrame pganterior;
     /**
      * Creates new form AsignarResponsable
      */
-    private Jugador jugador;
     
-    public AsignarResponsable() {
+    public AsignarResponsable(JFrame anterior) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        pganterior = anterior;
     }
 
     /**
@@ -186,10 +188,8 @@ public class AsignarResponsable extends javax.swing.JFrame {
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
         // TODO add your handling code here:
-        jugador = new Jugador();
-        jugador.setVisible(true);
-        setVisible(false);
-        dispose();
+        pganterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_AsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarActionPerformed

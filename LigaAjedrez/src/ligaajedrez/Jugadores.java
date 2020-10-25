@@ -6,15 +6,16 @@
 package ligaajedrez;
 
 import javax.swing.JOptionPane;
+import modelo.Jugador;
 
 /**
  *
  * @author angel
  */
-public class Jugador extends javax.swing.JFrame {
+public class Jugadores extends javax.swing.JFrame {
 
     /**
-     * Creates new form Jugador
+     * Creates new form Jugadores
      */
     private AsignarResponsable resp;
     private ReservarSede resSede;
@@ -22,8 +23,9 @@ public class Jugador extends javax.swing.JFrame {
     private InscribirseTorneo inscribir_torneo;
     private Login login;
     
-    public Jugador() {
+    public Jugadores(Jugador jugador) {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -164,7 +166,7 @@ public class Jugador extends javax.swing.JFrame {
 
     private void jB_InscribirseTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirseTorneoActionPerformed
         // TODO add your handling code here:
-        inscribir_torneo = new InscribirseTorneo();
+        inscribir_torneo = new InscribirseTorneo(this);
         inscribir_torneo.setVisible(true);
         setVisible(false);
         dispose();
@@ -172,7 +174,7 @@ public class Jugador extends javax.swing.JFrame {
 
     private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
         // TODO add your handling code here:4
-        resp = new AsignarResponsable();
+        resp = new AsignarResponsable(this);
         resp.setVisible(true);
         setVisible(false);
         dispose();
@@ -180,7 +182,7 @@ public class Jugador extends javax.swing.JFrame {
 
     private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
         // TODO add your handling code here:
-        resSede = new ReservarSede();
+        resSede = new ReservarSede(this);
         resSede.setVisible(true);
         setVisible(false);
         dispose();
@@ -188,7 +190,7 @@ public class Jugador extends javax.swing.JFrame {
 
     private void jB_IntroducirResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirResActionPerformed
         // TODO add your handling code here:
-        resultado = new Resultado();
+        resultado = new Resultado(this);
         resultado.setVisible(true);
         setVisible(false);
         dispose();
@@ -198,7 +200,7 @@ public class Jugador extends javax.swing.JFrame {
         // TODO add your handling code here:
         login = new Login();
         login.setVisible(true);
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_HistorialActionPerformed

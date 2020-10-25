@@ -6,20 +6,35 @@
 package ligaajedrez;
 
 import javax.swing.JOptionPane;
+import modelo.Administrador;
+import modelo.GestorLiga;
+import modelo.Jugador;
+import modelo.Usuario;
 
 /**
  *
  * @author angel
  */
 public class Login extends javax.swing.JFrame {
-    private Administrador administrador;
+    private Administracion administracion;
+    private Jugadores jugadores;
     private Jugador jugador;
+    private Administrador administrador;
+    private RegistroJugador registrar;
+    private GestorLiga gestor;
+    private Usuario usuario;
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        gestor = new GestorLiga();
+        jugador = new Jugador(gestor.getLiga());
+        administrador = new Administrador(gestor.getLiga());
+        
     }
 
     /**
@@ -132,20 +147,23 @@ public class Login extends javax.swing.JFrame {
     private void jB_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EntrarActionPerformed
         if((jTF_User.getText()).equals("administrador")){
             this.setVisible(false);
-            administrador = new Administrador();
-            administrador.setVisible(true);
+            administracion = new Administracion(administrador);
+            administracion.setVisible(true);
         }
         else if((jTF_User.getText()).equals("jugador")){   
             this.setVisible(false);
-            jugador = new Jugador();
-            jugador.setVisible(true);
+            jugadores = new Jugadores(jugador);
+            jugadores.setVisible(true);
         }
         else 
             JOptionPane.showMessageDialog(null, "El usuario debe ser: \"administrador\"  o: \"jugador\"", "AVISO",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jB_EntrarActionPerformed
 
     private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
-        // TODO add your handling code here:
+        usuario = new Usuario();
+        registrar = new RegistroJugador(usuario);        
+        this.setVisible(false);
+        registrar.setVisible(true);
     }//GEN-LAST:event_jB_ResgistrarActionPerformed
 
     /**

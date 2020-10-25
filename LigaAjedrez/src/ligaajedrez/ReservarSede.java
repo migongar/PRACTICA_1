@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class ReservarSede extends javax.swing.JFrame {
 
+    private JFrame pganterior;
+    
     /**
      * Creates new form ReservarSede
-     */
-    private Jugador jugador;
+     */    
     
-    public ReservarSede() {
+    public ReservarSede(JFrame anterior) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        pganterior = anterior;
     }
 
     /**
@@ -33,7 +37,6 @@ public class ReservarSede extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jL_Horarios = new javax.swing.JList<>();
-        jTextField1 = new javax.swing.JTextField();
         jB_Buscar = new javax.swing.JButton();
         jB_Reservar = new javax.swing.JButton();
         jB_Salir = new javax.swing.JButton();
@@ -41,6 +44,7 @@ public class ReservarSede extends javax.swing.JFrame {
         jL_Entrenador = new javax.swing.JLabel();
         jTF_Entrenador = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,28 +101,37 @@ public class ReservarSede extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jL_Entrenador))
                         .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTF_Entrenador, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jB_Buscar)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTF_Entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jB_Buscar)))))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jL_ReservarSede)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jB_Buscar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTF_Entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_Entrenador))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTF_Entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jL_Entrenador))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jB_Buscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -131,11 +144,8 @@ public class ReservarSede extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        // TODO add your handling code here:
-        jugador = new Jugador();
-        jugador.setVisible(true);
-        setVisible(false);
-        dispose();
+        pganterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarActionPerformed
@@ -148,12 +158,12 @@ public class ReservarSede extends javax.swing.JFrame {
     private javax.swing.JButton jB_Buscar;
     private javax.swing.JButton jB_Reservar;
     private javax.swing.JButton jB_Salir;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jL_Entrenador;
     private javax.swing.JList<String> jL_Horarios;
     private javax.swing.JLabel jL_ReservarSede;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTF_Entrenador;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
