@@ -5,12 +5,15 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author angel
  */
 public class Usuario {
     private String login, password;
+    private int tipousuario;
     protected Liga liga;
     
     public Usuario(){
@@ -18,10 +21,11 @@ public class Usuario {
     
     public Usuario(Liga lig){
         this.liga = lig;
-    }    
+    }
 
-    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad) {
-        if(liga.registrarJugador(nom,ape,dni,club,edad)){
+    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad, int cat) {
+        if(liga.registrarJugador(nom,ape,dni,club,edad, cat)){
+            tipousuario = 0;
             login = nom.substring(0,3) + ape.substring(0, 3);
             password = "contraseña";
             return true;
@@ -36,5 +40,25 @@ public class Usuario {
     
     public String getPassword(){
         return login;
+    }
+
+    public int getTipo() {
+        return tipousuario;
+    }
+
+    public ArrayList buscarTorneos(String dni) {
+        ArrayList<Torneo> torneos = null;
+        Jugador jug = liga.buscarJugador(dni);
+        if(jug != null){
+            torneos = liga.buscarTorneos(jug);
+        }
+        
+        return torneos;
+    }
+
+    public boolean registrarJugadorTorneo(Usuario jugador, Object torneo) {
+        Jugador jug = (Jugador)jugador;
+        Torneo tor = (Torneo) torneo;
+        return liga.inscrbirTorneo(jug,tor);
     }
 }

@@ -22,10 +22,13 @@ public class Jugadores extends javax.swing.JFrame {
     private Resultado resultado;
     private InscribirseTorneo inscribir_torneo;
     private Login login;
+    private Jugador jugador;
     
-    public Jugadores(Jugador jugador) {
+    public Jugadores(Jugador jug) {
         initComponents();
         this.setLocationRelativeTo(null);
+        jugador = jug;
+        
     }
 
     /**
@@ -166,7 +169,7 @@ public class Jugadores extends javax.swing.JFrame {
 
     private void jB_InscribirseTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirseTorneoActionPerformed
         // TODO add your handling code here:
-        inscribir_torneo = new InscribirseTorneo(this);
+        inscribir_torneo = new InscribirseTorneo(jugador,this);
         inscribir_torneo.setVisible(true);
         setVisible(false);
         dispose();

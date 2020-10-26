@@ -20,5 +20,9 @@ public class GestorLiga {
     public Liga getLiga() {
         return liga;
     }
+
+    public Usuario buscarUsuario(String user) {
+        return liga.buscarUsuario(user);
+    }
     
 }

@@ -18,6 +18,7 @@ public class RegistroJugador extends javax.swing.JFrame {
     private Usuario usuario;
     /**
      * Creates new form RegistroJugador
+     * @param user
      */
     public RegistroJugador(Usuario user) {
         initComponents();        
@@ -171,7 +172,7 @@ public class RegistroJugador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String dni, nom, ape, dir, email, club;
-        int edad;
+        int edad, categoria;
         Calendar hoy = Calendar.getInstance();
 
         int diff_year = hoy.get(Calendar.YEAR) -  jDC_fnac.getCalendar().get(Calendar.YEAR);
@@ -185,12 +186,20 @@ public class RegistroJugador extends javax.swing.JFrame {
         
         edad = diff_year;
         
+        if(edad>=18)
+            categoria = 1;
+        else if(edad<=15)
+                categoria = 3;
+            else
+                categoria = 2;
+            
+        
         dni = jTF_DNI.getText();     
         nom = jTF_Nombre.getText();
         ape = jTF_Apellidos.getText();
         club = jCB_club.getSelectedItem().toString();
         
-        if(!usuario.registrarJugador(nom, ape, dni, club, edad)){
+        if(!usuario.registrarJugador(nom, ape, dni, club, edad, categoria)){
             JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else{

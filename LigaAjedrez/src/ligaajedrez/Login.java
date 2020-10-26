@@ -18,8 +18,6 @@ import modelo.Usuario;
 public class Login extends javax.swing.JFrame {
     private Administracion administracion;
     private Jugadores jugadores;
-    private Jugador jugador;
-    private Administrador administrador;
     private RegistroJugador registrar;
     private GestorLiga gestor;
     private Usuario usuario;
@@ -32,8 +30,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         gestor = new GestorLiga();
-        jugador = new Jugador(gestor.getLiga());
-        administrador = new Administrador(gestor.getLiga());
+        usuario = new Usuario();
         
     }
 
@@ -145,18 +142,28 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTF_UserActionPerformed
 
     private void jB_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EntrarActionPerformed
-        if((jTF_User.getText()).equals("administrador")){
-            this.setVisible(false);
-            administracion = new Administracion(administrador);
-            administracion.setVisible(true);
-        }
-        else if((jTF_User.getText()).equals("jugador")){   
-            this.setVisible(false);
-            jugadores = new Jugadores(jugador);
-            jugadores.setVisible(true);
-        }
-        else 
-            JOptionPane.showMessageDialog(null, "El usuario debe ser: \"administrador\"  o: \"jugador\"", "AVISO",JOptionPane.WARNING_MESSAGE);
+        usuario = gestor.buscarUsuario(jTF_User.getText());
+        
+        if(usuario != null){
+            if(jTF_Passwd.getText().equals(usuario.getPassword())){     
+                switch (usuario.getTipo()) {
+                    case 1:
+                        this.setVisible(false);
+                        administracion = new Administracion((Administrador) usuario);
+                        administracion.setVisible(true);
+                        break;
+                    case 0:
+                        this.setVisible(false);
+                        jugadores = new Jugadores((Jugador) usuario);
+                        jugadores.setVisible(true);
+                        break;
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(null, "El password no es correcto", "AVISO",JOptionPane.WARNING_MESSAGE);
+            }
+        else
+            JOptionPane.showMessageDialog(null, "El usuario no existe", "AVISO",JOptionPane.WARNING_MESSAGE);   
     }//GEN-LAST:event_jB_EntrarActionPerformed
 
     private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
