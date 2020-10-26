@@ -13,14 +13,19 @@ import java.util.ArrayList;
  */
 public class Torneo {
     private String nombre;
-    protected ArrayList<Club> clubes;
-    protected ArrayList<Jugador> jugadores;
+    protected ArrayList<Club> clubes = new ArrayList<Club>();
+    protected ArrayList<Partida> partidas = new ArrayList<Partida>();
+    protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+    
+    public Torneo(String nom){
+        this.nombre = nom;
+    }
 
-    public boolean buscarClub(String nom) {
+    public boolean buscarClub(Club club) {
         boolean encontrado = false;
         int i = 0;
         while(!encontrado && i<clubes.size()){
-            if(clubes.get(i).getNombre().equals(nom)){
+            if(clubes.get(i).getNombre().equals(club.getNombre())){
                 encontrado = true;
             }
         }
@@ -41,8 +46,14 @@ public class Torneo {
     public boolean addJugador(Jugador jugador) {
         return jugadores.add(jugador);
     }
+
+    public void addClub(Club club) {
+        clubes.add(club);
+    }
     
-    
+    public String toString(){
+            return nombre;
+    }
             
     
 }

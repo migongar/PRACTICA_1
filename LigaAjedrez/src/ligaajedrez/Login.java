@@ -30,7 +30,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         gestor = new GestorLiga();
-        usuario = new Usuario();
+        usuario = new Usuario(gestor.getLiga());
         
     }
 
@@ -167,8 +167,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_EntrarActionPerformed
 
     private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
-        usuario = new Usuario();
-        registrar = new RegistroJugador(usuario);        
+        //usuario = new Usuario();
+        registrar = new RegistroJugador(usuario, this);        
         this.setVisible(false);
         registrar.setVisible(true);
     }//GEN-LAST:event_jB_ResgistrarActionPerformed

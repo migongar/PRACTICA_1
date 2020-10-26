@@ -42,7 +42,7 @@ public class InscribirseTorneo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JL_Torneos = new javax.swing.JList<>();
         jB_Inscribir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jB_Salir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jT_dni = new javax.swing.JTextField();
         jB_buscar = new javax.swing.JButton();
@@ -60,10 +60,10 @@ public class InscribirseTorneo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jB_SalirActionPerformed(evt);
             }
         });
 
@@ -88,7 +88,7 @@ public class InscribirseTorneo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jButton2)
+                .addComponent(jB_Salir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jB_Inscribir)
                 .addGap(33, 33, 33))
@@ -124,7 +124,7 @@ public class InscribirseTorneo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Inscribir)
-                    .addComponent(jButton2))
+                    .addComponent(jB_Salir))
                 .addContainerGap())
         );
 
@@ -137,23 +137,21 @@ public class InscribirseTorneo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al realizar la reserva del cliente habitual", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(null, "Se ha realizado con exito", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Te has inscrito en: ", "AVISO",JOptionPane.INFORMATION_MESSAGE);
                 pganterior.setVisible(true);
                 this.dispose();
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun torneo", "ERROR",  JOptionPane.ERROR_MESSAGE);
-        }
-        
-        JOptionPane.showMessageDialog(this, "Inscrito en: ");
+        }        
     }//GEN-LAST:event_jB_InscribirActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
         // TODO add your handling code here:        
         pganterior.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jT_dniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_dniActionPerformed
         // TODO add your handling code here:
@@ -183,8 +181,8 @@ public class InscribirseTorneo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> JL_Torneos;
     private javax.swing.JButton jB_Inscribir;
+    private javax.swing.JButton jB_Salir;
     private javax.swing.JButton jB_buscar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

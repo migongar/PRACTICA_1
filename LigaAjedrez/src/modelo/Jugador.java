@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author angel
@@ -12,18 +14,30 @@ package modelo;
 public class Jugador extends Usuario{
     private String nombre, apellidos, dni;
     private int  edad, categoria; 
-    private Club club;
+    protected Club club;
+    protected ArrayList<Torneo> torneos = new ArrayList<Torneo>();
     
-    public Jugador(Liga liga){
-        super(liga);
+    /*public Jugador(){
+        
     }
-    
-    public Jugador(String nom, String ape, String dni, Club club, int edad, int categoria){
+    */
+    public Jugador(String nom, String ape, String dni, Club cl, int ed, Liga liga){
+        super(nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 0, liga);        
         this.nombre = nom;
         this.apellidos = ape;
         this.dni = dni;
-        this.edad = edad;
-        this.categoria = categoria;
+        this.club = cl;
+        this.edad = ed;
+        
+        if(edad>=18)
+            categoria = 1;
+        else if(edad<=15)
+                categoria = 3;
+            else
+                categoria = 2;
+        
+        System.out.println("Jugador: " + (nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase())+
+                "Contraseña: contrasenya" + "DNI: " + this.dni);
     }
     
     public Club getClub(){
@@ -38,9 +52,13 @@ public class Jugador extends Usuario{
         return dni;
     }
 
-    
+    public boolean addTorneo(Torneo tor) {
+        return torneos.add(tor);
+    }
 
-    
-    
-    
+    public ArrayList getTorneos() {
+        return torneos;
+    }
+
+
 }

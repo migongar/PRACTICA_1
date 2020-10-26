@@ -12,16 +12,39 @@ import java.util.ArrayList;
  * @author angel
  */
 public class Liga {
-    protected ArrayList<Club> clubes;
-    protected ArrayList<Jugador> jugadores;
-    protected ArrayList<Administrador> administradores;
-    protected ArrayList<Torneo> torneos;
+    protected ArrayList<Club> clubes = new ArrayList<Club>();
+    protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+    protected ArrayList<Administrador> administradores = new ArrayList<Administrador>();
+    protected ArrayList<Torneo> torneos = new ArrayList<Torneo>();
+    protected ArrayList<Federacion> federaciones = new ArrayList<Federacion>();
 
-    public void cargarDatos() {
+
+    public void cargarDatos() {        
+        Administrador admin = new Administrador("Julian", "Lopez","89657412P", this);
+        Federacion fede = new Federacion("Federacion de Valencia");
+        Sede sede = new Sede("Sede Levante");
+        Club club = new Club("Levante FC",fede,sede,this);
+        Jugador jugador = new Jugador("Juan" , "Vazquez", "12256848L", club,  16, this);
+        
+        fede.anyadirClub(club);
+        
+        Torneo torneo = new Torneo("Torneo Smart");
+        torneo.addClub(club);
+        
+        jugadores.clear();
+        administradores.clear();
+        federaciones.clear();
+        torneos.clear();
+        
+        administradores.add(admin);
+        jugadores.add(jugador);
+        federaciones.add(fede);
+        torneos.add(torneo);
+        
         
     }
 
-    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad, int cat) {
+    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad) {
         boolean encontrado = false;
         Club clubencontrado = null;
         int i = 0;
@@ -32,7 +55,7 @@ public class Liga {
             }
         }
         
-        Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad, cat);
+        Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad,this);
         
         return jugadores.add(nuevo);            
     }
@@ -60,9 +83,9 @@ public class Liga {
     }
 
     public ArrayList<Torneo> buscarTorneos(Jugador jug) {
-        ArrayList<Torneo> encontrados = null;
+        ArrayList<Torneo> encontrados = new ArrayList<Torneo>();
         for(int i=0;i<torneos.size();i++){
-            if(torneos.get(i).buscarClub(jug.getNombre()) && !torneos.get(i).buscarJugador(jug.getNombre()))
+            if(torneos.get(i).buscarClub(jug.getClub()) && !torneos.get(i).buscarJugador(jug.getNombre()))
                 encontrados.add(torneos.get(i));
         }
         
@@ -75,7 +98,7 @@ public class Liga {
         while(!encontrado && i<torneos.size()){
             if(torneos.get(i) == tor){
                 encontrado = true;
-                inscrito = torneos.get(i).addJugador(jugador);
+                inscrito = torneos.get(i).addJugador(jugador) && jugador.addTorneo(tor);
             }
             i++;
         }
@@ -98,5 +121,25 @@ public class Liga {
         }
         
         return jugador;
+    }
+
+    public ArrayList<Federacion> getFederaciones() {
+        return federaciones;
+    }
+
+    public ArrayList buscarClubes(String federacion) {
+        boolean encontrado = false;
+        int i = 0;
+        ArrayList<Club> clubes= null;
+        
+        while(!encontrado && i < federaciones.size()){
+            if(federaciones.get(i).getNombre().equals(federacion)){
+                encontrado = true;
+                clubes = federaciones.get(i).getClubes();
+            }
+            i++;
+        }
+        
+        return clubes;
     }
 }

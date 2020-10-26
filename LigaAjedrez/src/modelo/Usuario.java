@@ -16,22 +16,19 @@ public class Usuario {
     private int tipousuario;
     protected Liga liga;
     
-    public Usuario(){
+    public Usuario(Liga liga){
+        this.liga = liga;
     }
     
-    public Usuario(Liga lig){
+    public Usuario(String log, String pass,int tipo,Liga lig){        
+        this.login = log;
+        this.password = pass;
+        this.tipousuario = tipo;
         this.liga = lig;
     }
 
-    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad, int cat) {
-        if(liga.registrarJugador(nom,ape,dni,club,edad, cat)){
-            tipousuario = 0;
-            login = nom.substring(0,3) + ape.substring(0, 3);
-            password = "contraseña";
-            return true;
-        }
-        else
-            return false;
+    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad) {
+        return liga.registrarJugador(nom,ape,dni,club,edad);            
     }
     
     public String getLogin(){
@@ -39,7 +36,7 @@ public class Usuario {
     }
     
     public String getPassword(){
-        return login;
+        return password;
     }
 
     public int getTipo() {
@@ -60,5 +57,21 @@ public class Usuario {
         Jugador jug = (Jugador)jugador;
         Torneo tor = (Torneo) torneo;
         return liga.inscrbirTorneo(jug,tor);
+    }
+    
+    public void setLogin(String user) {
+        login = user;
+    }
+    
+    public void setContraseña(String pass) {
+        password = pass;
+    }
+
+    public ArrayList getFederaciones() {
+        return liga.getFederaciones();
+    }
+
+    public ArrayList buscarClubes(String federacion) {
+        return liga.buscarClubes(federacion);
     }
 }

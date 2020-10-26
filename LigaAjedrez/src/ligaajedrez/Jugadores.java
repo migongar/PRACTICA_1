@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Jugador;
 
@@ -207,8 +208,13 @@ public class Jugadores extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_HistorialActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Historial Jugador:");
+        ArrayList lista = new ArrayList();
+        lista = jugador.getTorneos();
+        String torneos = "";
+        for(int i = 0;i<lista.size();i++){
+            torneos += lista.get(i).toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(this, "Historial Jugador:" + torneos);
     }//GEN-LAST:event_jB_HistorialActionPerformed
 
 
