@@ -93,7 +93,7 @@ public class RegistroJugador extends javax.swing.JFrame {
             }
         });
 
-        jL_Registro.setText("REGISTRO");
+        jL_Registro.setText("REGISTRO JUGADOR");
 
         jL_Cuota.setText("Cuota a pagar:");
 

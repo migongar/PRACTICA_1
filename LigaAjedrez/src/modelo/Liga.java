@@ -23,16 +23,25 @@ public class Liga {
 
 
     public void cargarDatos() {        
-        Administrador admin = new Administrador("Julian", "Lopez","89657412P", this);
-        Federacion fede = new Federacion("Federacion de Valencia");
-        Sede sede = new Sede("Sede Levante", fede);
-        Club club = new Club("Levante FC",fede,sede,this);
-        Jugador jugador = new Jugador("Juan" , "Vazquez", "12256848L", club,  16, this);
         
+        Federacion fede = new Federacion("Federacion de Valencia");
+        System.out.println("Federacion: " + fede.toString());
+        Sede sede = new Sede("Sede Levante", fede);
+        System.out.println("Sede: " + sede.toString());
+        Club club = new Club("Levante FC",fede,sede,this);
+        System.out.println("Club: " + fede.toString());       
         fede.anyadirClub(club);
         
         Torneo torneo = new Torneo("Torneo Smart");
+        System.out.println("Torneo: " + torneo.toString());
         torneo.addClub(club);
+        
+        
+        Administrador admin = new Administrador("Julian", "Lopez","89657412P", this);
+        Jugador jugador = new Jugador("Juan" , "Vazquez", "12256848L", club,  16, this);
+        
+        
+        
         
         jugadores.clear();
         administradores.clear();
