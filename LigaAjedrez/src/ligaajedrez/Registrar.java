@@ -5,17 +5,27 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
+import modelo.Administrador;
+
 /**
  *
  * @author angel
  */
 public class Registrar extends javax.swing.JFrame {
+    private Administrador administrador;
+    private JFrame paganterior;
+    private RegistroJugador registroJugador;
+    private RegistroFederacion registroFederacion;
+    private RegistroEntrenador registroEntrenador;
 
     /**
      * Creates new form Registrar
      */
-    public Registrar() {
+    public Registrar(Administrador admin, JFrame pgant) {
         initComponents();
+        administrador = admin;
+        paganterior = pgant;
     }
 
     /**
@@ -28,21 +38,54 @@ public class Registrar extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jB_regClub = new javax.swing.JButton();
+        jB_regFede = new javax.swing.JButton();
+        jB_regEntrenador = new javax.swing.JButton();
+        jB_regGerente = new javax.swing.JButton();
+        jB_regJugador = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jB_regSede = new javax.swing.JButton();
+        jB_regTorneo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("REGISTRAR");
 
-        jButton1.setText("Registrar Club");
+        jB_regClub.setText("Registrar Club");
 
-        jButton2.setText("Registrar Federacion");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jB_regFede.setText("Registrar Federacion");
+        jB_regFede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jB_regFedeActionPerformed(evt);
             }
         });
+
+        jB_regEntrenador.setText("Registrar Entrenador");
+        jB_regEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_regEntrenadorActionPerformed(evt);
+            }
+        });
+
+        jB_regGerente.setText("Registrar Gerente");
+
+        jB_regJugador.setText("RegistrarJugador");
+        jB_regJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_regJugadorActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jB_regSede.setText("Registrar Sede");
+
+        jB_regTorneo.setText("Registrar Torneo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,35 +96,87 @@ public class Registrar extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(141, 141, 141))
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jB_regGerente)
+                        .addGap(18, 18, 18)
+                        .addComponent(jB_regSede)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB_regJugador))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jB_regTorneo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jB_regClub)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jB_regFede)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB_regEntrenador)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(62, 62, 62))
+                    .addComponent(jB_regGerente)
+                    .addComponent(jB_regJugador)
+                    .addComponent(jB_regSede))
+                .addGap(9, 9, 9)
+                .addComponent(jB_regTorneo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB_regClub)
+                    .addComponent(jB_regFede)
+                    .addComponent(jB_regEntrenador))
+                .addGap(47, 47, 47)
+                .addComponent(jButton1)
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jB_regFedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regFedeActionPerformed
+        registroFederacion = new RegistroFederacion(administrador,this);
+        this.setVisible(false);
+        registroFederacion.setVisible(true);
+    }//GEN-LAST:event_jB_regFedeActionPerformed
+
+    private void jB_regJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regJugadorActionPerformed
+        registroJugador = new RegistroJugador(administrador, this);        
+        this.setVisible(false);
+        registroJugador.setVisible(true);
+    }//GEN-LAST:event_jB_regJugadorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        paganterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jB_regEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regEntrenadorActionPerformed
+        registroEntrenador = new RegistroEntrenador(administrador, this);        
+        this.setVisible(false);
+        registroEntrenador.setVisible(true);
+    }//GEN-LAST:event_jB_regEntrenadorActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_regClub;
+    private javax.swing.JButton jB_regEntrenador;
+    private javax.swing.JButton jB_regFede;
+    private javax.swing.JButton jB_regGerente;
+    private javax.swing.JButton jB_regJugador;
+    private javax.swing.JButton jB_regSede;
+    private javax.swing.JButton jB_regTorneo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

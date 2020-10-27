@@ -18,6 +18,7 @@ public class Administracion extends javax.swing.JFrame {
     private ReservarSede reservarSede;
     private Resultado resultado;
     private Historial historial;
+    private Registrar registrar;
     private Administrador administrador;
 
     /**
@@ -99,6 +100,11 @@ public class Administracion extends javax.swing.JFrame {
         jL_Nombre.setText("nombre");
 
         jB_Resgistrar.setText("Registrar");
+        jB_Resgistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ResgistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,11 +123,9 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(jB_IntroducirRes))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jB_Resgistrar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jL_Admin)
-                                .addComponent(jB_AsignarSede)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jL_Admin)
+                            .addComponent(jB_AsignarSede))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -137,6 +141,10 @@ public class Administracion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jB_Resgistrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +160,9 @@ public class Administracion extends javax.swing.JFrame {
                     .addComponent(jB_Historial)
                     .addComponent(jB_AsignarSede)
                     .addComponent(jB_AsignarResponsable))
-                .addGap(34, 34, 34)
+                .addGap(35, 35, 35)
                 .addComponent(jB_Resgistrar)
-                .addGap(43, 43, 43)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_ReservarSede)
                     .addComponent(jB_IntroducirRes)
@@ -200,6 +208,10 @@ public class Administracion extends javax.swing.JFrame {
         asignarSede = new AsignarSede(this);
         asignarSede.setVisible(true);
     }//GEN-LAST:event_jB_AsignarSedeActionPerformed
+
+    private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
+        registrar = new Registrar(administrador,this);
+    }//GEN-LAST:event_jB_ResgistrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

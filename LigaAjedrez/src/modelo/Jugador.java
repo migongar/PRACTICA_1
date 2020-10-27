@@ -37,7 +37,7 @@ public class Jugador extends Usuario{
                 categoria = 2;
         
         System.out.println("Jugador: " + (nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase())+
-                "Contraseña: contrasenya" + "DNI: " + this.dni);
+                " Contraseña: contrasenya" + " DNI: " + this.dni);
     }
     
     public Club getClub(){

@@ -13,9 +13,11 @@ import java.util.ArrayList;
  */
 public class Sede {
     private String nombre;
+    protected Federacion federacion;
     protected ArrayList<Partida> partidas = new ArrayList<Partida>();
     
-    public Sede(String nom){
+    public Sede(String nom, Federacion fede){
         this.nombre = nom;
+        this.federacion = fede;
     }
 }

@@ -21,7 +21,23 @@ public class Administrador extends Usuario{
         this.apellidos = ape;
         this.dni = dni;
         System.out.println("Admin: " + (nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase()) +
-                "Contraseña: contrasenya" + "DNI: " + this.dni);
+                " Contraseña: contrasenya" + " DNI: " + this.dni);
+    }
+
+    public boolean registrarFederacion(String nomFede) {
+        return liga.registrarFederacion(nomFede);
+    }
+
+    public boolean registrarGerente(String nombre, String apellidos, String dni) {
+        return liga.registrarGerente(nombre,apellidos,dni);
+    }
+
+    public boolean registrarEntrenador(String nombre, String apellidos, String dni) {
+        return liga.registrarEntrenador(nombre,apellidos,dni);
+    }
+
+    public boolean registrarSede(String nomSede, String nomFede) {
+        return liga.registrarSede(nomSede,nomFede);
     }
     
 }

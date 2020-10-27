@@ -17,12 +17,15 @@ public class Liga {
     protected ArrayList<Administrador> administradores = new ArrayList<Administrador>();
     protected ArrayList<Torneo> torneos = new ArrayList<Torneo>();
     protected ArrayList<Federacion> federaciones = new ArrayList<Federacion>();
+    protected ArrayList<Gerente> gerentes = new ArrayList<Gerente>();
+    protected ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
+    protected ArrayList<Sede> sedes = new ArrayList<Sede>();
 
 
     public void cargarDatos() {        
         Administrador admin = new Administrador("Julian", "Lopez","89657412P", this);
         Federacion fede = new Federacion("Federacion de Valencia");
-        Sede sede = new Sede("Sede Levante");
+        Sede sede = new Sede("Sede Levante", fede);
         Club club = new Club("Levante FC",fede,sede,this);
         Jugador jugador = new Jugador("Juan" , "Vazquez", "12256848L", club,  16, this);
         
@@ -141,5 +144,37 @@ public class Liga {
         }
         
         return clubes;
+    }
+
+    public boolean registrarFederacion(String nomFede) {
+        Federacion fede = new Federacion(nomFede);
+        return federaciones.add(fede);
+    }
+
+    public boolean registrarGerente(String nombre, String apellidos, String dni) {
+        Gerente ger = new Gerente(nombre,apellidos,dni);
+        return gerentes.add(ger);
+    }
+
+    public boolean registrarEntrenador(String nombre, String apellidos, String dni) {
+        Entrenador ger = new Entrenador(nombre,apellidos,dni);
+        return entrenadores.add(ger);
+    }
+
+    public boolean registrarSede(String nomSede, String nomFede) {
+        Federacion fede = null;
+        boolean encontrado = false;
+        int i = 0;
+        while(!encontrado && i < federaciones.size()){
+            if(federaciones.get(i).getNombre().equals(nomFede)){
+                encontrado = true;
+                fede = federaciones.get(i);
+            }
+            i++;
+        }
+        
+        Sede sede = new Sede(nomSede,fede);
+        
+        return sedes.add(sede);
     }
 }
