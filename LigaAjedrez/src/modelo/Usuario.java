@@ -29,7 +29,6 @@ public class Usuario {
 
     public boolean registrarJugador(String nom, String ape, String dni, Object club, int edad) {
         Club clubi = (Club)club;
-        System.out.println(clubi.getNombre());
         return liga.registrarJugador(nom,ape,dni,clubi.getNombre(),edad);            
     }
     
@@ -76,8 +75,5 @@ public class Usuario {
     public ArrayList buscarClubes(String federacion) {
         return liga.buscarClubes(federacion);
     }
-
-    public Administrador getAdministrador() {
-        return liga.buscarAdministrador(login);
-    }
+    
 }

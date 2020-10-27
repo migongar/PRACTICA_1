@@ -194,8 +194,5 @@ public class Liga {
     public ArrayList<Gerente> getGerentes() {
         return gerentes;
     }
-
-    Administrador buscarAdministrador(String login) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
