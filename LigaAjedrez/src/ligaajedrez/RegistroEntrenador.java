@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Administrador;
@@ -20,7 +21,8 @@ public class RegistroEntrenador extends javax.swing.JFrame {
      * Creates new form RegistroEntrenador
      */
     public RegistroEntrenador(Administrador admin, JFrame pagant) {
-        initComponents();        
+        initComponents();
+        this.setLocationRelativeTo(null);
         administrador = admin;
         paganterior = pagant;
     }
@@ -138,6 +140,11 @@ public class RegistroEntrenador extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Registrado correctamente", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+            ArrayList lista = new ArrayList();
+            lista = administrador.getLiga().getEntrenadores();
+            for(int i = 0; i<lista.size();i++){
+                System.out.println("Sede " + (i+1) + ": " + lista.get(i).toString());
+            }
             paganterior.setVisible(true);
             this.dispose();
         }

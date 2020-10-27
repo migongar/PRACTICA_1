@@ -149,12 +149,12 @@ public class Login extends javax.swing.JFrame {
                 switch (usuario.getTipo()) {
                     case 1:
                         this.setVisible(false);
-                        administracion = new Administracion((Administrador) usuario);
+                        administracion = new Administracion((Administrador) usuario, this);
                         administracion.setVisible(true);
                         break;
                     case 0:
                         this.setVisible(false);
-                        jugadores = new Jugadores((Jugador) usuario);
+                        jugadores = new Jugadores((Jugador) usuario, this);
                         jugadores.setVisible(true);
                         break;
                 }

@@ -20,5 +20,9 @@ public class Entrenador {
         contratado = false;
     }
     
+    public String toString(){
+            return nombre;
+    }
+    
     
 }

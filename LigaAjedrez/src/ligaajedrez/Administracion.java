@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import javax.swing.JFrame;
 import modelo.Administrador;
 
 /**
@@ -20,14 +21,16 @@ public class Administracion extends javax.swing.JFrame {
     private Historial historial;
     private Registrar registrar;
     private Administrador administrador;
+    private JFrame paganterior;
 
     /**
      * Creates new form Administrador
      */
-    public Administracion(Administrador admin) {
+    public Administracion(Administrador admin, JFrame pgant) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.administrador = admin;
+        this.paganterior = pgant;
     }
 
     /**
@@ -49,6 +52,7 @@ public class Administracion extends javax.swing.JFrame {
         jL_Nombre = new javax.swing.JLabel();
         jTF_nombre = new javax.swing.JTextField();
         jB_Resgistrar = new javax.swing.JButton();
+        jB_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +110,13 @@ public class Administracion extends javax.swing.JFrame {
             }
         });
 
+        jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,8 +153,13 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(jTF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jB_Resgistrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jB_Resgistrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(jB_Salir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,7 +183,9 @@ public class Administracion extends javax.swing.JFrame {
                     .addComponent(jB_ReservarSede)
                     .addComponent(jB_IntroducirRes)
                     .addComponent(jB_Inscribirse))
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jB_Salir)
+                .addGap(5, 5, 5))
         );
 
         pack();
@@ -211,7 +229,14 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
         registrar = new Registrar(administrador,this);
+        this.setVisible(false);
+        registrar.setVisible(true);
     }//GEN-LAST:event_jB_ResgistrarActionPerformed
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        paganterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jB_SalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,6 +247,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton jB_IntroducirRes;
     private javax.swing.JButton jB_ReservarSede;
     private javax.swing.JButton jB_Resgistrar;
+    private javax.swing.JButton jB_Salir;
     private javax.swing.JLabel jL_Admin;
     private javax.swing.JLabel jL_Nombre;
     private javax.swing.JTextField jTF_nombre;

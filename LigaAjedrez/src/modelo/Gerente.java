@@ -20,4 +20,8 @@ public class Gerente {
         this.contratado = false;
     }
     
+    public String toString(){
+            return nombre;
+    }
+    
 }

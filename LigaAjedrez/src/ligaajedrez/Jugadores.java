@@ -6,6 +6,7 @@
 package ligaajedrez;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Jugador;
 
@@ -22,13 +23,15 @@ public class Jugadores extends javax.swing.JFrame {
     private ReservarSede resSede;
     private Resultado resultado;
     private InscribirseTorneo inscribir_torneo;
-    private Login login;
+    private JFrame paganterior;
     private Jugador jugador;
     
-    public Jugadores(Jugador jug) {
+    public Jugadores(Jugador jug,JFrame pgant) {
         initComponents();
         this.setLocationRelativeTo(null);
-        jugador = jug;
+        this.jugador = jug;
+        this.paganterior = pgant;
+        
         
     }
 
@@ -201,9 +204,8 @@ public class Jugadores extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_IntroducirResActionPerformed
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        // TODO add your handling code here:
-        login = new Login();
-        login.setVisible(true);
+        
+        paganterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 

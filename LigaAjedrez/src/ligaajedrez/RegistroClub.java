@@ -16,6 +16,7 @@ public class RegistroClub extends javax.swing.JFrame {
      */
     public RegistroClub() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

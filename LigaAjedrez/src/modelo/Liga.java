@@ -177,4 +177,20 @@ public class Liga {
         
         return sedes.add(sede);
     }
+
+    public ArrayList<Entrenador> getEntrenadores() {
+        return entrenadores;
+    }
+
+    public ArrayList<Sede> getSedes() {
+        return sedes;
+    }
+
+    public ArrayList<Gerente> getGerentes() {
+        return gerentes;
+    }
+
+    Administrador buscarAdministrador(String login) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

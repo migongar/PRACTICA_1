@@ -20,4 +20,8 @@ public class Sede {
         this.nombre = nom;
         this.federacion = fede;
     }
+    
+    public String toString(){
+            return nombre;
+    }
 }

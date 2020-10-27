@@ -42,6 +42,10 @@ public class Usuario {
     public int getTipo() {
         return tipousuario;
     }
+    
+    public Liga getLiga(){
+        return liga;
+    }
 
     public ArrayList buscarTorneos(String dni) {
         ArrayList<Torneo> torneos = null;
@@ -66,12 +70,12 @@ public class Usuario {
     public void setContraseña(String pass) {
         password = pass;
     }
-
-    public ArrayList getFederaciones() {
-        return liga.getFederaciones();
-    }
-
+    
     public ArrayList buscarClubes(String federacion) {
         return liga.buscarClubes(federacion);
+    }
+
+    public Administrador getAdministrador() {
+        return liga.buscarAdministrador(login);
     }
 }

@@ -17,19 +17,19 @@ import modelo.Usuario;
  * @author angel
  */
 public class RegistroJugador extends javax.swing.JFrame {
-    private JFrame login;
+    private JFrame pganterior;
     private Usuario usuario;
     /**
      * Creates new form RegistroJugador
      * @param user
      */
-    public RegistroJugador(Usuario user, JFrame login) {
+    public RegistroJugador(Usuario user, JFrame pgant) {
         initComponents();        
         this.setLocationRelativeTo(null);
         this.usuario = user;
-        this.login = login;
+        this.pganterior = pgant;
         ArrayList lista = new ArrayList();
-        lista = usuario.getFederaciones();
+        lista = usuario.getLiga().getFederaciones();
         for(int i = 0; i<lista.size();i++){
             jCB_federacion.addItem(lista.get(i).toString());
         }
@@ -87,6 +87,11 @@ public class RegistroJugador extends javax.swing.JFrame {
         });
 
         jButton2.setText("salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jL_Registro.setText("REGISTRO");
 
@@ -241,7 +246,7 @@ public class RegistroJugador extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Registrado correctamente.\nNombre de Usuario: " + usuario.getLogin() + "\nContaraseña: " + usuario.getPassword(), "AVISO",JOptionPane.INFORMATION_MESSAGE);
-            login.setVisible(true);
+            pganterior.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -269,6 +274,11 @@ public class RegistroJugador extends javax.swing.JFrame {
 
         jL_Club.setModel(lista);
     }//GEN-LAST:event_jB_BuscarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        pganterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -18,12 +18,14 @@ public class Registrar extends javax.swing.JFrame {
     private RegistroJugador registroJugador;
     private RegistroFederacion registroFederacion;
     private RegistroEntrenador registroEntrenador;
+    private RegistroSede registroSede;
 
     /**
      * Creates new form Registrar
      */
     public Registrar(Administrador admin, JFrame pgant) {
-        initComponents();
+        initComponents();        
+        this.setLocationRelativeTo(null);
         administrador = admin;
         paganterior = pgant;
     }
@@ -84,6 +86,11 @@ public class Registrar extends javax.swing.JFrame {
         });
 
         jB_regSede.setText("Registrar Sede");
+        jB_regSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_regSedeActionPerformed(evt);
+            }
+        });
 
         jB_regTorneo.setText("Registrar Torneo");
 
@@ -166,6 +173,12 @@ public class Registrar extends javax.swing.JFrame {
         this.setVisible(false);
         registroEntrenador.setVisible(true);
     }//GEN-LAST:event_jB_regEntrenadorActionPerformed
+
+    private void jB_regSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regSedeActionPerformed
+        registroSede = new RegistroSede(administrador, this);        
+        this.setVisible(false);
+        registroSede.setVisible(true);
+    }//GEN-LAST:event_jB_regSedeActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
