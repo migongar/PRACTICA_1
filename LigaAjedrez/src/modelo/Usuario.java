@@ -27,8 +27,10 @@ public class Usuario {
         this.liga = lig;
     }
 
-    public boolean registrarJugador(String nom, String ape, String dni, String club, int edad) {
-        return liga.registrarJugador(nom,ape,dni,club,edad);            
+    public boolean registrarJugador(String nom, String ape, String dni, Object club, int edad) {
+        Club clubi = (Club)club;
+        System.out.println(clubi.getNombre());
+        return liga.registrarJugador(nom,ape,dni,clubi.getNombre(),edad);            
     }
     
     public String getLogin(){
@@ -48,7 +50,7 @@ public class Usuario {
     }
 
     public ArrayList buscarTorneos(String dni) {
-        ArrayList<Torneo> torneos = null;
+        ArrayList<Torneo> torneos = new ArrayList<Torneo>();
         Jugador jug = liga.buscarJugador(dni);
         if(jug != null){
             torneos = liga.buscarTorneos(jug);

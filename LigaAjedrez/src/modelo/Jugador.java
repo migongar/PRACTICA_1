@@ -28,13 +28,16 @@ public class Jugador extends Usuario{
         this.dni = dni;
         this.club = cl;
         this.edad = ed;
+        this.liga = liga;
         
         if(edad>=18)
             categoria = 1;
         else if(edad<=15)
                 categoria = 3;
             else
-                categoria = 2;
+                categoria = 2;  
+        
+        club.addJugador(this);
         
         System.out.println("Jugador: " + (nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase())+
                 " Contraseña: contrasenya" + " DNI: " + this.dni);

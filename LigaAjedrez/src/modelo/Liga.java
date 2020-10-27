@@ -38,27 +38,31 @@ public class Liga {
         administradores.clear();
         federaciones.clear();
         torneos.clear();
+        clubes.clear();
+        sedes.clear();
+        
         
         administradores.add(admin);
         jugadores.add(jugador);
         federaciones.add(fede);
+        sedes.add(sede);
+        clubes.add(club);
         torneos.add(torneo);
-        
-        
     }
 
     public boolean registrarJugador(String nom, String ape, String dni, String club, int edad) {
         boolean encontrado = false;
-        Club clubencontrado = null;
+        Club clubencontrado = new Club();
         int i = 0;
         while(!encontrado && i<clubes.size()){
             if(clubes.get(i).getNombre().equals(club)){
                 clubencontrado = clubes.get(i);
                 encontrado = true;
             }
+            i++;
         }
         
-        Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad,this);
+        Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad,this);        
         
         return jugadores.add(nuevo);            
     }
@@ -88,6 +92,7 @@ public class Liga {
     public ArrayList<Torneo> buscarTorneos(Jugador jug) {
         ArrayList<Torneo> encontrados = new ArrayList<Torneo>();
         for(int i=0;i<torneos.size();i++){
+            System.out.println(jug.getClub().toString());
             if(torneos.get(i).buscarClub(jug.getClub()) && !torneos.get(i).buscarJugador(jug.getNombre()))
                 encontrados.add(torneos.get(i));
         }

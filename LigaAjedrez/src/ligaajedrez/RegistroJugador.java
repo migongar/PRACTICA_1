@@ -239,9 +239,8 @@ public class RegistroJugador extends javax.swing.JFrame {
         dni = jTF_DNI.getText();     
         nom = jTF_Nombre.getText();
         ape = jTF_Apellidos.getText();
-        club = jCB_federacion.getSelectedItem().toString();
         
-        if(!usuario.registrarJugador(nom, ape, dni, club, edad)){
+        if(!usuario.registrarJugador(nom, ape, dni, (Object)jL_Club.getSelectedValue(), edad)){
             JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else{

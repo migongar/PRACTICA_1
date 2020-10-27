@@ -143,7 +143,7 @@ public class RegistroEntrenador extends javax.swing.JFrame {
             ArrayList lista = new ArrayList();
             lista = administrador.getLiga().getEntrenadores();
             for(int i = 0; i<lista.size();i++){
-                System.out.println("Sede " + (i+1) + ": " + lista.get(i).toString());
+                System.out.println("Entrenador " + (i+1) + ": " + lista.get(i).toString());
             }
             paganterior.setVisible(true);
             this.dispose();

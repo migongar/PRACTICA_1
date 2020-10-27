@@ -25,12 +25,20 @@ public class Club {
         this.liga = liga;
     }
 
+    public Club() {
+        
+    }
+
     public String getNombre() {
         return nombre;
     }
     
     public String toString(){
         return nombre;
+    }
+
+    public void addJugador(Jugador jug) {
+        jugadores.add(jug);
     }
     
 }
