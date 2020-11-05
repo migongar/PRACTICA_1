@@ -5,11 +5,13 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author angel
  */
-public class Entrenador {
+public class Entrenador implements Serializable{
     private String nombre,apellidos,dni;
     private boolean contratado;
 

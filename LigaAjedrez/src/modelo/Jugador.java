@@ -37,10 +37,8 @@ public class Jugador extends Usuario{
             else
                 categoria = 2;  
         
-        club.addJugador(this);
+        club.addJugador(this);        
         
-        System.out.println("Jugador: " + (nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase())+
-                " Contraseña: contrasenya" + " DNI: " + this.dni);
     }
     
     public Club getClub(){
@@ -63,5 +61,7 @@ public class Jugador extends Usuario{
         return torneos;
     }
 
-
+    public String toString(){
+        return "Jugador: " + nombre +  " " + apellidos + " " + super.toString() + " DNI: " + dni + " Club: " + club;
+    }
 }

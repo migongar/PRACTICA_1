@@ -5,13 +5,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author angel
  */
-public class Usuario {
+public class Usuario implements Serializable {
     private String login, password;
     private int tipousuario;
     protected Liga liga;
@@ -74,6 +75,10 @@ public class Usuario {
     
     public ArrayList buscarClubes(String federacion) {
         return liga.buscarClubes(federacion);
+    }
+    
+    public String toString(){
+        return "Usuario: " + login +  " Contraseña: " + password ;
     }
     
 }

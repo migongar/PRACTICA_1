@@ -5,13 +5,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author angel
  */
-public class Club {
+public class Club implements Serializable{
     private String nombre;
     protected Liga liga;
     protected Federacion federacion;

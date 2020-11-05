@@ -13,7 +13,7 @@ public class GestorLiga {
     private Liga liga;
     
     public GestorLiga(){
-        liga = new Liga();   
+        liga = new Liga(); 
         liga.cargarDatos();
     }
 

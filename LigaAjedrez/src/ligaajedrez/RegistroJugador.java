@@ -244,7 +244,8 @@ public class RegistroJugador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Registrado correctamente.\nNombre de Usuario: " + usuario.getLogin() + "\nContaraseña: " + usuario.getPassword(), "AVISO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Nuevo jugador: " + usuario);
             pganterior.setVisible(true);
             this.dispose();
         }

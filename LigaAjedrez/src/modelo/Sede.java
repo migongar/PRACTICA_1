@@ -5,13 +5,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author angel
  */
-public class Sede {
+public class Sede implements Serializable {
     private String nombre;
     protected Federacion federacion;
     protected ArrayList<Partida> partidas = new ArrayList<Partida>();

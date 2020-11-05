@@ -19,9 +19,7 @@ public class Administrador extends Usuario{
         super(nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 1, liga);        
         this.nombre = nom;
         this.apellidos = ape;
-        this.dni = dni;
-        System.out.println("Admin: " + (nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase()) +
-                " Contraseña: contrasenya" + " DNI: " + this.dni);
+        this.dni = dni;        
     }
 
     public boolean registrarFederacion(String nomFede) {
@@ -40,4 +38,7 @@ public class Administrador extends Usuario{
         return liga.registrarSede(nomSede,nomFede);
     }
     
+    public String toString(){
+        return "Admin: " + nombre +  " " + apellidos + " " + super.toString() + " DNI: " + dni;
+    }
 }
