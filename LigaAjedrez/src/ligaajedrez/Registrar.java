@@ -20,6 +20,7 @@ public class Registrar extends javax.swing.JFrame {
     private RegistroEntrenador registroEntrenador;
     private RegistroSede registroSede;
     private RegistroGerente registroGerente;
+    private RegistroClub registroClub;
 
     /**
      * Creates new form Registrar
@@ -55,6 +56,11 @@ public class Registrar extends javax.swing.JFrame {
         jLabel1.setText("REGISTRAR");
 
         jB_regClub.setText("Registrar Club");
+        jB_regClub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_regClubActionPerformed(evt);
+            }
+        });
 
         jB_regFede.setText("Registrar Federacion");
         jB_regFede.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +197,12 @@ public class Registrar extends javax.swing.JFrame {
         this.setVisible(false);
         registroGerente.setVisible(true);
     }//GEN-LAST:event_jB_regGerenteActionPerformed
+
+    private void jB_regClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regClubActionPerformed
+        registroClub = new RegistroClub(administrador, this);        
+        this.setVisible(false);
+        registroClub.setVisible(true);
+    }//GEN-LAST:event_jB_regClubActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

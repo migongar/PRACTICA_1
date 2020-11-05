@@ -5,18 +5,31 @@
  */
 package ligaajedrez;
 
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import modelo.Administrador;
+
 /**
  *
  * @author angel
  */
 public class RegistroClub extends javax.swing.JFrame {
-
+    private Administrador administrador;
+    private JFrame paganterior;
     /**
      * Creates new form RegistroClub
      */
-    public RegistroClub() {
+    public RegistroClub(Administrador admin, JFrame pagant) {
         initComponents();
         this.setLocationRelativeTo(null);
+        administrador = admin;
+        paganterior = pagant;
+        
+        ArrayList lista = new ArrayList();
+        lista = administrador.getLiga().getFederaciones();
+        for(int i = 0; i<lista.size();i++){
+            jC_Fede.addItem(lista.get(i).toString());
+        }
     }
 
     /**
@@ -28,23 +41,242 @@ public class RegistroClub extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jT_Nombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jC_Fede = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jC_Sede = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jT_DNIGer = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jB_BuscarGer = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jT_NomGer = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jB_BuscarEnt = new javax.swing.JButton();
+        jT_DNIEnt = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jT_NomEnt = new javax.swing.JTextField();
+        jB_Salir = new javax.swing.JButton();
+        jB_Registrar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("REGISTRO CLUB");
+
+        jLabel2.setText("Nombre: ");
+
+        jLabel3.setText("Federacion: ");
+
+        jC_Fede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jC_FedeActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Sede:");
+
+        jC_Sede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jC_SedeActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Datos del Presidente");
+
+        jT_DNIGer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_DNIGerActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("DNI");
+
+        jB_BuscarGer.setText("Buscar");
+
+        jLabel7.setText("Nombre: ");
+
+        jLabel8.setText("Datos de Entrenador");
+
+        jB_BuscarEnt.setText("Buscar");
+
+        jT_DNIEnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_DNIEntActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("DNI");
+
+        jLabel10.setText("Nombre: ");
+
+        jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
+
+        jB_Registrar.setText("Registrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jC_Fede, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jC_Sede, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel5)
+                .addGap(96, 96, 96)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jT_DNIGer, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jB_BuscarGer))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jT_NomGer, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(jT_DNIEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jB_BuscarEnt)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jT_NomEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jB_Salir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jB_Registrar)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jC_Fede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jC_Sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jT_DNIGer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jB_BuscarGer)
+                    .addComponent(jLabel9)
+                    .addComponent(jB_BuscarEnt)
+                    .addComponent(jT_DNIEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jT_NomGer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jT_NomEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB_Salir)
+                    .addComponent(jB_Registrar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jC_FedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jC_FedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jC_FedeActionPerformed
+
+    private void jC_SedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jC_SedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jC_SedeActionPerformed
+
+    private void jT_DNIGerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_DNIGerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_DNIGerActionPerformed
+
+    private void jT_DNIEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_DNIEntActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_DNIEntActionPerformed
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        paganterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_BuscarEnt;
+    private javax.swing.JButton jB_BuscarGer;
+    private javax.swing.JButton jB_Registrar;
+    private javax.swing.JButton jB_Salir;
+    private javax.swing.JComboBox<String> jC_Fede;
+    private javax.swing.JComboBox<String> jC_Sede;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jT_DNIEnt;
+    private javax.swing.JTextField jT_DNIGer;
+    private javax.swing.JTextField jT_NomEnt;
+    private javax.swing.JTextField jT_NomGer;
+    private javax.swing.JTextField jT_Nombre;
     // End of variables declaration//GEN-END:variables
 }
