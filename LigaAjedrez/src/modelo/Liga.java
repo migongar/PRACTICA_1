@@ -177,7 +177,7 @@ public class Liga implements Serializable{
         Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad,this);
               
         if(jugadores.add(nuevo)){
-            System.out.println("Nuevo: " + nuevo);                   
+            System.out.println("Nuevo Jugador: " + nuevo);                   
             this.guardarDatos();
             return true;
         }
@@ -270,17 +270,36 @@ public class Liga implements Serializable{
 
     public boolean registrarFederacion(String nomFede) {
         Federacion fede = new Federacion(nomFede);
-        return federaciones.add(fede);
+                                      
+        if(federaciones.add(fede)){
+            System.out.println("Nueva Federacion: " + fede); 
+            this.guardarDatos();
+            return true;
+        }
+        else
+            return false;        
     }
 
     public boolean registrarGerente(String nombre, String apellidos, String dni) {
         Gerente ger = new Gerente(nombre,apellidos,dni);
-        return gerentes.add(ger);
+        if(gerentes.add(ger)){
+            System.out.println("Nuevo Gerente: " + ger); 
+            this.guardarDatos();
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean registrarEntrenador(String nombre, String apellidos, String dni) {
-        Entrenador ger = new Entrenador(nombre,apellidos,dni);
-        return entrenadores.add(ger);
+        Entrenador entr = new Entrenador(nombre,apellidos,dni);
+        if(entrenadores.add(entr)){
+            System.out.println("Nuevo Entrenador: " + entr); 
+            this.guardarDatos();
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean registrarSede(String nomSede, String nomFede) {
@@ -297,7 +316,13 @@ public class Liga implements Serializable{
         
         Sede sede = new Sede(nomSede,fede);
         
-        return sedes.add(sede);
+        if(sedes.add(sede)){
+            System.out.println("Nueva Sede: " + sede); 
+            this.guardarDatos();
+            return true;
+        }
+        else
+            return false;
     }
 
     public ArrayList<Entrenador> getEntrenadores() {
