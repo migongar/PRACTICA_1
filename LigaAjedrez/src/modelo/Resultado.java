@@ -25,5 +25,7 @@ public class Resultado implements Serializable{
         this.fecha = fecha;
     }
     
-    
+    public String toString(){
+        return "Ganador: " + ganador + " Rival: " + rival + " Tiempo: " + tiempo;
+}
 }

@@ -19,7 +19,8 @@ import modelo.Usuario;
  */
 public class IntroducirResultado extends javax.swing.JFrame {
     private JFrame pganterior;
-    private Usuario usuario;
+    private Usuario usuario;    
+    private DefaultListModel lista;
     /**
      * Creates new form Resultado
      */
@@ -29,6 +30,7 @@ public class IntroducirResultado extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.usuario = user;
         this.pganterior = anterior;
+        this.lista = new DefaultListModel();
     }
 
     /**
@@ -259,7 +261,17 @@ public class IntroducirResultado extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Transaccion hecha correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
-
+            
+            jTF_Torneo.setText("");
+            jDC_fecha.setCalendar(null);
+            jTF_ganador.setText("");
+            jTF_rival.setText("");
+            jTF_Tiempo.setText("");
+            jCB_torneos.removeAllItems();
+            lista.removeAllElements();
+            
+            
+            
             /*ArrayList lista = new ArrayList();
             lista = administrador.getLiga().getTorneos();
 
@@ -292,8 +304,10 @@ public class IntroducirResultado extends javax.swing.JFrame {
 
     private void jB_SeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SeleccionarActionPerformed
         if(jList_PartidasDisp.getSelectedIndex() != -1){
+            int index= jList_PartidasDisp.getSelectedIndex();
             jTF_Torneo.setText(jCB_torneos.getSelectedItem().toString());
-            jTF_rival.setText(jList_PartidasDisp.getSelectedValue());
+            //System.out.println(lista.getElementAt(index));
+            jTF_rival.setText(lista.getElementAt(index).toString());
         }
         else
             JOptionPane.showMessageDialog(null,"No se ha seleccionado ninguna partida disponible", "AVISO", JOptionPane.INFORMATION_MESSAGE);
@@ -306,7 +320,6 @@ public class IntroducirResultado extends javax.swing.JFrame {
         
         jList_PartidasDisp.clearSelection();
 
-        DefaultListModel lista = new DefaultListModel();
         if(!listaPartidas.isEmpty()){
             for(int i = 0; i < listaPartidas.size(); i++){
                 lista.addElement(listaPartidas.get(i));                   

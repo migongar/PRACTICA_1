@@ -69,4 +69,8 @@ public class Jugador extends Usuario implements Serializable{
     public void addPartida(Partida nuevaPartida) {
         partidas.add(nuevaPartida);
     }
+
+    public void elimnarTorneoJugador(Torneo torneo) {
+        torneos.remove(torneo);
+    }
 }

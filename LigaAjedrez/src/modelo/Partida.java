@@ -62,12 +62,15 @@ public class Partida implements Serializable{
 
     public void setSede(Sede sede) {
         this.sede = sede;
-    }
-    
-    
-    
-    
-    
+    }   
     
     
 }
+    
+    
+    
+    
+    
+    
+    
+

@@ -31,7 +31,7 @@ public class Liga implements Serializable{
 
 
     public void cargarDatos() {        
-       
+       /*
         ArrayList arrayList;
         
         jugadores.clear();
@@ -56,7 +56,7 @@ public class Liga implements Serializable{
             
             for(int i = 0; i < arrayList.size(); i++) {
                 System.out.println( arrayList.get(i));                
-            }*/
+            }
             
             administradores = (ArrayList<Administrador>) arrayList.get(0);
             jugadores = (ArrayList<Jugador>) arrayList.get(1);
@@ -104,17 +104,19 @@ public class Liga implements Serializable{
             
             System.out.println( "Torneos:"); 
             
-            for(int i = 0; i < torneos.size(); i++) {
-                System.out.println( torneos.get(i));                
+            for(int i = 0; i < torneos.size(); i++) {                
+                System.out.println( torneos.get(i));
+                if(torneos.get(i).isInicio())
+                    System.out.println("Iniciado");
             }          
             
         } catch (Exception e) {
             System.out.println( e.getMessage() );
-        }      
-/*
-    
+        }
+
+   
         
-        
+        */
         Federacion fede = new Federacion("Federacion de Valencia");
         System.out.println("Federacion: " + fede.toString()); 
         
@@ -158,9 +160,7 @@ public class Liga implements Serializable{
         Torneo torneo2 = new Torneo("Torneo Santander", fede);
         System.out.println("Torneo: " + torneo2.toString());
         torneo2.addClub(club);
-        torneo2.addClub(club2);
-        
-        this.iniciarTorneo(torneo2);        
+        torneo2.addClub(club2);        
         
         Administrador admin = new Administrador("Julian", "Lopez","89657412P", this);
         System.out.println("Administrador: " + admin.toString());
@@ -169,6 +169,18 @@ public class Liga implements Serializable{
         System.out.println("Jugador: " + jugador.toString());
         Jugador jugador2 = new Jugador("Marcos" , "Alonso", "52967432W", club2,  17, this);
         System.out.println("Jugador: " + jugador2.toString());
+        
+        torneo2.addJugador(jugador);
+        torneo2.addJugador(jugador2);
+        jugador.addTorneo(torneo2);
+        jugador2.addTorneo(torneo2);
+        
+        Partida partidajuagor = new Partida(jugador, sede, torneo2 );
+        Partida partidajuagor2 = new Partida(jugador2, sede, torneo2 );
+        
+        jugador.addPartida(partidajuagor);
+        jugador2.addPartida(partidajuagor2);
+        
                
         jugadores.clear();
         administradores.clear();
@@ -197,6 +209,9 @@ public class Liga implements Serializable{
         torneos.add(torneo);
         torneos.add(torneo2);
         
+        if(this.iniciarTorneo(torneo2))
+            System.out.println(torneo2.toString() + "Iniciado");
+        
         ArrayList arrayList = new ArrayList();
 
         System.out.println("Datos que vamos a escribir en el fichero:");      
@@ -222,7 +237,7 @@ public class Liga implements Serializable{
         } catch (Exception e) {
             System.out.println( e.getMessage() );
         }
-*/
+
     }
     
 
@@ -633,9 +648,12 @@ public class Liga implements Serializable{
                         }                        
                         else{
                             torneos.get(i).eliminarJugadorTorneo(jug);
+                            jugadores.get(indice).elimnarTorneoJugador(torneos.get(indT));
                         }
                         Resultado resultado = new Resultado(ganador, rival, tiempo, fecha);
                         jugadores.get(indice).getPartidas().get(i).setResultado(resultado);
+                        System.out.println(jugadores.get(indice).getPartidas().get(i).getResultado());
+
                         encPartida = true;
                 }
                     i++;
@@ -685,6 +703,7 @@ public class Liga implements Serializable{
         
         ArrayList<Partida> partidasJugador = jugadores.get(indice).getPartidas();
         
+        try{
         while(!encontrado && i<partidasJugador.size()){
             if(partidasJugador.get(i).getTorneo().getNombre().equals(torneo) && partidasJugador.get(i).getResultado() == null){
                 partidas.add(partidasJugador.get(i));
@@ -692,35 +711,45 @@ public class Liga implements Serializable{
             }
             i++;            
         }
+        }catch(Exception e){
+            System.out.println( e.getMessage() );
+        }
                 
         return partidas;
     }
     
-    public void iniciarTorneo(Torneo torneo){
+    public boolean iniciarTorneo(Torneo torneo){
         ArrayList<Jugador> encTorneo = new ArrayList<Jugador>();
-        boolean encontrado = false;
-        int i = 0, indice;
+        boolean torneoenc = false, torneojugador = false;
+        int i = 0, indice = 0;
         
-        while(!encontrado && i<torneos.size()){
+        System.out.println( "iniciar torneo" + torneo.getNombre());
+        
+        while(!torneoenc && i<torneos.size()){
+            System.out.println( "Torneo:" + torneos.get(i).getNombre());
             if(torneos.get(i).getNombre().equals(torneo.getNombre())){
                 encTorneo = torneos.get(i).getJugadores();
                 torneos.get(i).setInicio(true);
-                encontrado = true;
+                torneoenc = true;
+                System.out.println( "Torneo encontrado");
             }
             i++;            
         }        
         
         for(int j = 0; j< encTorneo.size();j++){
-            indice = this.buscarJugador(encTorneo.get(i).getDNI());
-            encontrado = false;
+            indice = this.buscarJugador(encTorneo.get(j).getDNI());
+            torneojugador = false;
             i = 0;
-            while(!encontrado && i<jugadores.size()){
+            while(!torneojugador && i<jugadores.size()){
                 if(jugadores.get(indice).getTorneos().get(i).getNombre().equals(torneo.getNombre())){
                     jugadores.get(indice).getTorneos().get(i).setInicio(true);
-                    encontrado = true;
+                    torneojugador = true;
+                    System.out.println( "Torneojugador encontrado");
                 }
             i++;
             }           
         }
+        
+        return (torneojugador && torneoenc);
     }
 }
