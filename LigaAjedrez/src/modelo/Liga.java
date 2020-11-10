@@ -31,7 +31,7 @@ public class Liga implements Serializable{
 
 
     public void cargarDatos() {        
-        
+       
         ArrayList arrayList;
         
         jugadores.clear();
@@ -110,15 +110,15 @@ public class Liga implements Serializable{
             
         } catch (Exception e) {
             System.out.println( e.getMessage() );
-        }
-        
+        }      
 /*
     
         
         
         Federacion fede = new Federacion("Federacion de Valencia");
-        System.out.println("Federacion: " + fede.toString());        
+        System.out.println("Federacion: " + fede.toString()); 
         
+        //CLUB 1
         Gerente gerente = new Gerente("Manuel", "Carrera", "25836417H", true);
         System.out.println("Gerente: " + gerente.toString());  
         
@@ -134,14 +134,41 @@ public class Liga implements Serializable{
         if(!fede.anyadirClub(club))
             System.out.println("Error al añadir club a federacion");
         
-        Torneo torneo = new Torneo("Torneo Smart");
+        //CLUB 2
+        Gerente gerente2 = new Gerente("Amador", "Contraras", "48521569L", true);
+        System.out.println("Gerente: " + gerente.toString());  
+        
+        Entrenador entrenador2 = new Entrenador("Maria", "Valero", "41695278O", true);
+        System.out.println("Entrenador: " + entrenador.toString());
+        
+        Sede sede2 = new Sede("Pavellon Este",fede);
+        System.out.println("Sede: " + sede.toString());
+        
+        Club club2 = new Club("Valencia FC",fede,sede2, gerente2, entrenador2, this);
+        System.out.println("Club: " + club2.toString());       
+        
+        if(!fede.anyadirClub(club2))
+            System.out.println("Error al añadir club a federacion");
+        
+        Torneo torneo = new Torneo("Torneo Smart", fede);
         System.out.println("Torneo: " + torneo.toString());
-        torneo.addClub(club);        
+        torneo.addClub(club);
+        torneo.addClub(club2);
+        
+        Torneo torneo2 = new Torneo("Torneo Santander", fede);
+        System.out.println("Torneo: " + torneo2.toString());
+        torneo2.addClub(club);
+        torneo2.addClub(club2);
+        
+        this.iniciarTorneo(torneo2);        
         
         Administrador admin = new Administrador("Julian", "Lopez","89657412P", this);
         System.out.println("Administrador: " + admin.toString());
+        
         Jugador jugador = new Jugador("Juan" , "Vazquez", "12256848L", club,  16, this);
         System.out.println("Jugador: " + jugador.toString());
+        Jugador jugador2 = new Jugador("Marcos" , "Alonso", "52967432W", club2,  17, this);
+        System.out.println("Jugador: " + jugador2.toString());
                
         jugadores.clear();
         administradores.clear();
@@ -152,12 +179,23 @@ public class Liga implements Serializable{
         clubes.clear();  
                 
         administradores.add(admin);
+        
         jugadores.add(jugador);
+        jugadores.add(jugador2);
+        
         federaciones.add(fede);
+        
         gerentes.add(gerente);
+        gerentes.add(gerente2);
+        
         entrenadores.add(entrenador);
+        entrenadores.add(entrenador2);
+        
         clubes.add(club);
+        clubes.add(club2);
+        
         torneos.add(torneo);
+        torneos.add(torneo2);
         
         ArrayList arrayList = new ArrayList();
 
@@ -631,7 +669,7 @@ public class Liga implements Serializable{
         if(indice >= 0){
             ArrayList<Torneo> torneosJugador = jugadores.get(indice).getTorneos();
             for(int i = 0;i<torneosJugador.size();i++){
-                if(!torneosJugador.get(i).isInicio())
+                if(torneosJugador.get(i).isInicio())
                     torneosEncurso.add(torneosJugador.get(i));
             }
         }
@@ -658,5 +696,31 @@ public class Liga implements Serializable{
         return partidas;
     }
     
-    
+    public void iniciarTorneo(Torneo torneo){
+        ArrayList<Jugador> encTorneo = new ArrayList<Jugador>();
+        boolean encontrado = false;
+        int i = 0, indice;
+        
+        while(!encontrado && i<torneos.size()){
+            if(torneos.get(i).getNombre().equals(torneo.getNombre())){
+                encTorneo = torneos.get(i).getJugadores();
+                torneos.get(i).setInicio(true);
+                encontrado = true;
+            }
+            i++;            
+        }        
+        
+        for(int j = 0; j< encTorneo.size();j++){
+            indice = this.buscarJugador(encTorneo.get(i).getDNI());
+            encontrado = false;
+            i = 0;
+            while(!encontrado && i<jugadores.size()){
+                if(jugadores.get(indice).getTorneos().get(i).getNombre().equals(torneo.getNombre())){
+                    jugadores.get(indice).getTorneos().get(i).setInicio(true);
+                    encontrado = true;
+                }
+            i++;
+            }           
+        }
+    }
 }

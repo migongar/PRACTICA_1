@@ -50,7 +50,7 @@ public class Jugador extends Usuario implements Serializable{
         return torneos.add(tor);
     }
 
-    public ArrayList getTorneos() {
+    public ArrayList<Torneo> getTorneos() {
         return torneos;
     }
 

@@ -28,6 +28,10 @@ public class Torneo implements Serializable{
         this.federacion = fede;
         this.inicio = false;
     }
+    
+    public ArrayList<Jugador> getJugadores(){
+        return jugadores;
+    }
 
     public void setInicio(boolean inicio) {
         this.inicio = inicio;
