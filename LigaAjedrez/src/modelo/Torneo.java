@@ -13,14 +13,35 @@ import java.util.ArrayList;
  * @author angel
  */
 public class Torneo implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+    private boolean inicio;
     private String nombre;
+    private Jugador espPartida = null;
+    protected Federacion federacion;
     protected ArrayList<Club> clubes = new ArrayList<Club>();
-    protected ArrayList<Partida> partidas = new ArrayList<Partida>();
+    //protected ArrayList<Partida> partidas = new ArrayList<Partida>();
     protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     
-    public Torneo(String nom){
+    public Torneo(String nom, Federacion fede){
         this.nombre = nom;
+        this.federacion = fede;
+        this.inicio = false;
     }
+
+    public void setInicio(boolean inicio) {
+        this.inicio = inicio;
+    }
+
+    public boolean isInicio() {
+        return inicio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
 
     public boolean buscarClub(Club club) {
         boolean encontrado = false;
@@ -29,6 +50,7 @@ public class Torneo implements Serializable{
             if(clubes.get(i).getNombre().equals(club.getNombre())){
                 encontrado = true;
             }
+            i++;
         }
         return encontrado;
     }
@@ -40,6 +62,7 @@ public class Torneo implements Serializable{
             if(jugadores.get(i).getNombre().equals(nombre)){
                 encontrado = true;
             }
+            i++;
         }
         return encontrado;
     }
@@ -54,6 +77,41 @@ public class Torneo implements Serializable{
     
     public String toString(){
             return nombre;
+    }
+
+    public Federacion getFederacion() {
+        return federacion;
+    }
+
+    public int getNumJugadores() {
+        return jugadores.size();
+    }
+
+    public Partida siguientePartida(Jugador jugador) {
+        boolean encontrado = false;
+        int i = 0;
+        Partida nuevaPartida = null;
+        
+        if(jugadores.size()>2){
+            while(!encontrado && i<jugadores.size()){
+                if(jugadores.get(i).getNombre().equals(jugador.getNombre())){
+                    if(espPartida != null){
+                        nuevaPartida = new Partida(espPartida,jugador.getClub().getSede(),this);
+                        jugadores.get(i).addPartida(nuevaPartida);
+                    }
+                    else
+                        espPartida = jugadores.get(i); 
+                    encontrado = true;
+                }
+                i++;                
+            }                
+        }
+        
+        return nuevaPartida;
+    }
+
+    public boolean eliminarJugadorTorneo(Jugador oponente) {
+        return jugadores.remove(oponente);
     }
             
     

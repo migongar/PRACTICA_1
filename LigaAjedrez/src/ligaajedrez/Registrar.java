@@ -18,9 +18,9 @@ public class Registrar extends javax.swing.JFrame {
     private RegistroJugador registroJugador;
     private RegistroFederacion registroFederacion;
     private RegistroEntrenador registroEntrenador;
-    private RegistroSede registroSede;
     private RegistroGerente registroGerente;
     private RegistroClub registroClub;
+    private RegistroTorneo registroTorneo;
 
     /**
      * Creates new form Registrar
@@ -48,7 +48,6 @@ public class Registrar extends javax.swing.JFrame {
         jB_regGerente = new javax.swing.JButton();
         jB_regJugador = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jB_regSede = new javax.swing.JButton();
         jB_regTorneo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,14 +96,12 @@ public class Registrar extends javax.swing.JFrame {
             }
         });
 
-        jB_regSede.setText("Registrar Sede");
-        jB_regSede.addActionListener(new java.awt.event.ActionListener() {
+        jB_regTorneo.setText("Registrar Torneo");
+        jB_regTorneo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_regSedeActionPerformed(evt);
+                jB_regTorneoActionPerformed(evt);
             }
         });
-
-        jB_regTorneo.setText("Registrar Torneo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,17 +120,14 @@ public class Registrar extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jB_regGerente)
-                        .addGap(18, 18, 18)
-                        .addComponent(jB_regSede)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB_regTorneo)
+                        .addGap(18, 18, 18)
                         .addComponent(jB_regJugador))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jB_regTorneo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jB_regClub)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jB_regFede)))
+                        .addComponent(jB_regClub)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jB_regFede)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jB_regEntrenador)))
                 .addContainerGap())
@@ -147,10 +141,8 @@ public class Registrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_regGerente)
                     .addComponent(jB_regJugador)
-                    .addComponent(jB_regSede))
-                .addGap(9, 9, 9)
-                .addComponent(jB_regTorneo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jB_regTorneo))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_regClub)
                     .addComponent(jB_regFede)
@@ -186,12 +178,6 @@ public class Registrar extends javax.swing.JFrame {
         registroEntrenador.setVisible(true);
     }//GEN-LAST:event_jB_regEntrenadorActionPerformed
 
-    private void jB_regSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regSedeActionPerformed
-        registroSede = new RegistroSede(administrador, this);        
-        this.setVisible(false);
-        registroSede.setVisible(true);
-    }//GEN-LAST:event_jB_regSedeActionPerformed
-
     private void jB_regGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regGerenteActionPerformed
         registroGerente = new RegistroGerente(administrador, this);        
         this.setVisible(false);
@@ -203,6 +189,12 @@ public class Registrar extends javax.swing.JFrame {
         this.setVisible(false);
         registroClub.setVisible(true);
     }//GEN-LAST:event_jB_regClubActionPerformed
+
+    private void jB_regTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regTorneoActionPerformed
+        registroTorneo = new RegistroTorneo(administrador, this);        
+        this.setVisible(false);
+        registroTorneo.setVisible(true);
+    }//GEN-LAST:event_jB_regTorneoActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -211,7 +203,6 @@ public class Registrar extends javax.swing.JFrame {
     private javax.swing.JButton jB_regFede;
     private javax.swing.JButton jB_regGerente;
     private javax.swing.JButton jB_regJugador;
-    private javax.swing.JButton jB_regSede;
     private javax.swing.JButton jB_regTorneo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

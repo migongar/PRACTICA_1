@@ -5,11 +5,15 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author angel
  */
-public class GestorLiga {
+public class GestorLiga implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     private Liga liga;
     
     public GestorLiga(){

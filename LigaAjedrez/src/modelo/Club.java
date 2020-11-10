@@ -13,17 +13,24 @@ import java.util.ArrayList;
  * @author angel
  */
 public class Club implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     private String nombre;
     protected Liga liga;
     protected Federacion federacion;
     protected Sede sede;
+    protected Gerente gerente;
+    protected Entrenador entrenador;
     protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     
-    public Club(String nom,Federacion fede,Sede sede,Liga liga){
+    public Club(String nom,Federacion fede,Sede sede, Gerente gerente, Entrenador entrenador, Liga liga){
         this.nombre = nom;
         this.federacion = fede;
         this.sede = sede;
         this.liga = liga;
+        this.gerente = gerente;
+        this.entrenador = entrenador;
+        
     }
 
     public Club() {
@@ -38,8 +45,12 @@ public class Club implements Serializable{
         return nombre;
     }
 
-    public void addJugador(Jugador jug) {
-        jugadores.add(jug);
+    public boolean addJugador(Jugador jug) {
+        return jugadores.add(jug);
+    }
+    
+    public Sede getSede(){
+        return sede;
     }
     
 }

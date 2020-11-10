@@ -6,29 +6,30 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  *
  * @author angel
  */
-public class Sede implements Serializable {
+public class Datos implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private String nombre;
-    protected Federacion federacion;
-    protected ArrayList<Partida> partidas = new ArrayList<Partida>();
-    
-    public Sede(String nom, Federacion fede){
+    String nombre, apellidos, dni;
+    public Datos(String nom, String ape, String dni){
         this.nombre = nom;
-        this.federacion = fede;
+        this.apellidos = ape;
+        this.dni = dni;
     }
     
-    public String getNombre(){
+    public String getDNI(){
+        return dni;
+    }
+
+    public String getNombre() {
         return nombre;
     }
-    
-    public String toString(){
-            return nombre;
+
+    public String getApellidos() {
+        return apellidos;
     }
 }

@@ -52,12 +52,10 @@
                               <Component id="jL_Password" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jL_Inicio" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTF_User" max="32767" attributes="0"/>
-                                  <Component id="jTF_Passwd" pref="128" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jTF_User" pref="128" max="32767" attributes="0"/>
+                              <Component id="jPF_Password" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -78,7 +76,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jL_Password" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTF_Passwd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPF_Password" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="78" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -106,8 +104,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTF_UserActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTF_Passwd">
-        </Component>
         <Component class="javax.swing.JButton" name="jB_Entrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Entrar"/>
@@ -128,6 +124,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_ResgistrarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="jPF_Password">
         </Component>
       </SubComponents>
     </Container>

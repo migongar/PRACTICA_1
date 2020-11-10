@@ -5,8 +5,11 @@
  */
 package ligaajedrez;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Administrador;
+import modelo.DatosTorneo;
 
 /**
  *
@@ -14,14 +17,23 @@ import javax.swing.JOptionPane;
  */
 public class AsignarSede extends javax.swing.JFrame {
     private JFrame pganterior;
+    private Administrador administrador;
+    private ArrayList<DatosTorneo> datosTorneo = null;
 
     /**
      * Creates new form AsignarSede
      */
-    public AsignarSede(JFrame anterior) {
+    public AsignarSede(Administrador admin,JFrame anterior) {
         initComponents();
         this.setLocationRelativeTo(null);
-        pganterior = anterior;
+        this.pganterior = anterior;
+        this.administrador = admin;
+        
+        ArrayList lista = new ArrayList();
+        lista = administrador.getLiga().getFederaciones();
+        for(int i = 0; i<lista.size();i++){
+            jCB_federacion.addItem(lista.get(i).toString());
+        }
     }
 
 
@@ -35,25 +47,34 @@ public class AsignarSede extends javax.swing.JFrame {
     private void initComponents() {
 
         jL_AsigSede = new javax.swing.JLabel();
-        jCB_Sede = new javax.swing.JComboBox<>();
-        jL_Sede = new javax.swing.JLabel();
-        jB_Asignar = new javax.swing.JButton();
+        jB_asignar = new javax.swing.JButton();
         jB_Salir = new javax.swing.JButton();
-        jCB_Equipo = new javax.swing.JComboBox<>();
-        jL_Equipo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jT_torneosDisponibles = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jB_crearPartidas = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jT_partidasCreadas = new javax.swing.JTable();
+        jCB_sede = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jT_partidasAsignadas = new javax.swing.JTable();
+        jB_deshacer = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jCB_federacion = new javax.swing.JComboBox<>();
+        jB_buscarTorneos = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jL_AsigSede.setText("ASIGNAR SEDE");
 
-        jCB_Sede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jL_Sede.setText("Sede:");
-
-        jB_Asignar.setText("Asignar");
-        jB_Asignar.addActionListener(new java.awt.event.ActionListener() {
+        jB_asignar.setText("Asignar");
+        jB_asignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_AsignarActionPerformed(evt);
+                jB_asignarActionPerformed(evt);
             }
         });
 
@@ -64,53 +85,185 @@ public class AsignarSede extends javax.swing.JFrame {
             }
         });
 
-        jCB_Equipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jT_torneosDisponibles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre de Torneo", "Jugadores inscritos"
+            }
+        ));
+        jT_torneosDisponibles.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(jT_torneosDisponibles);
 
-        jL_Equipo.setText("Equipo:");
+        jLabel1.setText("Torneos disponibles");
+
+        jB_crearPartidas.setText("Crear partidas");
+        jB_crearPartidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_crearPartidasActionPerformed(evt);
+            }
+        });
+
+        jT_partidasCreadas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Jugador", "Rival"
+            }
+        ));
+        jScrollPane2.setViewportView(jT_partidasCreadas);
+
+        jLabel2.setText("Seleccione la sede a asignar");
+
+        jLabel3.setText("Partidas creadas");
+
+        jT_partidasAsignadas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Jugador", "Rival", "Sede"
+            }
+        ));
+        jScrollPane3.setViewportView(jT_partidasAsignadas);
+
+        jB_deshacer.setText("Deshacer asignacion");
+
+        jLabel4.setText("Partidas asignadas");
+
+        jB_buscarTorneos.setText("Buscar Torneos");
+        jB_buscarTorneos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_buscarTorneosActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Federacion:");
+
+        jButton4.setText("Finalizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(jL_AsigSede)
-                .addContainerGap(181, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(126, 126, 126)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCB_federacion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jB_buscarTorneos))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel2)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jCB_sede, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jB_asignar)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jB_deshacer)
+                                                .addGap(49, 49, 49))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jB_crearPartidas)
+                                        .addGap(110, 110, 110)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(293, 293, 293)
+                        .addComponent(jL_AsigSede)))
+                .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
                 .addComponent(jB_Salir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jB_Asignar)
-                .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jL_Sede, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jL_Equipo, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCB_Equipo, 0, 83, Short.MAX_VALUE)
-                    .addComponent(jCB_Sede, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(67, 67, 67))
+                .addComponent(jButton4)
+                .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jL_AsigSede)
-                .addGap(71, 71, 71)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCB_Equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_Equipo))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jL_Sede)
-                    .addComponent(jCB_Sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jB_Asignar)
-                    .addComponent(jB_Salir))
-                .addGap(22, 22, 22))
+                    .addComponent(jB_buscarTorneos)
+                    .addComponent(jCB_federacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jB_crearPartidas)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jB_Salir)
+                            .addComponent(jButton4))
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel2)
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCB_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jB_asignar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jB_deshacer)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -121,18 +274,51 @@ public class AsignarSede extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
 
-    private void jB_AsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarActionPerformed
+    private void jB_asignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_asignarActionPerformed
         JOptionPane.showMessageDialog(null, "Asignacion realizada con exito\n ", "AVISO", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jB_AsignarActionPerformed
+    }//GEN-LAST:event_jB_asignarActionPerformed
+
+    private void jB_buscarTorneosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarTorneosActionPerformed
+        String federacion;
+        
+        federacion = jCB_federacion.getSelectedItem().toString();
+        
+        datosTorneo = administrador.buscarTorneosSinPartidas(federacion);
+        /*
+        if(datosTorneo != null){
+            jT_nomGerente.setText(datosGerente.getNombre());
+            jT_apGerente.setText(datosGerente.getApellidos());
+        }
+        else{       
+            JOptionPane.showMessageDialog(null, "No hay torneos disponibles", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+        }*/
+    }//GEN-LAST:event_jB_buscarTorneosActionPerformed
+
+    private void jB_crearPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_crearPartidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_crearPartidasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jB_Asignar;
     private javax.swing.JButton jB_Salir;
-    private javax.swing.JComboBox<String> jCB_Equipo;
-    private javax.swing.JComboBox<String> jCB_Sede;
+    private javax.swing.JButton jB_asignar;
+    private javax.swing.JButton jB_buscarTorneos;
+    private javax.swing.JButton jB_crearPartidas;
+    private javax.swing.JButton jB_deshacer;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jCB_federacion;
+    private javax.swing.JComboBox<String> jCB_sede;
     private javax.swing.JLabel jL_AsigSede;
-    private javax.swing.JLabel jL_Equipo;
-    private javax.swing.JLabel jL_Sede;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jT_partidasAsignadas;
+    private javax.swing.JTable jT_partidasCreadas;
+    private javax.swing.JTable jT_torneosDisponibles;
     // End of variables declaration//GEN-END:variables
 }

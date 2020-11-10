@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * @author angel
  */
 public class Federacion implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     private String nombre;
     protected ArrayList<Club> clubes = new ArrayList<Club>();
     
@@ -32,7 +34,7 @@ public class Federacion implements Serializable{
             return nombre;
     }
 
-    public void anyadirClub(Club club) {
-        clubes.add(club);
+    public boolean anyadirClub(Club club) {
+        return clubes.add(club);
     }
 }

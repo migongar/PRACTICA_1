@@ -17,7 +17,7 @@ public class Administracion extends javax.swing.JFrame {
     private AsignarSede asignarSede;
     private AsignarResponsable asignarResponsable;
     private ReservarSede reservarSede;
-    private Resultado resultado;
+    private IntroducirResultado resultado;
     private Historial historial;
     private Registrar registrar;
     private Administrador administrador;
@@ -211,7 +211,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jB_IntroducirResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirResActionPerformed
         this.setVisible(false);
-        resultado = new Resultado(this);
+        resultado = new IntroducirResultado(administrador,this);
         resultado.setVisible(true);
     }//GEN-LAST:event_jB_IntroducirResActionPerformed
 
@@ -223,7 +223,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jB_AsignarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarSedeActionPerformed
         this.setVisible(false);
-        asignarSede = new AsignarSede(this);
+        asignarSede = new AsignarSede(administrador, this);
         asignarSede.setVisible(true);
     }//GEN-LAST:event_jB_AsignarSedeActionPerformed
 

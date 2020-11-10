@@ -5,23 +5,28 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author angel
  */
-public class Gerente {
-    private String nombre,apellidos,dni;
+public class Gerente extends Persona implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     private boolean contratado;
 
-    public Gerente(String nombre, String apellidos, String dni) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        this.contratado = false;
+    public Gerente(String nombre, String apellidos, String dni, boolean contrato) {
+        super(nombre,apellidos,dni);
+        this.contratado = contrato;
     }
     
-    public String toString(){
-            return nombre;
+    public void setContratado(boolean contrato){
+        contratado = contrato;
+    }    
+
+    public boolean getContratado() {
+        return contratado;
     }
     
 }

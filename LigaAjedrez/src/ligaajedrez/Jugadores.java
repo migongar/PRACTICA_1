@@ -21,7 +21,7 @@ public class Jugadores extends javax.swing.JFrame {
      */
     private AsignarResponsable resp;
     private ReservarSede resSede;
-    private Resultado resultado;
+    private IntroducirResultado resultado;
     private InscribirseTorneo inscribir_torneo;
     private JFrame paganterior;
     private Jugador jugador;
@@ -172,39 +172,30 @@ public class Jugadores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_InscribirseTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirseTorneoActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
         inscribir_torneo = new InscribirseTorneo(jugador,this);
         inscribir_torneo.setVisible(true);
-        setVisible(false);
-        dispose();
     }//GEN-LAST:event_jB_InscribirseTorneoActionPerformed
 
     private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
-        // TODO add your handling code here:4
+        this.setVisible(false);
         resp = new AsignarResponsable(this);
         resp.setVisible(true);
-        setVisible(false);
-        dispose();
     }//GEN-LAST:event_jB_AsignarResponsableActionPerformed
 
     private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
         resSede = new ReservarSede(this);
         resSede.setVisible(true);
-        setVisible(false);
-        dispose();
     }//GEN-LAST:event_jB_ReservarSedeActionPerformed
 
     private void jB_IntroducirResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_IntroducirResActionPerformed
-        // TODO add your handling code here:
-        resultado = new Resultado(this);
+        this.setVisible(false);
+        resultado = new IntroducirResultado(jugador,this);
         resultado.setVisible(true);
-        setVisible(false);
-        dispose();
     }//GEN-LAST:event_jB_IntroducirResActionPerformed
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        
         paganterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
@@ -216,6 +207,7 @@ public class Jugadores extends javax.swing.JFrame {
         for(int i = 0;i<lista.size();i++){
             torneos += lista.get(i).toString() + "\n";
         }
+        
         JOptionPane.showMessageDialog(this, "Historial Jugador:" + torneos);
     }//GEN-LAST:event_jB_HistorialActionPerformed
 

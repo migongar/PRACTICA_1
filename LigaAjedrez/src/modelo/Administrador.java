@@ -5,21 +5,22 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author angel
  */
-public class Administrador extends Usuario{
-    private String nombre, apellidos, dni;
-    
+public class Administrador extends Usuario implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     /*public Administrador() {
     }
 */
     public Administrador(String nom, String ape, String dni, Liga liga) {
-        super(nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 1, liga);        
-        this.nombre = nom;
-        this.apellidos = ape;
-        this.dni = dni;        
+        super(nom, ape, dni, nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 1, liga);   
     }
 
     public boolean registrarFederacion(String nomFede) {
@@ -33,12 +34,40 @@ public class Administrador extends Usuario{
     public boolean registrarEntrenador(String nombre, String apellidos, String dni) {
         return liga.registrarEntrenador(nombre,apellidos,dni);
     }
+    
+    public boolean registrarClub(String club, String federacion, String sede, String gerente, String entrenador) {        
+        return liga.registrarClub(club, federacion, sede, gerente, entrenador);
+    }
 
-    public boolean registrarSede(String nomSede, String nomFede) {
-        return liga.registrarSede(nomSede,nomFede);
+    public Datos buscarGerente(String DNIgerente) {
+        Gerente gerente = null;
+        Datos datosGerente = null;
+        gerente = liga.buscarGerente(DNIgerente);
+        if(gerente != null)
+            datosGerente = new Datos(gerente.getNombre(), gerente.getApellidos(), gerente.getDNI());
+        
+        return datosGerente;
+    }
+
+    public Datos buscarEntrenador(String DNIentrenador) {
+        Entrenador entrenador = null;
+        Datos datosGerente = null;
+        entrenador = liga.buscarEntrenador(DNIentrenador);
+        if(entrenador != null)
+            datosGerente = new Datos(entrenador.getNombre(), entrenador.getApellidos(), entrenador.getDNI());
+        
+        return datosGerente;
+    }
+
+    public boolean registrarTorneo(String nombreTorneo, DefaultListModel listaTorneo, String federacion) {
+        return liga.registrarTorneo(nombreTorneo, listaTorneo, federacion);
     }
     
-    public String toString(){
-        return "Admin: " + nombre +  " " + apellidos + " " + super.toString() + " DNI: " + dni;
+
+    public ArrayList<DatosTorneo> buscarTorneosSinPartidas(String federacion) {
+        ArrayList<DatosTorneo> torneos = null;
+        torneos = liga.buscarTorneosSinPartidas(federacion);
+        
+        return torneos;
     }
 }

@@ -11,20 +11,20 @@ import java.io.Serializable;
  *
  * @author angel
  */
-public class Entrenador implements Serializable{
-    private String nombre,apellidos,dni;
+public class Entrenador extends Persona implements Serializable{    
+
+    private static final long serialVersionUID = 1L;
     private boolean contratado;
 
-    public Entrenador(String nombre, String apellidos, String dni) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        contratado = false;
+    public Entrenador(String nombre, String apellidos, String dni, boolean contrato) {
+        super(nombre,apellidos,dni);
+        contratado = contrato;
     }
     
-    public String toString(){
-            return nombre;
+    public void setContratado(boolean contrato){
+        contratado = contrato;
     }
+    
     
     
 }

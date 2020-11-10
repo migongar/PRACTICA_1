@@ -5,18 +5,39 @@
  */
 package ligaajedrez;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Administrador;
+
 /**
  *
  * @author angel
  */
 public class RegistroTorneo extends javax.swing.JFrame {
-
+    private Administrador administrador;
+    private JFrame paganterior;
+    private DefaultListModel listaDisponible, listaTorneo;
+    private String federacion;
     /**
      * Creates new form RegistroTorneo
      */
-    public RegistroTorneo() {
+    public RegistroTorneo(Administrador admin, JFrame pagant) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.administrador = admin;
+        this.paganterior = pagant;
+        
+        listaDisponible = new DefaultListModel();
+        listaTorneo = new DefaultListModel();
+        
+        ArrayList lista = new ArrayList();
+        lista = administrador.getLiga().getFederaciones();
+        
+        for(int i = 0; i<lista.size();i++){
+            jCB_federacion.addItem(lista.get(i).toString());
+        }
     }
 
     /**
@@ -29,32 +50,277 @@ public class RegistroTorneo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTF_nomTorneo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jCB_federacion = new javax.swing.JComboBox<>();
+        jB_Salir = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jL_clubesDisponibles = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jL_clubesTorneo = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jB_addClub = new javax.swing.JButton();
+        jB_removeClub = new javax.swing.JButton();
+        jB_Registrar = new javax.swing.JButton();
+        jB_buscarClubes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("REGISTRO TORNEO");
+
+        jLabel2.setText("Nombre del Torneo: ");
+
+        jLabel3.setText("Seleccione Federacion:");
+
+        jCB_federacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_federacionActionPerformed(evt);
+            }
+        });
+
+        jB_Salir.setText("Salir");
+        jB_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalirActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Clubes disponibles");
+
+        jScrollPane1.setViewportView(jL_clubesDisponibles);
+
+        jScrollPane2.setViewportView(jL_clubesTorneo);
+
+        jLabel5.setText("Clubes en Torneo");
+
+        jB_addClub.setText("Añadir club >>");
+        jB_addClub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_addClubActionPerformed(evt);
+            }
+        });
+
+        jB_removeClub.setText("<< Quitar Club");
+        jB_removeClub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_removeClubActionPerformed(evt);
+            }
+        });
+
+        jB_Registrar.setText("Registrar");
+        jB_Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_RegistrarActionPerformed(evt);
+            }
+        });
+
+        jB_buscarClubes.setText("Buscar clubes");
+        jB_buscarClubes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_buscarClubesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCB_federacion, 0, 198, Short.MAX_VALUE)
+                            .addComponent(jTF_nomTorneo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jB_buscarClubes)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jB_Salir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jB_Registrar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jB_addClub)
+                                            .addComponent(jB_removeClub)))
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)))
+                        .addContainerGap(24, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(225, 225, 225)
                 .addComponent(jLabel1)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTF_nomTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jCB_federacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_buscarClubes))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jB_Salir)
+                            .addComponent(jB_Registrar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jB_addClub)
+                        .addGap(26, 26, 26)
+                        .addComponent(jB_removeClub)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jB_addClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_addClubActionPerformed
+        //String clubSeleccionado = jL_clubesDisponibles.getSelectedValue();
+        
+        if(jL_clubesDisponibles.getSelectedIndex() != -1){
+            int club = jL_clubesDisponibles.getSelectedIndex();
+            
+            listaTorneo.addElement(jL_clubesDisponibles.getSelectedValue());
+            jL_clubesTorneo.setModel(listaTorneo);
+            
+            if(listaDisponible.getSize() != 0)
+                listaDisponible.removeElementAt(club);
+            
+            jL_clubesDisponibles.setModel(listaDisponible);
+        }
+        else
+            JOptionPane.showMessageDialog(null,"No se ha seleccionado ningún club disponible", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+        
+        
+    }//GEN-LAST:event_jB_addClubActionPerformed
+
+    private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
+        paganterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jCB_federacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_federacionActionPerformed
+        
+    }//GEN-LAST:event_jCB_federacionActionPerformed
+
+    private void jB_buscarClubesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarClubesActionPerformed
+        ArrayList clubesDisponibles = new ArrayList();
+        
+        federacion = jCB_federacion.getSelectedItem().toString();
+        
+        clubesDisponibles = administrador.buscarClubes(federacion);
+        
+        jL_clubesDisponibles.clearSelection();
+        jL_clubesTorneo.clearSelection();
+        listaDisponible.clear();
+        listaTorneo.clear();
+        
+        if(!clubesDisponibles.isEmpty()){
+            for(int i = 0; i < clubesDisponibles.size(); i++){
+                listaDisponible.addElement(clubesDisponibles.get(i));                   
+            }
+        }                
+        else{
+            JOptionPane.showMessageDialog(null,"No hay clubes disponibles para esta federacion", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+        jL_clubesDisponibles.setModel(listaDisponible);
+    }//GEN-LAST:event_jB_buscarClubesActionPerformed
+
+    private void jB_removeClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_removeClubActionPerformed
+        if(jL_clubesTorneo.getSelectedIndex() != -1){
+            int club = jL_clubesTorneo.getSelectedIndex();
+            
+            listaDisponible.addElement(jL_clubesTorneo.getSelectedValue());
+            jL_clubesDisponibles.setModel(listaDisponible);
+            
+            if(listaTorneo.getSize() != 0)
+                listaTorneo.removeElementAt(club);
+            
+            jL_clubesTorneo.setModel(listaTorneo);
+        }
+        else
+            JOptionPane.showMessageDialog(null,"No se ha seleccionado ningún club", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jB_removeClubActionPerformed
+
+    private void jB_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RegistrarActionPerformed
+        String nombreTorneo;
+        
+        nombreTorneo = jTF_nomTorneo.getText();
+        
+        if(listaTorneo.size()<2){
+            JOptionPane.showMessageDialog(null, "Deben haber al menos 2 clubs en el torneo", "AVISO",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            if(!administrador.registrarTorneo(nombreTorneo, listaTorneo, federacion)){
+                JOptionPane.showMessageDialog(null, "Error al registrar el Torneo", "ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+
+                ArrayList lista = new ArrayList();
+                lista = administrador.getLiga().getTorneos();
+
+                for(int i = 0; i<lista.size();i++){
+                    System.out.println("Torneo " + (i+1) + ": " + lista.get(i).toString());
+                }
+
+                paganterior.setVisible(true);
+                this.dispose();
+            }
+        }
+        
+    }//GEN-LAST:event_jB_RegistrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_Registrar;
+    private javax.swing.JButton jB_Salir;
+    private javax.swing.JButton jB_addClub;
+    private javax.swing.JButton jB_buscarClubes;
+    private javax.swing.JButton jB_removeClub;
+    private javax.swing.JComboBox<String> jCB_federacion;
+    private javax.swing.JList<String> jL_clubesDisponibles;
+    private javax.swing.JList<String> jL_clubesTorneo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTF_nomTorneo;
     // End of variables declaration//GEN-END:variables
 }

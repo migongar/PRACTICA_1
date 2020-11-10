@@ -132,12 +132,16 @@ public class InscribirseTorneo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InscribirActionPerformed
+        String dniJugador;
+        
+        dniJugador = jT_dni.getText();
+        
         if(JL_Torneos.getSelectedValue() != null){            
-            if(!usuario.registrarJugadorTorneo(usuario,(Object)JL_Torneos.getSelectedValue())){
+            if(!usuario.registrarJugadorTorneo(dniJugador,(Object)JL_Torneos.getSelectedValue())){
                 JOptionPane.showMessageDialog(null, "Error al realizar la reserva del cliente habitual", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(null, "Te has inscrito en: ", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Te has inscrito en: " + (Object)JL_Torneos.getSelectedValue(), "AVISO",JOptionPane.INFORMATION_MESSAGE);
                 pganterior.setVisible(true);
                 this.dispose();
             }

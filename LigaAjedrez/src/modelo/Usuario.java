@@ -7,12 +7,16 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author angel
  */
-public class Usuario implements Serializable {
+public class Usuario extends Persona implements Serializable {
+
+    private static final long serialVersionUID = 1L;    
     private String login, password;
     private int tipousuario;
     protected Liga liga;
@@ -21,7 +25,8 @@ public class Usuario implements Serializable {
         this.liga = liga;
     }
     
-    public Usuario(String log, String pass,int tipo,Liga lig){        
+    public Usuario(String nom, String ape, String dni, String log, String pass,int tipo,Liga lig){        
+        super(nom,ape,dni);
         this.login = log;
         this.password = pass;
         this.tipousuario = tipo;
@@ -49,20 +54,13 @@ public class Usuario implements Serializable {
         return liga;
     }
 
-    public ArrayList buscarTorneos(String dni) {
-        ArrayList<Torneo> torneos = new ArrayList<Torneo>();
-        Jugador jug = liga.buscarJugador(dni);
-        if(jug != null){
-            torneos = liga.buscarTorneos(jug);
-        }
-        
-        return torneos;
+    public ArrayList buscarTorneos(String dniJugador) {
+        return liga.buscarTorneos(dniJugador);
     }
 
-    public boolean registrarJugadorTorneo(Usuario jugador, Object torneo) {
-        Jugador jug = (Jugador)jugador;
+    public boolean registrarJugadorTorneo(String jugador, Object torneo) {        
         Torneo tor = (Torneo) torneo;
-        return liga.inscrbirTorneo(jug,tor);
+        return liga.inscrbirTorneo(jugador,tor);
     }
     
     public void setLogin(String user) {
@@ -78,7 +76,23 @@ public class Usuario implements Serializable {
     }
     
     public String toString(){
-        return "Usuario: " + login +  " Contraseña: " + password ;
+        return super.toString() + " Usuario: " + login +  " Contraseña: " + password ;
+    }
+
+    public ArrayList buscarPartidasEnCurso(String dniJugador) {
+        return liga.buscarPartidasEnCurso(dniJugador);
+    }
+
+    public boolean introducirResultado(String jugador, String torneo, String ganador, String rival, Date fecha, String tiempo) {
+        return liga.introducirResultado(jugador, torneo, ganador, rival, fecha, tiempo);
+    }
+
+    public ArrayList buscarTorneosJugador(String jugador) {
+        return liga.buscarTorneosJugador(jugador);
+    }
+
+    public ArrayList verPartidas(String jugador, String torneo) {
+        return liga.buscarPartidasJugador(jugador,torneo);
     }
     
 }

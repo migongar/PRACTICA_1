@@ -5,27 +5,28 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author angel
  */
-public class Jugador extends Usuario{
-    private String nombre, apellidos, dni;
-    private int  edad, categoria; 
+public class Jugador extends Usuario implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+    private int  edad, categoria;
     protected Club club;
     protected ArrayList<Torneo> torneos = new ArrayList<Torneo>();
+    protected ArrayList<Partida> partidas = new ArrayList<Partida>();
+    protected ArrayList<Partida> historial = new ArrayList<Partida>();
     
     /*public Jugador(){
         
     }
     */
     public Jugador(String nom, String ape, String dni, Club cl, int ed, Liga liga){
-        super(nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 0, liga);        
-        this.nombre = nom;
-        this.apellidos = ape;
-        this.dni = dni;
+        super(nom,ape,dni,nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 0, liga);
         this.club = cl;
         this.edad = ed;
         this.liga = liga;
@@ -43,15 +44,7 @@ public class Jugador extends Usuario{
     
     public Club getClub(){
         return club;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDNI() {
-        return dni;
-    }
+    }    
 
     public boolean addTorneo(Torneo tor) {
         return torneos.add(tor);
@@ -62,6 +55,18 @@ public class Jugador extends Usuario{
     }
 
     public String toString(){
-        return "Jugador: " + nombre +  " " + apellidos + " " + super.toString() + " DNI: " + dni + " Club: " + club;
+        return super.toString() + " Club: " + club;
+    }
+
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
+    public boolean eliminarRivalPartidas(Partida partida) {
+        return partidas.remove(partida);
+    }
+
+    public void addPartida(Partida nuevaPartida) {
+        partidas.add(nuevaPartida);
     }
 }
