@@ -19,7 +19,7 @@ import javax.swing.DefaultListModel;
  * @author angel
  */
 public class Liga {
-  
+    protected FactoriaPersona factoria = new FactoriaPersona();
     protected ArrayList<Club> clubes = new ArrayList<Club>();
     protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     protected ArrayList<Administrador> administradores = new ArrayList<Administrador>();
@@ -30,6 +30,7 @@ public class Liga {
 
 
     public void cargarDatos() { 
+        
         /*
         
         
@@ -271,8 +272,9 @@ public class Liga {
 
     public Usuario buscarUsuario(String user) {
         DAO usuarioDAO = new DAO();
-        Usuario usuario = usuarioDAO.buscarUsuario(user);
-        usuario.setLiga(this);
+        factoria.setLiga(this);
+        return usuarioDAO.buscarUsuario(factoria,user);
+        
         /*boolean encontrado = false;
         int i = 0;
         Usuario usuario = null;
@@ -291,7 +293,7 @@ public class Liga {
             }
             i++;
         }*/
-        return usuario;
+        //return usuario;
     }
 
     public ArrayList<Torneo> buscarTorneos(String dniJugador) {
@@ -402,9 +404,11 @@ public class Liga {
 
     public boolean registrarGerente(String nombre, String apellidos, String dni) {
         DAO gerenteDAO = new DAO();
-        Gerente ger = new Gerente(nombre,apellidos,dni, false);
         
-        return gerenteDAO.registrarGerente(ger);
+        //Persona ger = gerente.crearPersona(nombre, apellidos, dni,1);
+        //Gerente ger = new Gerente(nombre,apellidos,dni, false);
+        
+        return gerenteDAO.registrarGerente((Gerente)factoria.crearPersona(nombre, apellidos, dni,2));
         /*if(gerentes.add(ger)){
             System.out.println("Nuevo Gerente: " + ger); 
             this.guardarDatos();
@@ -416,9 +420,9 @@ public class Liga {
 
     public boolean registrarEntrenador(String nombre, String apellidos, String dni) {
         DAO entrenadorDAO = new DAO();
-        Entrenador entr = new Entrenador(nombre,apellidos,dni, false);
+        //Entrenador entr = new Entrenador(nombre,apellidos,dni, false);
         
-        return entrenadorDAO.registrarEntrenador(entr);
+        return entrenadorDAO.registrarEntrenador((Entrenador)factoria.crearPersona(nombre,apellidos, dni, 3));
         /*
         if(entrenadores.add(entr)){
             System.out.println("Nuevo Entrenador: " + entr); 

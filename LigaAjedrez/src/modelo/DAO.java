@@ -17,10 +17,9 @@ import java.util.ArrayList;
  *
  * @author angel
  */
-public class DAO implements Serializable{
+public class DAO{
 
-    private static final long serialVersionUID = 1L;
-    public Usuario buscarUsuario(String user){
+    public Usuario buscarUsuario(FactoriaPersona factoria,String user){
         Connection connection=null;
 	Conexion conexion=new Conexion();
         PreparedStatement statement=null;
@@ -31,9 +30,7 @@ public class DAO implements Serializable{
         
         connection = conexion.getConnection();
         
-        try {
-            
-                    
+        try {                   
             if (connection!=null) {
                 statement=connection.prepareStatement(consulta);
                 statement.setString(1, user);               
@@ -42,18 +39,24 @@ public class DAO implements Serializable{
                 while (resultados.next()) {
                     switch(resultados.getInt("tipo")){
                         case 0:
-                            usuario = new Jugador();
+                            factoria.setUser(resultados.getString("login"));
+                            factoria.setPassword(resultados.getString("password"));
+                            factoria.setTipo(resultados.getInt("tipo"));
+                            factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 1);
                             break;
                         case 1:
-                            usuario = new Administrador();
+                            factoria.setUser(resultados.getString("login"));
+                            factoria.setPassword(resultados.getString("password"));
+                            factoria.setTipo(resultados.getInt("tipo"));
+                            factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 4);
                             break;
                     }
-                    usuario.setLogin(resultados.getString("login"));
+                    /*usuario.setLogin(resultados.getString("login"));
                     usuario.setContraseña(resultados.getString("password"));
                     usuario.setTipousuario(resultados.getInt("tipo"));
                     usuario.setNombre(resultados.getString("nombre"));
                     usuario.setApellidos(resultados.getString("apellidos"));
-                    usuario.setDni(resultados.getString("dni"));
+                    usuario.setDni(resultados.getString("dni"));*/
                 }
                 System.out.println(usuario);
             }
@@ -132,7 +135,7 @@ public class DAO implements Serializable{
                     resultados = statement.executeQuery();
                     if(resultados.next()){
                         int i = resultados.getInt(1);
-                        String registroentrenador = "insert into gerente(contratado,id_persona) values (?,?)";
+                        String registroentrenador = "insert into gerentes(contratado,id_persona) values (?,?)";
                         statement=connection.prepareStatement(registroentrenador);
                         statement.setBoolean(1, ger.isContratado());
                         statement.setInt(2, i);
@@ -410,4 +413,6 @@ public class DAO implements Serializable{
         
         return clubes;
     }
+
+    
 }
