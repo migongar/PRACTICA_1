@@ -20,6 +20,8 @@ public class InscribirseTorneo extends javax.swing.JFrame {
     private Usuario usuario;
     /**
      * Creates new form IncribirseTorneo
+     * @param user
+     * @param anterior
      */
     
     public InscribirseTorneo(Usuario user,JFrame anterior) {
@@ -165,7 +167,7 @@ public class InscribirseTorneo extends javax.swing.JFrame {
     }//GEN-LAST:event_jT_dniActionPerformed
 
     private void jB_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarActionPerformed
-        ArrayList listaTorneos = new ArrayList();
+        ArrayList listaTorneos;
         if(usuario.comprobarDNI(jT_dni.getText())){
             listaTorneos = usuario.buscarTorneos(jT_dni.getText());
 

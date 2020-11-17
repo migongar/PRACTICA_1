@@ -144,7 +144,8 @@ public class Login extends javax.swing.JFrame {
         usuario = gestor.buscarUsuario(jTF_User.getText());
         
         if(usuario != null){
-            if(jPF_Password.getText().equals(usuario.getPassword())){     
+            String contrasenya = new String(jPF_Password.getPassword());
+            if(contrasenya.equals(usuario.getPassword())){     
                 switch (usuario.getTipo()) {
                     case 1:
                         this.setVisible(false);

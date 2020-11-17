@@ -14,9 +14,8 @@ import javax.swing.DefaultListModel;
  *
  * @author angel
  */
-public class Usuario extends Persona implements Serializable {
+public class Usuario extends Persona {
 
-    private static final long serialVersionUID = 1L;    
     private String login, password;
     private int tipousuario;
     protected Liga liga;

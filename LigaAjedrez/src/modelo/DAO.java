@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,9 @@ import java.util.ArrayList;
  *
  * @author angel
  */
-public class DAO {
+public class DAO implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     public Usuario buscarUsuario(String user){
         Connection connection=null;
 	Conexion conexion=new Conexion();
@@ -254,12 +257,11 @@ public class DAO {
                 String consulta = "SELECT id_torneo FROM torneo_jugador WHERE id_jugador = ? ";
                 statement=connection.prepareStatement(consulta);                
                 statement.setInt(1, idjugador);
-                
                 resultados = statement.executeQuery();
                 while (resultados.next()) {
                         torneos.add(resultados.getInt("id_torneo"));
-                    }
-                }           
+                }
+            }           
         } catch (SQLException e) { // Error al realizar la consulta
             System.out.println("Error en la petición a la BD");
         }
@@ -269,7 +271,7 @@ public class DAO {
         return torneos;
     }
 
-    public int buscarClub(String dniJugador) {
+    public int buscarClubJugador(String dniJugador) {
         int idclub = -1;
         Connection connection=null;
 	Conexion conexion=new Conexion();
@@ -375,5 +377,37 @@ public class DAO {
         conexion.desconectar();
         
         return torneos;
+    }
+
+    public ArrayList<Club> buscarClubes(String federacion) {
+        ArrayList<Club> clubes = new ArrayList<Club>();
+        Connection connection=null;
+	Conexion conexion=new Conexion();
+        PreparedStatement statement=null;
+        ResultSet resultados = null;
+        
+        connection = conexion.getConnection();
+        
+        try {
+            if (connection!=null) {
+                // Consulta SQL
+                String consulta = "SELECT nombre_club FROM clubes JOIN federaciones ON id_federacion = idfederaciones WHERE nombre_federacion = ?";
+                statement=connection.prepareStatement(consulta);
+                statement.setString(1, federacion);
+                
+                resultados = statement.executeQuery();
+                while (resultados.next()) {
+                        Club club = new Club();
+                        club.setNombre(resultados.getString("nombre_club"));
+                        clubes.add(club);
+                    }
+                }           
+        } catch (SQLException e) { // Error al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
+        conexion.desconectar();
+        
+        return clubes;
     }
 }

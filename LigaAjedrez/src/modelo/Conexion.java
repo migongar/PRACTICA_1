@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.TimeZone;
@@ -14,6 +15,7 @@ import java.util.TimeZone;
  * @author angel
  */
 public class Conexion {
+
     Connection conexionBD = null;
     public Conexion(){        
         String bd = "jdbc:mysql://localhost/LigaAjedrez?serverTimezone=" + TimeZone.getDefault().getID();

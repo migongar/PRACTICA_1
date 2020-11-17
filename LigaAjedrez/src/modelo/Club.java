@@ -37,6 +37,23 @@ public class Club implements Serializable{
         
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setFederacion(Federacion federacion) {
+        this.federacion = federacion;
+    }
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
+    }
+
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
+    }
+    
+
     public String getNombre() {
         return nombre;
     }

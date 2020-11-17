@@ -18,9 +18,8 @@ import javax.swing.DefaultListModel;
  *
  * @author angel
  */
-public class Liga implements Serializable{
-
-    private static final long serialVersionUID = 1L;    
+public class Liga {
+  
     protected ArrayList<Club> clubes = new ArrayList<Club>();
     protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     protected ArrayList<Administrador> administradores = new ArrayList<Administrador>();
@@ -299,19 +298,19 @@ public class Liga implements Serializable{
         ArrayList<Torneo> encontrados = new ArrayList<Torneo>();
         DAO torneoDAO = new DAO();
         int idjug = torneoDAO.buscarJugador(dniJugador);
-        int idclub = torneoDAO.buscarClub(dniJugador);
+        int idclub = torneoDAO.buscarClubJugador(dniJugador);
         
         if(idjug != -1 && idclub != -1){
-            ArrayList<Integer> idtorneos = new ArrayList<Integer>();            
-            idtorneos = torneoDAO.buscarTorneosJugador(idjug);
-            System.out.println("aqui");
+            ArrayList<Integer> idtorneos = torneoDAO.buscarTorneosJugador(idjug);
+            
             if(!idtorneos.isEmpty()){
-                encontrados = torneoDAO.buscarTorneoDisponibleJugador(idclub,idtorneos);                
+                encontrados = torneoDAO.buscarTorneoDisponibleJugador(idclub,idtorneos);
+                              
             }
             else
                 encontrados = torneoDAO.buscarTorneosClub(idclub);
-            
         }
+        
         return encontrados;
         /*int existe = this.buscarJugador(dniJugador);
         
@@ -367,8 +366,11 @@ public class Liga implements Serializable{
         /*return federaciones;*/
     }
 
-    public ArrayList buscarClubes(String federacion) {
-        boolean encontrado = false;
+    public ArrayList<Club> buscarClubes(String federacion) {
+        DAO clubesDAO = new DAO();        
+        
+        return clubesDAO.buscarClubes(federacion);
+        /*boolean encontrado = false;
         int i = 0;
         ArrayList<Club> clubes= null;
         
@@ -380,7 +382,7 @@ public class Liga implements Serializable{
             i++;
         }
         
-        return clubes;
+        return clubes;*/
     }
 
     public boolean registrarFederacion(String nomFede) {
@@ -457,7 +459,7 @@ public class Liga implements Serializable{
     }
 
     private void guardarDatos() {
-         try {
+         /*try {
              ArrayList arrayList = new ArrayList ();   
         
             arrayList.add(0, administradores);
@@ -479,7 +481,7 @@ public class Liga implements Serializable{
             
         } catch (Exception e) {
             System.out.println( e.getMessage() );
-        }
+        }*/
     }
 
     public boolean registrarClub(String club, String federacion, String sede, String gerente, String entrenador) {
