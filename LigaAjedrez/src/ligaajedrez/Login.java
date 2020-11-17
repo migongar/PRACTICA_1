@@ -30,7 +30,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         gestor = new GestorLiga();
-        usuario = new Usuario(gestor.getLiga());
+        //usuario = new Usuario(gestor.getLiga());
         
     }
 
@@ -148,7 +148,7 @@ public class Login extends javax.swing.JFrame {
                 switch (usuario.getTipo()) {
                     case 1:
                         this.setVisible(false);
-                        administracion = new Administracion((Administrador) usuario, this);
+                        administracion = new Administracion((Administrador)usuario, this);
                         administracion.setVisible(true);
                         break;
                     case 0:

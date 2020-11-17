@@ -251,7 +251,7 @@ public class RegistroJugador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RegistrarActionPerformed
-        String dni, nom, ape;
+        String dni, nom, ape, user, pass;
         int edad;
         Calendar hoy = Calendar.getInstance();
 
@@ -269,23 +269,28 @@ public class RegistroJugador extends javax.swing.JFrame {
         dni = jTF_DNI.getText();     
         nom = jTF_Nombre.getText();
         ape = jTF_Apellidos.getText();
+        user = jTF_Usuario.getText();
+        pass = jTF_Password.getText();
         
-        if(!usuario.registrarJugador(nom, ape, dni, (Object)jL_Club.getSelectedValue(), edad)){
-            JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
+        if(!usuario.comprobarDNI(dni)){
+            JOptionPane.showMessageDialog(null, "DNI no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
-            
-            ArrayList lista = new ArrayList();
-            lista = usuario.getLiga().getJugadores();
-            
-            for(int i = 0; i<lista.size();i++){
-                System.out.println("Jugador " + (i+1) + ": " + lista.get(i).toString());
+        else if(!usuario.registrarJugador(nom, ape, dni, (Object)jL_Club.getSelectedValue(), edad, user, pass)){
+                JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
-            
-            pganterior.setVisible(true);
-            this.dispose();
-        }
+            else{
+                JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+
+                ArrayList lista = new ArrayList();
+                lista = usuario.getLiga().getJugadores();
+
+                for(int i = 0; i<lista.size();i++){
+                    System.out.println("Jugador " + (i+1) + ": " + lista.get(i).toString());
+                }
+
+                pganterior.setVisible(true);
+                this.dispose();
+            }
     }//GEN-LAST:event_jB_RegistrarActionPerformed
 
     private void jCB_federacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_federacionActionPerformed

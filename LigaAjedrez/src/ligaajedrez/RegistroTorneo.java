@@ -22,18 +22,21 @@ public class RegistroTorneo extends javax.swing.JFrame {
     private String federacion;
     /**
      * Creates new form RegistroTorneo
+     * @param admin
+     * @param pagant
      */
     public RegistroTorneo(Administrador admin, JFrame pagant) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.administrador = admin;
-        this.paganterior = pagant;
+        this.paganterior = pagant;        
         
         listaDisponible = new DefaultListModel();
         listaTorneo = new DefaultListModel();
         
         ArrayList lista = new ArrayList();
-        lista = administrador.getLiga().getFederaciones();
+        
+        lista = administrador.getLiga().getFederaciones();        
         
         for(int i = 0; i<lista.size();i++){
             jCB_federacion.addItem(lista.get(i).toString());

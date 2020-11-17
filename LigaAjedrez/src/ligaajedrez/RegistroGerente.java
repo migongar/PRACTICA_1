@@ -132,20 +132,22 @@ public class RegistroGerente extends javax.swing.JFrame {
         apellidos = jT_apellidos.getText();
         dni = jT_dni.getText();
         
-        
-        if(!administrador.registrarGerente(nombre,apellidos,dni)) {
-            JOptionPane.showMessageDialog(null, "Error al registrar el gerente", "ERROR",JOptionPane.ERROR_MESSAGE);
+        if(!administrador.comprobarDNI(dni)){
+            JOptionPane.showMessageDialog(null, "DNI no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Registrado correctamente", "AVISO",JOptionPane.INFORMATION_MESSAGE);
-            ArrayList lista = new ArrayList();
-            lista = administrador.getLiga().getGerentes();
-            for(int i = 0; i<lista.size();i++){
-                System.out.println("Gerente " + (i+1) + ": " + lista.get(i).toString());
+        else if(!administrador.registrarGerente(nombre,apellidos,dni)) {
+                JOptionPane.showMessageDialog(null, "Error al registrar el gerente", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
-            paganterior.setVisible(true);
-            this.dispose();
-        }
+            else{
+                JOptionPane.showMessageDialog(null, "Registrado correctamente", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+                ArrayList lista = new ArrayList();
+                lista = administrador.getLiga().getGerentes();
+                for(int i = 0; i<lista.size();i++){
+                    System.out.println("Gerente " + (i+1) + ": " + lista.get(i).toString());
+                }
+                paganterior.setVisible(true);
+                this.dispose();
+            }
     }//GEN-LAST:event_jB_RegistrarActionPerformed
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed

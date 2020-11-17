@@ -16,9 +16,9 @@ import javax.swing.DefaultListModel;
 public class Administrador extends Usuario implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    /*public Administrador() {
+    public Administrador() {
     }
-*/
+
     public Administrador(String nom, String ape, String dni, Liga liga) {
         super(nom, ape, dni, nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 1, liga);   
     }
@@ -64,10 +64,10 @@ public class Administrador extends Usuario implements Serializable{
     }
     
 
-    public ArrayList<DatosTorneo> buscarTorneosSinPartidas(String federacion) {
+    /*public ArrayList<DatosTorneo> buscarTorneosSinPartidas(String federacion) {
         ArrayList<DatosTorneo> torneos = null;
         torneos = liga.buscarTorneosSinPartidas(federacion);
         
         return torneos;
-    }
+    }*/
 }

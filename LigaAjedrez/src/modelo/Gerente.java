@@ -20,10 +20,15 @@ public class Gerente extends Persona implements Serializable{
         super(nombre,apellidos,dni);
         this.contratado = contrato;
     }
-    
-    public void setContratado(boolean contrato){
-        contratado = contrato;
-    }    
+
+    public boolean isContratado() {
+        return contratado;
+    }
+
+    public void setContratado(boolean contratado) {
+        this.contratado = contratado;
+    }
+        
 
     public boolean getContratado() {
         return contratado;

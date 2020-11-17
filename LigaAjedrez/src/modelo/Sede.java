@@ -16,12 +16,12 @@ public class Sede implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String nombre;
-    protected Federacion federacion;
+    //protected Federacion federacion;
     protected ArrayList<Partida> partidas = new ArrayList<Partida>();
     
-    public Sede(String nom, Federacion fede){
+    public Sede(String nom/*, Federacion fede*/){
         this.nombre = nom;
-        this.federacion = fede;
+        //this.federacion = fede;
     }
     
     public String getNombre(){

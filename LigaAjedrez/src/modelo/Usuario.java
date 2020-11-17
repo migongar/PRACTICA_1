@@ -33,9 +33,17 @@ public class Usuario extends Persona implements Serializable {
         this.liga = lig;
     }
 
-    public boolean registrarJugador(String nom, String ape, String dni, Object club, int edad) {
+    public Usuario() {
+        
+    }
+
+    public void setTipousuario(int tipousuario) {
+        this.tipousuario = tipousuario;
+    }
+    
+    public boolean registrarJugador(String nom, String ape, String dni, Object club, int edad, String user, String pass) {
         Club clubi = (Club)club;
-        return liga.registrarJugador(nom,ape,dni,clubi.getNombre(),edad);            
+        return liga.registrarJugador(nom,ape,dni,clubi.getNombre(),edad, user, pass);            
     }
     
     public String getLogin(){
@@ -48,6 +56,10 @@ public class Usuario extends Persona implements Serializable {
 
     public int getTipo() {
         return tipousuario;
+    }
+
+    public void setLiga(Liga liga) {
+        this.liga = liga;
     }
     
     public Liga getLiga(){
@@ -93,6 +105,23 @@ public class Usuario extends Persona implements Serializable {
 
     public ArrayList verPartidas(String jugador, String torneo) {
         return liga.buscarPartidasJugador(jugador,torneo);
+    }
+
+    public boolean comprobarDNI(String dni) {
+        if(!(dni.length()>=8 && dni.length()<=9))
+            return false;
+        
+        String numeros = dni.substring(0,dni.length()-1);
+        
+        int numdni = 0;
+        
+        try{
+            numdni = Integer.parseInt(numeros);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        
+        return Character.isLetter(dni.charAt(dni.length()-1));
     }
     
 }

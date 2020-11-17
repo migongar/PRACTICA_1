@@ -136,15 +136,18 @@ public class InscribirseTorneo extends javax.swing.JFrame {
         
         dniJugador = jT_dni.getText();
         
-        if(JL_Torneos.getSelectedValue() != null){            
-            if(!usuario.registrarJugadorTorneo(dniJugador,(Object)JL_Torneos.getSelectedValue())){
-                JOptionPane.showMessageDialog(null, "Error al realizar la reserva del cliente habitual", "ERROR",JOptionPane.ERROR_MESSAGE);
+        if(JL_Torneos.getSelectedValue() != null){
+            if(!usuario.comprobarDNI(dniJugador)){
+                JOptionPane.showMessageDialog(null, "DNI no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Te has inscrito en: " + (Object)JL_Torneos.getSelectedValue(), "AVISO",JOptionPane.INFORMATION_MESSAGE);
-                pganterior.setVisible(true);
-                this.dispose();
-            }
+            else if(!usuario.registrarJugadorTorneo(dniJugador,(Object)JL_Torneos.getSelectedValue())){
+                    JOptionPane.showMessageDialog(null, "Error al realizar la reserva del cliente habitual", "ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Te has inscrito en: " + (Object)JL_Torneos.getSelectedValue(), "AVISO",JOptionPane.INFORMATION_MESSAGE);
+                    pganterior.setVisible(true);
+                    this.dispose();
+                }
         }
         else{
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun torneo", "ERROR",  JOptionPane.ERROR_MESSAGE);
@@ -163,22 +166,25 @@ public class InscribirseTorneo extends javax.swing.JFrame {
 
     private void jB_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarActionPerformed
         ArrayList listaTorneos = new ArrayList();
-        
-        listaTorneos = usuario.buscarTorneos(jT_dni.getText());
-        
-        JL_Torneos.clearSelection();
+        if(usuario.comprobarDNI(jT_dni.getText())){
+            listaTorneos = usuario.buscarTorneos(jT_dni.getText());
 
-        DefaultListModel lista = new DefaultListModel();
-        if(!listaTorneos.isEmpty()){
-            for(int i = 0; i < listaTorneos.size(); i++){
-                lista.addElement(listaTorneos.get(i));                   
+            JL_Torneos.clearSelection();
+
+            DefaultListModel lista = new DefaultListModel();
+            if(!listaTorneos.isEmpty()){
+                for(int i = 0; i < listaTorneos.size(); i++){
+                    lista.addElement(listaTorneos.get(i));                   
+                }
+            }                
+            else{
+                JOptionPane.showMessageDialog(null,"No hay torneos disponibles para este jugador", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-        }                
-        else{
-            JOptionPane.showMessageDialog(null,"No hay torneos disponibles para este jugador", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
 
-        JL_Torneos.setModel(lista);  
+            JL_Torneos.setModel(lista);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "DNI no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jB_buscarActionPerformed
 
 

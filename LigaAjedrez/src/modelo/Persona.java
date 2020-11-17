@@ -15,7 +15,7 @@ public class Persona implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private String nombre, apellidos, dni;
-    
+
     public Persona(){
         
     }
@@ -23,6 +23,18 @@ public class Persona implements Serializable{
     public Persona(String nom, String ape, String dni){
         this.nombre = nom;
         this.apellidos = ape;
+        this.dni = dni;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setDni(String dni) {
         this.dni = dni;
     }
     

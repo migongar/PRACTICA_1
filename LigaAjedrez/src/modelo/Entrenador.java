@@ -16,6 +16,10 @@ public class Entrenador extends Persona implements Serializable{
     private static final long serialVersionUID = 1L;
     private boolean contratado;
 
+    public boolean isContratado() {
+        return contratado;
+    }
+
     public Entrenador(String nombre, String apellidos, String dni, boolean contrato) {
         super(nombre,apellidos,dni);
         contratado = contrato;

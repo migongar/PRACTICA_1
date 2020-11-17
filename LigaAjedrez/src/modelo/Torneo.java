@@ -18,15 +18,19 @@ public class Torneo implements Serializable{
     private boolean inicio;
     private String nombre;
     private Jugador espPartida = null;
-    protected Federacion federacion;
+    //protected Federacion federacion;
     protected ArrayList<Club> clubes = new ArrayList<Club>();
-    //protected ArrayList<Partida> partidas = new ArrayList<Partida>();
+    protected ArrayList<Partida> partidas = new ArrayList<Partida>();
     protected ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     
-    public Torneo(String nom, Federacion fede){
+    public Torneo(String nom/*, Federacion fede*/){
         this.nombre = nom;
-        this.federacion = fede;
+        //this.federacion = fede;
         this.inicio = false;
+    }
+
+    public Torneo() {
+        
     }
     
     public ArrayList<Jugador> getJugadores(){
@@ -43,6 +47,10 @@ public class Torneo implements Serializable{
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     
@@ -83,9 +91,9 @@ public class Torneo implements Serializable{
             return nombre;
     }
 
-    public Federacion getFederacion() {
+    /*public Federacion getFederacion() {
         return federacion;
-    }
+    }*/
 
     public int getNumJugadores() {
         return jugadores.size();

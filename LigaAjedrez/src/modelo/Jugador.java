@@ -21,12 +21,12 @@ public class Jugador extends Usuario implements Serializable{
     protected ArrayList<Partida> partidas = new ArrayList<Partida>();
     protected ArrayList<Partida> historial = new ArrayList<Partida>();
     
-    /*public Jugador(){
+    public Jugador(){
         
     }
-    */
-    public Jugador(String nom, String ape, String dni, Club cl, int ed, Liga liga){
-        super(nom,ape,dni,nom.substring(0,2).toLowerCase() + ape.substring(0, 2).toLowerCase(),"contrasenya", 0, liga);
+    
+    public Jugador(String nom, String ape, String dni, Club cl, int ed, Liga liga, String user, String pass){
+        super(nom,ape,dni,user,pass, 0, liga);
         this.club = cl;
         this.edad = ed;
         this.liga = liga;

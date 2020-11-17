@@ -192,7 +192,7 @@ public class Registrar extends javax.swing.JFrame {
 
     private void jB_regTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_regTorneoActionPerformed
         registroTorneo = new RegistroTorneo(administrador, this);        
-        this.setVisible(false);
+        this.setVisible(false);        
         registroTorneo.setVisible(true);
     }//GEN-LAST:event_jB_regTorneoActionPerformed
     

@@ -27,5 +27,5 @@ public class Resultado implements Serializable{
     
     public String toString(){
         return "Ganador: " + ganador + " Rival: " + rival + " Tiempo: " + tiempo;
-}
+    }
 }

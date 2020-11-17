@@ -283,7 +283,7 @@ public class AsignarSede extends javax.swing.JFrame {
         
         federacion = jCB_federacion.getSelectedItem().toString();
         
-        datosTorneo = administrador.buscarTorneosSinPartidas(federacion);
+        //datosTorneo = administrador.buscarTorneosSinPartidas(federacion);
         /*
         if(datosTorneo != null){
             jT_nomGerente.setText(datosGerente.getNombre());
