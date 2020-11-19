@@ -69,5 +69,21 @@ public class Club implements Serializable{
     public Sede getSede(){
         return sede;
     }
+
+    public void setSede(Sede sede) {
+        this.sede = sede;
+    }
+
+    public Federacion getFederacion() {
+        return federacion;
+    }
+
+    public Gerente getGerente() {
+        return gerente;
+    }
+
+    public Entrenador getEntrenador() {
+        return entrenador;
+    }
     
 }

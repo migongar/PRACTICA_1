@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultListModel;
@@ -18,12 +19,12 @@ import modelo.Usuario;
  */
 public class RegistroJugador extends javax.swing.JFrame {
     private JFrame pganterior;
-    private Usuario usuario;
+    private Fachada usuario;
     /**
      * Creates new form RegistroJugador
      * @param user
      */
-    public RegistroJugador(Usuario user, JFrame pgant) {
+    public RegistroJugador(Fachada user, JFrame pgant) {
         initComponents();        
         this.setLocationRelativeTo(null);
         this.usuario = user;
@@ -280,13 +281,13 @@ public class RegistroJugador extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
-                /*
+                
                 ArrayList lista = new ArrayList();
                 lista = usuario.getLiga().getJugadores();
 
                 for(int i = 0; i<lista.size();i++){
                     System.out.println("Jugador " + (i+1) + ": " + lista.get(i).toString());
-                }*/
+                }
 
                 pganterior.setVisible(true);
                 this.dispose();

@@ -32,6 +32,10 @@ public class Torneo implements Serializable{
     public Torneo() {
         
     }
+
+    public ArrayList<Club> getClubes() {
+        return clubes;
+    }
     
     public ArrayList<Jugador> getJugadores(){
         return jugadores;

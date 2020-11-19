@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import modelo.Administrador;
  * @author angel
  */
 public class RegistroTorneo extends javax.swing.JFrame {
-    private Administrador administrador;
+    private Fachada administrador;
     private JFrame paganterior;
     private DefaultListModel listaDisponible, listaTorneo;
     private String federacion;
@@ -25,7 +26,7 @@ public class RegistroTorneo extends javax.swing.JFrame {
      * @param admin
      * @param pagant
      */
-    public RegistroTorneo(Administrador admin, JFrame pagant) {
+    public RegistroTorneo(Fachada admin, JFrame pagant) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.administrador = admin;

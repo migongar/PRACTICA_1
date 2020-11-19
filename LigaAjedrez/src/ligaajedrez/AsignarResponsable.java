@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -14,14 +15,16 @@ import javax.swing.JOptionPane;
  */
 public class AsignarResponsable extends javax.swing.JFrame {
     private JFrame pganterior;
+    private Fachada usuario;
     /**
      * Creates new form AsignarResponsable
      */
     
-    public AsignarResponsable(JFrame anterior) {
+    public AsignarResponsable(Fachada user,JFrame anterior) {
         initComponents();
         this.setLocationRelativeTo(null);
-        pganterior = anterior;
+        this.usuario = user;
+        this.pganterior = anterior;
     }
 
     /**

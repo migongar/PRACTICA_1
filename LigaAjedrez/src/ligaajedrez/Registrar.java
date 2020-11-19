@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import javax.swing.JFrame;
 import modelo.Administrador;
 
@@ -13,7 +14,7 @@ import modelo.Administrador;
  * @author angel
  */
 public class Registrar extends javax.swing.JFrame {
-    private Administrador administrador;
+    private Fachada administrador;
     private JFrame paganterior;
     private RegistroJugador registroJugador;
     private RegistroFederacion registroFederacion;
@@ -25,7 +26,7 @@ public class Registrar extends javax.swing.JFrame {
     /**
      * Creates new form Registrar
      */
-    public Registrar(Administrador admin, JFrame pgant) {
+    public Registrar(Fachada admin, JFrame pgant) {
         initComponents();        
         this.setLocationRelativeTo(null);
         administrador = admin;

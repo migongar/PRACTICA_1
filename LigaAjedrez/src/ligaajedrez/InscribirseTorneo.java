@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -17,14 +18,14 @@ import modelo.Usuario;
  */
 public class InscribirseTorneo extends javax.swing.JFrame {
     private JFrame pganterior;
-    private Usuario usuario;
+    private Fachada usuario;
     /**
      * Creates new form IncribirseTorneo
      * @param user
      * @param anterior
      */
     
-    public InscribirseTorneo(Usuario user,JFrame anterior) {
+    public InscribirseTorneo(Fachada user,JFrame anterior) {
         initComponents();
         this.setLocationRelativeTo(null);
         pganterior = anterior;

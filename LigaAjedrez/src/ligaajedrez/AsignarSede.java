@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -17,13 +18,13 @@ import modelo.DatosTorneo;
  */
 public class AsignarSede extends javax.swing.JFrame {
     private JFrame pganterior;
-    private Administrador administrador;
+    private Fachada administrador;
     private ArrayList<DatosTorneo> datosTorneo = null;
 
     /**
      * Creates new form AsignarSede
      */
-    public AsignarSede(Administrador admin,JFrame anterior) {
+    public AsignarSede(Fachada admin,JFrame anterior) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pganterior = anterior;

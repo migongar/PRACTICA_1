@@ -41,6 +41,14 @@ public class Jugador extends Usuario implements Serializable{
         club.addJugador(this);        
         
     }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
     
     public Club getClub(){
         return club;

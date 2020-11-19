@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import javax.swing.JFrame;
 import modelo.Administrador;
 
@@ -20,13 +21,13 @@ public class Administracion extends javax.swing.JFrame {
     private IntroducirResultado resultado;
     private Historial historial;
     private Registrar registrar;
-    private Administrador administrador;
+    private Fachada administrador;
     private JFrame paganterior;
 
     /**
      * Creates new form Administrador
      */
-    public Administracion(Administrador admin, JFrame pgant) {
+    public Administracion(Fachada admin, JFrame pgant) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.administrador = admin;
@@ -193,7 +194,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
         this.setVisible(false);
-        reservarSede = new ReservarSede(this);
+        reservarSede = new ReservarSede(administrador,this);
         reservarSede.setVisible(true);
     }//GEN-LAST:event_jB_ReservarSedeActionPerformed
 
@@ -217,7 +218,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
         this.setVisible(false);
-        asignarResponsable = new AsignarResponsable(this);
+        asignarResponsable = new AsignarResponsable(administrador,this);
         asignarResponsable.setVisible(true);
     }//GEN-LAST:event_jB_AsignarResponsableActionPerformed
 

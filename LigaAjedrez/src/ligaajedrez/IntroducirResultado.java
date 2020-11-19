@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,13 +20,13 @@ import modelo.Usuario;
  */
 public class IntroducirResultado extends javax.swing.JFrame {
     private JFrame pganterior;
-    private Usuario usuario;    
+    private Fachada usuario;    
     private DefaultListModel lista;
     /**
      * Creates new form Resultado
      */
     
-    public IntroducirResultado(Usuario user,JFrame anterior) {
+    public IntroducirResultado(Fachada user,JFrame anterior) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.usuario = user;

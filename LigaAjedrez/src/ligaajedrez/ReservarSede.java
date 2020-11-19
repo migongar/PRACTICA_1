@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -13,17 +14,18 @@ import javax.swing.JOptionPane;
  * @author angel
  */
 public class ReservarSede extends javax.swing.JFrame {
-
+    private Fachada usuario;
     private JFrame pganterior;
     
     /**
      * Creates new form ReservarSede
      */    
     
-    public ReservarSede(JFrame anterior) {
+    public ReservarSede(Fachada user,JFrame anterior) {
         initComponents();
         this.setLocationRelativeTo(null);
-        pganterior = anterior;
+        this.usuario = user;
+        this.pganterior = anterior;
     }
 
     /**

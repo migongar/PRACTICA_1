@@ -5,17 +5,21 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author angel
  */
-public class FactoriaPersona {
+public class FactoriaPersona implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     private Club club;
     private int edad;
     private String user;
     private String password;
     private Liga liga;
-    private int tipo;
+    private boolean contratado;   
     
     public Persona crearPersona(String nombre, String ape, String dni, int tipo){
         Persona persona = new Persona();
@@ -24,10 +28,10 @@ public class FactoriaPersona {
                 persona = new Jugador(nombre, ape, dni, club, edad, liga, user, password);
                 break;
             case 2:
-                persona = new Gerente(nombre,ape,dni,false);
+                persona = new Gerente(nombre,ape,dni, contratado);
                 break;
             case 3:
-                persona = new Entrenador(nombre,ape,dni,false);
+                persona = new Entrenador(nombre,ape,dni,contratado);
                 break;
             case 4:
                 persona = new Administrador(nombre,ape,dni,liga);
@@ -36,10 +40,11 @@ public class FactoriaPersona {
         
         return persona;
     }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    
+    public void setContratado(boolean contratado) {
+        this.contratado = contratado;
     }
+    
 
     public void setClub(Club club) {
         this.club = club;

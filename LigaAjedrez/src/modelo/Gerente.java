@@ -21,8 +21,8 @@ public class Gerente extends Persona implements Serializable{
         this.contratado = contrato;
     }
 
-    Gerente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Gerente() {
+        
     }
 
     public boolean isContratado() {
@@ -32,10 +32,5 @@ public class Gerente extends Persona implements Serializable{
     public void setContratado(boolean contratado) {
         this.contratado = contratado;
     }
-        
-
-    public boolean getContratado() {
-        return contratado;
-    }
-    
+            
 }

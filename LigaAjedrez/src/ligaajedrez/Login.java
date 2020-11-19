@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import javax.swing.JOptionPane;
 import modelo.Administrador;
 import modelo.GestorLiga;
@@ -21,6 +22,7 @@ public class Login extends javax.swing.JFrame {
     private RegistroJugador registrar;
     private GestorLiga gestor;
     private Usuario usuario;
+    private Fachada fachada;
 
     /**
      * Creates new form Login
@@ -29,9 +31,9 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        gestor = new GestorLiga();
-        //usuario = new Usuario(gestor.getLiga());
-        
+        fachada = new Fachada();
+        //gestor = new GestorLiga();        
+        //usuario = new Usuario(gestor.getLiga());        
     }
 
     /**
@@ -141,20 +143,21 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTF_UserActionPerformed
 
     private void jB_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EntrarActionPerformed
-        usuario = gestor.buscarUsuario(jTF_User.getText());
+        fachada.setUsuario(fachada.buscarUsuario(jTF_User.getText()));
         
-        if(usuario != null){
+        if(fachada.getUsuario() != null){
             String contrasenya = new String(jPF_Password.getPassword());
-            if(contrasenya.equals(usuario.getPassword())){     
-                switch (usuario.getTipo()) {
+            if(contrasenya.equals(fachada.getUsuario().getPassword())){     
+                switch (fachada.getUsuario().getTipo()) {
                     case 1:
                         this.setVisible(false);
-                        administracion = new Administracion((Administrador)usuario, this);
+                        fachada.setAdministrador(fachada.getUsuario());
+                        administracion = new Administracion(fachada, this);
                         administracion.setVisible(true);
                         break;
                     case 0:
                         this.setVisible(false);
-                        jugadores = new Jugadores((Jugador) usuario, this);
+                        jugadores = new Jugadores(fachada, this);
                         jugadores.setVisible(true);
                         break;
                 }
@@ -168,7 +171,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jB_ResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ResgistrarActionPerformed
         //usuario = new Usuario();
-        registrar = new RegistroJugador(usuario, this);        
+        registrar = new RegistroJugador(fachada, this);        
         this.setVisible(false);
         registrar.setVisible(true);
     }//GEN-LAST:event_jB_ResgistrarActionPerformed

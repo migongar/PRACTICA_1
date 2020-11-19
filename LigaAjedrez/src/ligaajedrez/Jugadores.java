@@ -5,6 +5,7 @@
  */
 package ligaajedrez;
 
+import Fachada.Fachada;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,9 +25,9 @@ public class Jugadores extends javax.swing.JFrame {
     private IntroducirResultado resultado;
     private InscribirseTorneo inscribir_torneo;
     private JFrame paganterior;
-    private Jugador jugador;
+    private Fachada jugador;
     
-    public Jugadores(Jugador jug,JFrame pgant) {
+    public Jugadores(Fachada jug,JFrame pgant) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.jugador = jug;
@@ -179,13 +180,13 @@ public class Jugadores extends javax.swing.JFrame {
 
     private void jB_AsignarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AsignarResponsableActionPerformed
         this.setVisible(false);
-        resp = new AsignarResponsable(this);
+        resp = new AsignarResponsable(jugador,this);
         resp.setVisible(true);
     }//GEN-LAST:event_jB_AsignarResponsableActionPerformed
 
     private void jB_ReservarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReservarSedeActionPerformed
         this.setVisible(false);
-        resSede = new ReservarSede(this);
+        resSede = new ReservarSede(jugador,this);
         resSede.setVisible(true);
     }//GEN-LAST:event_jB_ReservarSedeActionPerformed
 
@@ -202,7 +203,7 @@ public class Jugadores extends javax.swing.JFrame {
 
     private void jB_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_HistorialActionPerformed
         ArrayList lista = new ArrayList();
-        lista = jugador.getTorneos();
+        //lista = jugador.getTorneos();
         String torneos = "";
         for(int i = 0;i<lista.size();i++){
             torneos += lista.get(i).toString() + "\n";
