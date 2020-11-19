@@ -18,50 +18,6 @@ import java.util.ArrayList;
  * @author angel
  */
 public class DAO{
-
-    /*public Usuario buscarUsuario(FactoriaPersona factoria,String user){
-        Connection connection=null;
-	Conexion conexion=new Conexion();
-        PreparedStatement statement=null;
-        ResultSet resultados = null;
-        Usuario usuario = null;
-        
-        // Consulta SQL
-        String consulta = "SELECT login, password, tipo, nombre, apellidos, dni FROM usuarios u JOIN personas p ON u.id_persona = p.idpersonas WHERE u.login = ? ";
-        
-        connection = conexion.getConnection();
-        
-        try {                   
-            if (connection!=null) {
-                statement=connection.prepareStatement(consulta);
-                statement.setString(1, user);               
-                
-                resultados = statement.executeQuery();
-                while (resultados.next()) {
-                    switch(resultados.getInt("tipo")){
-                        case 0:
-                            factoria.setUser(resultados.getString("login"));
-                            factoria.setPassword(resultados.getString("password"));
-                            factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 1);
-                            break;
-                        case 1:
-                            factoria.setUser(resultados.getString("login"));
-                            factoria.setPassword(resultados.getString("password"));
-                            factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 4);
-                            break;
-                    }
-                }
-                System.out.println(usuario);
-            }
-        } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }
-        
-        conexion.desconectar();
-        
-        return usuario;
-    }*/
-
     public boolean registrarEntrenador(Entrenador entr) {
         boolean hecho = false;
         Connection connection=null;
@@ -250,7 +206,7 @@ public class DAO{
         return federaciones;
     }
 
-    public int buscarJugador(String dniJugador) {
+    /*public int buscarJugador(String dniJugador) {
         int idjugador = -1;
         Connection connection=null;
 	Conexion conexion=new Conexion();
@@ -278,7 +234,7 @@ public class DAO{
         conexion.desconectar();
         
         return idjugador;
-    }
+    }*/
 
     public ArrayList<Integer> buscarTorneosJugador(int idjugador) {
         ArrayList<Integer> torneos = new ArrayList<Integer>();
@@ -309,70 +265,7 @@ public class DAO{
         return torneos;
     }
 
-    public int buscarClubJugador(String dniJugador) {
-        int idclub = -1;
-        Connection connection=null;
-	Conexion conexion=new Conexion();
-        PreparedStatement statement=null;
-        ResultSet resultados = null;
-        
-        connection = conexion.getConnection();
-        
-        try {
-            if (connection!=null) {
-                // Consulta SQL
-                String consulta = "SELECT id_club FROM usuarios u JOIN jugadores j ON j.id_usuario = u.idusuarios JOIN personas p ON u.id_persona = p.idpersonas WHERE dni = ? ";
-                statement=connection.prepareStatement(consulta);
-                statement.setString(1, dniJugador);
-                
-                resultados = statement.executeQuery();
-                if(resultados.next()) {
-                    idclub = resultados.getInt("id_club");
-                }
-            }           
-        } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }
-        
-        conexion.desconectar();
-        
-        return idclub;
-    }
-
-    public ArrayList<Torneo> buscarTorneosClub(int idclub) {
-        ArrayList<Torneo> torneos = new ArrayList<Torneo>();
-        Connection connection=null;
-	Conexion conexion=new Conexion();
-        PreparedStatement statement=null;
-        ResultSet resultados = null;
-        
-        connection = conexion.getConnection();
-        
-        try {
-            if (connection!=null) {
-                // Consulta SQL
-                String consulta = "SELECT nombre_torneo, inicio FROM torneos t JOIN torneo_club tc ON tc.id_torneo = t.idtorneos WHERE tc.id_club = ? AND t.inicio = false ";
-                statement=connection.prepareStatement(consulta);               
-                statement.setInt(1, idclub);
-                
-                resultados = statement.executeQuery();
-                while (resultados.next()) {
-                        Torneo torneo = new Torneo();
-                        torneo.setNombre(resultados.getString("nombre_torneo"));
-                        torneo.setInicio(resultados.getBoolean("inicio"));
-                        torneos.add(torneo);
-                    }
-                }           
-        } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }
-        
-        conexion.desconectar();
-        
-        return torneos;
-    }
-
-    public ArrayList<Torneo> buscarTorneoDisponibleJugador(int idclub, ArrayList<Integer> idtorneos) {
+    /*public ArrayList<Torneo> buscarTorneoDisponibleJugador(int idclub, ArrayList<Integer> idtorneos) {
         ArrayList<Torneo> torneos = new ArrayList<Torneo>();
         Connection connection=null;
 	Conexion conexion=new Conexion();
@@ -415,9 +308,9 @@ public class DAO{
         conexion.desconectar();
         
         return torneos;
-    }
+    }*/
 
-    public ArrayList<Club> buscarClubes(String federacion) {
+    /*public ArrayList<Club> buscarClubes(String federacion) {
         ArrayList<Club> clubes = new ArrayList<Club>();
         Connection connection=null;
 	Conexion conexion=new Conexion();
@@ -447,7 +340,7 @@ public class DAO{
         conexion.desconectar();
         
         return clubes;
-    }
+    }*/
 
     public ArrayList<Administrador> getAdministradores(FactoriaPersona factoria) {
         ArrayList<Administrador> administradores = new ArrayList<Administrador>();
@@ -569,8 +462,8 @@ public class DAO{
                         
                         rconsultas = statement.executeQuery();
                         if(rconsultas.next()){                                                                 
-                            torneo.setNombre(resultados.getString("nombre_torneo"));
-                            torneo.setInicio(resultados.getBoolean("inicio"));                    
+                            torneo.setNombre(rconsultas.getString("nombre_torneo"));
+                            torneo.setInicio(rconsultas.getBoolean("inicio"));                    
                         }
                         
                         jugador.addTorneo(torneo);
@@ -951,12 +844,12 @@ public class DAO{
                             resultados = statement.executeQuery();
                             if(resultados.next()){
                                 int idclub = resultados.getInt(1);
-                                String consulta3 = "SELECT count(*) FROM usuario";
+                                String consulta3 = "SELECT count(*) FROM usuarios";
                                 statement=connection.prepareStatement(consulta3);
                                 resultados = statement.executeQuery();
                                 if(resultados.next()){
                                     int idusuario = resultados.getInt(1);
-                                    String registrojugador = "insert into jugador(edad,id_club,id_usuario) values (?,?,?)";
+                                    String registrojugador = "insert into jugadores(edad,id_club,id_usuario) values (?,?,?)";
                                     statement=connection.prepareStatement(registrojugador);
                                     statement.setInt(1, jugador.getEdad());
                                     statement.setInt(2, idclub);
@@ -1045,30 +938,35 @@ public class DAO{
                 String registrosede = "insert into sedes(nombre_sede) values (?)";
                 statement=connection.prepareStatement(registrosede);
                 statement.setString(1, club.getSede().getNombre());
-                
+                System.out.println("insertar sede");
                 if(statement.executeUpdate() > 0){
+                    System.out.println("buscar sede");
                     String consulta = "SELECT count(*) FROM sedes";
                     statement=connection.prepareStatement(consulta);
                     resultados = statement.executeQuery();
+                    
                     if(resultados.next()){
+                        System.out.println("buscar federacion");
                         int idsede = resultados.getInt(1);
-                        String consulta2 = "SELECT idfederaciones FROM federacioens WHERE nombre_federacion = ?";
+                        String consulta2 = "SELECT idfederaciones FROM federaciones WHERE nombre_federacion = ?";
                         statement=connection.prepareStatement(consulta2);
                         statement.setString(1, club.getFederacion().getNombre());
                         resultados = statement.executeQuery();
+                        
                         if(resultados.next()){
                             int idfederacion = resultados.getInt(1);
                             String consulta3 = "SELECT idgerentes FROM gerentes JOIN personas ON id_persona = idpersonas WHERE dni = ?";
                             statement=connection.prepareStatement(consulta3);
                             statement.setString(1, club.getGerente().getDNI());
                             resultados = statement.executeQuery();
+                            System.out.println("buscar gerente");
                             if(resultados.next()){
                                 int idgerente = resultados.getInt(1);
                                 String contratogerente = "UPDATE gerentes SET contratado = ? WHERE idgerentes = ?";
                                 statement=connection.prepareStatement(contratogerente);
                                 statement.setBoolean(1, club.getGerente().isContratado());
                                 statement.setInt(2, idgerente);
-
+                                System.out.println("contrado gerente");
                                 if(statement.executeUpdate() > 0){
                                     String consulta4 = "SELECT identrenadores FROM entrenadores JOIN personas ON id_persona = idpersonas WHERE dni = ?";
                                     statement=connection.prepareStatement(consulta4);

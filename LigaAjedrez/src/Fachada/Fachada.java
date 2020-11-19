@@ -26,7 +26,6 @@ public class Fachada {
     public Fachada(){
         gestor = new GestorLiga();
         usuario = new Usuario(gestor.getLiga());
-        administrador = new Administrador();
     }
 
     public Usuario getUsuario() {
@@ -49,7 +48,7 @@ public class Fachada {
         return gestor.buscarUsuario(user);
     }
 
-    public void setAdministrador(Usuario usuario) {
+    public void setAdministrador(Usuario usuario) {        
         administrador = (Administrador)usuario;
     }
 

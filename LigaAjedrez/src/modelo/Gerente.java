@@ -32,5 +32,5 @@ public class Gerente extends Persona implements Serializable{
     public void setContratado(boolean contratado) {
         this.contratado = contratado;
     }
-            
+        
 }
