@@ -15,6 +15,7 @@ public class Datos implements Serializable{
 
     private static final long serialVersionUID = 1L;
     String nombre, apellidos, dni;
+    
     public Datos(String nom, String ape, String dni){
         this.nombre = nom;
         this.apellidos = ape;

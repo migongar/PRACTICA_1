@@ -71,11 +71,11 @@ public class Torneo implements Serializable{
         return encontrado;
     }
 
-    public boolean buscarJugador(String nombre) {
+    public boolean buscarJugador(String dni) {
         boolean encontrado = false;
         int i = 0;
         while(!encontrado && i<jugadores.size()){
-            if(jugadores.get(i).getNombre().equals(nombre)){
+            if(jugadores.get(i).getDNI().equals(dni)){
                 encontrado = true;
             }
             i++;

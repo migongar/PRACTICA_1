@@ -14,52 +14,38 @@ import java.io.Serializable;
 public class FactoriaPersona implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private Club club;
-    private int edad;
-    private String user;
-    private String password;
-    private Liga liga;
-    private boolean contratado;   
+    protected Liga liga; 
     
     public Persona crearPersona(String nombre, String ape, String dni, int tipo){
-        Persona persona = new Persona();
+        Persona persona = null;
         switch(tipo){
             case 1:
-                persona = new Jugador(nombre, ape, dni, club, edad, liga, user, password);
+                persona = new Jugador();
+                persona.setNombre(nombre);
+                persona.setApellidos(ape);
+                persona.setDni(dni);
                 break;
             case 2:
-                persona = new Gerente(nombre,ape,dni, contratado);
+                persona = new Gerente();
+                persona.setNombre(nombre);
+                persona.setApellidos(ape);
+                persona.setDni(dni);
                 break;
             case 3:
-                persona = new Entrenador(nombre,ape,dni,contratado);
+                persona = new Entrenador();
+                persona.setNombre(nombre);
+                persona.setApellidos(ape);
+                persona.setDni(dni);
                 break;
             case 4:
-                persona = new Administrador(nombre,ape,dni,liga);
+                persona = new Administrador();
+                persona.setNombre(nombre);
+                persona.setApellidos(ape);
+                persona.setDni(dni);
                 break;
-        }
+        }       
         
         return persona;
-    }
-    
-    public void setContratado(boolean contratado) {
-        this.contratado = contratado;
-    }
-    
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setLiga(Liga liga) {

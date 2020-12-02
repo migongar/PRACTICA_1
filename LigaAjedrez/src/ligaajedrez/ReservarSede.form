@@ -47,14 +47,14 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="jL_Entrenador" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTF_Entrenador" min="-2" pref="106" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jTF_Entrenador" min="-2" pref="106" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jB_Buscar" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jDateChooser1" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -67,26 +67,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jL_ReservarSede" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jDateChooser1" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTF_Entrenador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jL_Entrenador" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jB_Buscar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser1" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jB_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTF_Entrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jL_Entrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -154,7 +146,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jL_Entrenador">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entrenador: "/>
+        <Property name="text" type="java.lang.String" value="DNI jugador"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTF_Entrenador">

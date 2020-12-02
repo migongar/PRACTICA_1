@@ -16,8 +16,8 @@ public class Entrenador extends Persona implements Serializable{
     private static final long serialVersionUID = 1L;
     private boolean contratado;
 
-    Entrenador() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Entrenador() {
+        
     }
 
     public boolean isContratado() {

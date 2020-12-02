@@ -73,13 +73,23 @@ public class Liga implements Serializable{
         System.out.println( "Gerentes:"); 
 
         for(int i = 0; i < gerentes.size(); i++) {
-            System.out.println( gerentes.get(i));                
+            System.out.print( gerentes.get(i));
+            System.out.print( " Contrato: ");
+            if(gerentes.get(i).isContratado())
+                System.out.println("Si");
+            else
+                System.out.println("No");
         }
 
         System.out.println( "Entrenadores:"); 
 
         for(int i = 0; i < entrenadores.size(); i++) {
-            System.out.println( entrenadores.get(i));                
+            System.out.print( entrenadores.get(i));
+            System.out.print( " Contrato: ");
+            if(entrenadores.get(i).isContratado())
+                System.out.println("Si");
+            else
+                System.out.println("No");
         }
 
         System.out.println( "Clubes:"); 
@@ -92,8 +102,14 @@ public class Liga implements Serializable{
 
         for(int i = 0; i < torneos.size(); i++) {                
             System.out.println( torneos.get(i));
+            System.out.println("Clubes inscritos:");
+            for(int j = 0; j < torneos.get(i).getClubes().size();j++){
+                System.out.println( torneos.get(i).getClubes().get(j));
+            }
             if(torneos.get(i).isInicio())
                 System.out.println("Iniciado");
+            else
+                System.out.println("No iniciado");
         }
         
         /*ArrayList arrayList;
@@ -309,27 +325,42 @@ public class Liga implements Serializable{
 
     public boolean registrarJugador(String nom, String ape, String dni, String club, int edad, String user, String pass) {
         DAO jugadorDAO = new DAO();
-        boolean encontrado = false;
         Club clubencontrado = new Club();
-        int i = 0;
-        while(!encontrado && i<clubes.size()){
-            if(clubes.get(i).getNombre().equals(club)){
-                clubencontrado = clubes.get(i);
-                encontrado = true;
+        boolean existe = false;        
+        int i =0;
+        
+        while(!existe && i < jugadores.size()){
+            if(jugadores.get(i).getDNI().equals(dni)){
+                existe = true;
             }
             i++;
         }
         
-        //Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad,this,user, pass);
-        factoria.setClub(clubencontrado);
-        factoria.setEdad(edad);
-        factoria.setUser(user);
-        factoria.setPassword(pass);  
-        
-        if(jugadorDAO.registrarJugador((Jugador)factoria.crearPersona(nom, ape, dni, 1))){
-            System.out.println("Nuevo Jugador: " + (Jugador)factoria.crearPersona(nom, ape, dni, 1));                
-            this.cargarDatos();
-            return true;
+        if(!existe){
+            boolean encontrado = false;
+            i=0;
+            while(!encontrado && i<clubes.size()){
+                if(clubes.get(i).getNombre().equals(club)){
+                    clubencontrado = clubes.get(i);
+                    encontrado = true;
+                }
+                i++;
+            }
+
+            //Jugador nuevo = new Jugador(nom,ape,dni,clubencontrado,edad,this,user, pass);
+            Jugador jugador = (Jugador)factoria.crearPersona(nom, ape, dni, 1);
+            jugador.setClub(clubencontrado);
+            jugador.setEdad(edad);
+            jugador.setLogin(user);
+            jugador.setContraseña(pass);
+
+            if(jugadorDAO.registrarJugador(jugador)){
+                System.out.println("Nuevo Jugador: " + jugador);                
+                this.cargarDatos();
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
@@ -366,8 +397,8 @@ public class Liga implements Serializable{
         
         if(existe != -1){
             Jugador jug = jugadores.get(existe);
-            for(int i=0;i<torneos.size();i++){
-                if(!torneos.get(i).isInicio() && torneos.get(i).buscarClub(jug.getClub()) && !torneos.get(i).buscarJugador(jug.getNombre()))
+            for(int i=0;i<torneos.size();i++){                
+                if(!torneos.get(i).isInicio() && torneos.get(i).buscarClub(jug.getClub()) && !torneos.get(i).buscarJugador(jug.getDNI()))
                     encontrados.add(torneos.get(i));
             }
         }   
@@ -379,15 +410,19 @@ public class Liga implements Serializable{
         DAO incribirDAO = new DAO();
         boolean encontrado = false, inscrito = false;
         int i = 0;
-        Jugador jugador = jugadores.get(this.buscarJugador(dniJugador));       
+        int indice = this.buscarJugador(dniJugador);
         
-        while(!encontrado && i<torneos.size()){
-            if(torneos.get(i) == tor){
-                encontrado = true;
-                inscrito = incribirDAO.registrarJugadorTorneo(jugador,torneos.get(i));
-                this.cargarDatos();
+        if(indice>=0){
+            Jugador jugador = jugadores.get(indice);     
+
+            while(!encontrado && i<torneos.size()){
+                if(torneos.get(i) == tor && !(torneos.get(i).buscarJugador(dniJugador))){
+                    encontrado = true;
+                    inscrito = incribirDAO.registrarJugadorTorneo(jugador,torneos.get(i));
+                    this.cargarDatos();
+                }
+                i++;
             }
-            i++;
         }
         
         return inscrito;
@@ -433,25 +468,55 @@ public class Liga implements Serializable{
 
     public boolean registrarFederacion(String nomFede) {
         DAO federacionDAO = new DAO();
-        Federacion fede = new Federacion(nomFede);
         
-        if(federacionDAO.registrarFederacion(fede)){
-            System.out.println("Nueva Federacion: " + fede); 
-            this.cargarDatos();
-            return true;
+        boolean existe = false;        
+        int i =0;
+        
+        while(!existe && i < federaciones.size()){
+            if(federaciones.get(i).getNombre().equals(nomFede)){
+                existe = true;
+            }
+            i++;
         }
+        
+        if(!existe){
+            Federacion fede = new Federacion(nomFede);
+
+            if(federacionDAO.registrarFederacion(fede)){
+                System.out.println("Nueva Federacion: " + fede); 
+                this.cargarDatos();
+                return true;
+            }
+            else
+                return false;
+            }
         else
-            return false;     
+            return false;
     }
 
     public boolean registrarGerente(String nombre, String apellidos, String dni) {
-        DAO gerenteDAO = new DAO();        
-        factoria.setContratado(false);
+        DAO gerenteDAO = new DAO();
+        boolean existe = false;        
+        int i =0;
         
-        if(gerenteDAO.registrarGerente((Gerente)factoria.crearPersona(nombre, apellidos, dni,2))){
-            System.out.println("Nuevo Gerente: " + (Gerente)factoria.crearPersona(nombre, apellidos, dni, 2)); 
-            this.cargarDatos();
-            return true;
+        while(!existe && i < gerentes.size()){
+            if(gerentes.get(i).getDNI().equals(dni)){
+                existe = true;
+            }
+            i++;
+        }
+        
+        if(!existe){
+            Gerente gerente = (Gerente) factoria.crearPersona(nombre, apellidos, dni,2);
+            gerente.setContratado(false);
+
+            if(gerenteDAO.registrarGerente(gerente)){
+                System.out.println("Nuevo Gerente: " + gerente); 
+                this.cargarDatos();
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
@@ -459,13 +524,26 @@ public class Liga implements Serializable{
 
     public boolean registrarEntrenador(String nombre, String apellidos, String dni) {
         DAO entrenadorDAO = new DAO();
- 
-        factoria.setContratado(false);
+        boolean existe = false;
+        int i =0;
         
-        if(entrenadorDAO.registrarEntrenador((Entrenador)factoria.crearPersona(nombre,apellidos, dni, 3))){
-            System.out.println("Nuevo Entrenador: " + (Entrenador) factoria.crearPersona(nombre, apellidos, dni, 3)); 
-            this.cargarDatos();
-            return true;
+        while(!existe && i < entrenadores.size()){
+            if(entrenadores.get(i).getDNI().equals(dni)){
+                existe = true;
+            }
+            i++;
+        }
+        
+        if(!existe){
+            Entrenador entrenador = (Entrenador)factoria.crearPersona(nombre,apellidos, dni, 3);
+            entrenador.setContratado(false);
+            if(entrenadorDAO.registrarEntrenador(entrenador)){
+                System.out.println("Nuevo Entrenador: " + entrenador); 
+                this.cargarDatos();
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
@@ -501,7 +579,7 @@ public class Liga implements Serializable{
         return gerentes;
     }
 
-    private void guardarDatos() {
+    /*private void guardarDatos() {
          try {
              ArrayList arrayList = new ArrayList ();   
         
@@ -526,37 +604,52 @@ public class Liga implements Serializable{
         } catch (Exception e) {
             System.out.println( e.getMessage() );
         }
-    }
+    }*/
 
     public boolean registrarClub(String club, String federacion, String sede, String gerente, String entrenador) {
         DAO clubDAO = new DAO();        
         Federacion fede = null;
         Sede nuevasede = null;
-        boolean encontrado = false;
+        boolean existe = false;
         int i = 0;
-        while(!encontrado && i < federaciones.size()){
-            if(federaciones.get(i).getNombre().equals(federacion)){
-                encontrado = true;
-                fede = federaciones.get(i);
-            }
+        
+        while(!existe && i<clubes.size()){
+            if(clubes.get(i).getNombre().equals(club))
+                existe = true;
             i++;
         }
         
-        nuevasede = this.crearSede(sede/*, fede*/);
-        
-        if(nuevasede != null){
-            Gerente gerenteclub = this.contratarGerente(gerente);
-            Entrenador entrenadorclub = this.contratarEntrenador(entrenador);
-            System.out.println("gerente contratado: " + gerenteclub.getDNI()); 
-            Club nuevoclub = new Club(club,fede,nuevasede,gerenteclub,entrenadorclub,this);
-            
-            if(clubDAO.registrarClub(nuevoclub)){
-                    System.out.println("Nuevo Club: " + nuevoclub); 
-                    this.cargarDatos();
-                    return true;
+        if(!existe){
+            boolean encontrado = false;
+            i = 0;
+
+            while(!encontrado && i < federaciones.size()){
+                if(federaciones.get(i).getNombre().equals(federacion)){
+                    encontrado = true;
+                    fede = federaciones.get(i);
+                }
+                i++;
+            }
+
+            nuevasede = this.crearSede(sede/*, fede*/);
+
+            if(nuevasede != null){
+                Gerente gerenteclub = this.contratarGerente(gerente);
+                Entrenador entrenadorclub = this.contratarEntrenador(entrenador);
+                System.out.println("gerente contratado: " + gerenteclub.getDNI()); 
+                Club nuevoclub = new Club(club,fede,nuevasede,gerenteclub,entrenadorclub,this);
+
+                if(clubDAO.registrarClub(nuevoclub)){
+                        System.out.println("Nuevo Club: " + nuevoclub); 
+                        this.cargarDatos();
+                        return true;
+                }
+                else
+                    return false;         
             }
             else
-                return false;         
+                return false;
+        
         }
         else
             return false;
@@ -619,7 +712,7 @@ public class Liga implements Serializable{
         Entrenador encEntrenador= null;
         
         while(!encontrado && i < entrenadores.size()){
-            if(entrenadores.get(i).getDNI().equals(DNIentrenador)){
+            if(entrenadores.get(i).getDNI().equals(DNIentrenador) && !entrenadores.get(i).isContratado()){
                 encontrado = true;
                 encEntrenador = entrenadores.get(i);
             }
@@ -633,7 +726,7 @@ public class Liga implements Serializable{
         return jugadores;
     }
 
-    public ArrayList getTorneos() {
+    public ArrayList<Torneo> getTorneos() {
         return torneos;
     }
 
@@ -652,29 +745,41 @@ public class Liga implements Serializable{
             k++;
         }*/
         
-        Torneo nuevoTorneo = new Torneo(nombreTorneo/*, fede*/);
-                
-        for(int i = 0;i<listaTorneo.size();i++){
-            boolean encontrado = false;
-            int j = 0;
-            while(!encontrado && j<clubes.size()){
-                if(clubes.get(j).getNombre().equals(listaTorneo.get(i).toString())){
-                    club = clubes.get(j);
-                    nuevoTorneo.addClub(club);
-                    encontrado = true;
-                }
-                j++;
-            }
-        }       
+        boolean existe = false;
+        int i = 0;
         
-        if(torneoDAO.registrarTorneo(nuevoTorneo)){
-            System.out.println("Nuevo Torneo: " + nuevoTorneo); 
-            this.cargarDatos();
-            return true;
+        while(!existe && i<torneos.size()){
+            if(torneos.get(i).getNombre().equals(nombreTorneo))
+                existe = true;
+            i++;
+        }
+        
+        if(!existe){        
+            Torneo nuevoTorneo = new Torneo(nombreTorneo/*, fede*/);
+
+            for(i = 0;i<listaTorneo.size();i++){
+                boolean encontrado = false;
+                int j = 0;
+                while(!encontrado && j<clubes.size()){
+                    if(clubes.get(j).getNombre().equals(listaTorneo.get(i).toString())){
+                        club = clubes.get(j);
+                        nuevoTorneo.addClub(club);
+                        encontrado = true;
+                    }
+                    j++;
+                }
+            }       
+
+            if(torneoDAO.registrarTorneo(nuevoTorneo)){
+                System.out.println("Nuevo Torneo: " + nuevoTorneo); 
+                this.cargarDatos();
+                return true;
+            }
+            else
+                return false;
         }
         else
-            return false;   
-        
+            return false;
     }
 
     /*public ArrayList<DatosTorneo> buscarTorneosSinPartidas(String federacion) {
@@ -812,8 +917,8 @@ public class Liga implements Serializable{
                 torneoenc = true;
                 System.out.println( "Torneo encontrado");
             }
-            i++;            
-        }        
+            i++;
+        }
         
         for(int j = 0; j< encTorneo.size();j++){
             indice = this.buscarJugador(encTorneo.get(j).getDNI());

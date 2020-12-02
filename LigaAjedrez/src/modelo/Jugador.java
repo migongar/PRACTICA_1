@@ -20,7 +20,7 @@ public class Jugador extends Usuario implements Serializable{
     protected ArrayList<Torneo> torneos = new ArrayList<Torneo>();
     protected ArrayList<Partida> partidas = new ArrayList<Partida>();
     protected ArrayList<Partida> historial = new ArrayList<Partida>();
-    
+
     public Jugador(){
         
     }
@@ -81,4 +81,17 @@ public class Jugador extends Usuario implements Serializable{
     public void elimnarTorneoJugador(Torneo torneo) {
         torneos.remove(torneo);
     }
+    
+    public int getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(int categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+    
 }

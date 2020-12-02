@@ -109,7 +109,7 @@ public class Usuario extends Persona implements Serializable{
     }
 
     public boolean comprobarDNI(String dni) {
-        if(!(dni.length()>=8 && dni.length()<=9))
+        if(!(dni.length()==9))
             return false;
         
         String numeros = dni.substring(0,dni.length()-1);

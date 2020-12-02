@@ -179,8 +179,9 @@ public class DAO{
 
                         rconsultas = statement.executeQuery();
                         if(rconsultas.next()){
-                            factoria.setContratado(rconsultas.getBoolean("contratado"));
-                            club_federacion.setEntrenador((Entrenador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 3));
+                            Entrenador entrenador = (Entrenador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 3);
+                            entrenador.setContratado(rconsultas.getBoolean("contratado"));
+                            club_federacion.setEntrenador(entrenador);
                         }
 
                         consultas = "SELECT nombre,apellidos,dni,contratado FROM gerentes JOIN personas ON id_persona = idpersonas WHERE idgerentes = ?";
@@ -189,8 +190,9 @@ public class DAO{
 
                         rconsultas = statement.executeQuery();
                         if(rconsultas.next()){
-                            factoria.setContratado(rconsultas.getBoolean("contratado"));
-                            club_federacion.setGerente((Gerente) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 2));
+                            Gerente gerente = (Gerente) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 2);
+                            gerente.setContratado(rconsultas.getBoolean("contratado"));
+                            club_federacion.setGerente(gerente);
                         }                        
                         fede.anyadirClub(club_federacion);                        
                     }
@@ -359,9 +361,10 @@ public class DAO{
                 
                 resultados = statement.executeQuery();
                 while (resultados.next()) {
-                        factoria.setUser(resultados.getString("login"));
-                        factoria.setPassword(resultados.getString("password"));
-                        administradores.add((Administrador) factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 4));
+                    Administrador administrador = (Administrador) factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 4);
+                    administrador.setLogin(resultados.getString("login"));
+                    administrador.setContraseña(resultados.getString("password"));
+                    administradores.add(administrador);
                     }
                 }           
         } catch (SQLException e) { // Error al realizar la consulta
@@ -426,8 +429,9 @@ public class DAO{
                         
                         rconsultas = statement.executeQuery();
                         if(rconsultas.next()){
-                            factoria.setContratado(rconsultas.getBoolean("contratado"));
-                            club_jugador.setEntrenador((Entrenador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 3));
+                            Entrenador entrenador = (Entrenador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 3);
+                            entrenador.setContratado(rconsultas.getBoolean("contratado"));
+                            club_jugador.setEntrenador(entrenador);
                         }
                         
                         consultas = "SELECT nombre,apellidos,dni,contratado FROM gerentes JOIN personas ON id_persona = idpersonas WHERE idgerentes = ?";
@@ -436,16 +440,18 @@ public class DAO{
                         
                         rconsultas = statement.executeQuery();
                         if(rconsultas.next()){
-                            factoria.setContratado(rconsultas.getBoolean("contratado"));
-                            club_jugador.setGerente((Gerente) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 2));
+                            Gerente gerente = (Gerente) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 2);
+                            gerente.setContratado(rconsultas.getBoolean("contratado"));
+                            club_jugador.setGerente(gerente);
                         }                       
-                    }
-                    factoria.setClub(club_jugador);
-                    factoria.setEdad(resultados.getInt("edad"));
-                    factoria.setUser(resultados.getString("login"));
-                    factoria.setPassword(resultados.getString("password"));
+                    }      
                     
                     Jugador jugador = (Jugador)factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"),1);
+                    
+                    jugador.setClub(club_jugador);
+                    jugador.setEdad(resultados.getInt("edad"));
+                    jugador.setLogin(resultados.getString("login"));
+                    jugador.setContraseña(resultados.getString("password"));
                     
                     ResultSet torneos = null;
                     String tconsulta = "SELECT id_torneo FROM torneo_jugador WHERE id_jugador = ?";
@@ -499,8 +505,9 @@ public class DAO{
                 
                 resultados = statement.executeQuery();
                 while (resultados.next()) {
-                    factoria.setContratado(resultados.getBoolean("contratado"));
-                    gerentes.add((Gerente) factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 2));
+                    Gerente gerente = (Gerente) factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 2);
+                    gerente.setContratado(resultados.getBoolean("contratado"));
+                    gerentes.add(gerente);
                 }
             }
             
@@ -530,8 +537,9 @@ public class DAO{
                 
                 resultados = statement.executeQuery();
                 while (resultados.next()) {
-                    factoria.setContratado(resultados.getBoolean("contratado"));
-                    entrenadores.add((Entrenador)factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 3));
+                    Entrenador entrenador = (Entrenador)factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 3);
+                    entrenador.setContratado(resultados.getBoolean("contratado"));
+                    entrenadores.add(entrenador);
                 }
             }
             
@@ -589,8 +597,9 @@ public class DAO{
 
                     rconsultas = statement.executeQuery();
                     if(rconsultas.next()){
-                        factoria.setContratado(rconsultas.getBoolean("contratado"));
-                        club.setEntrenador((Entrenador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 3));
+                        Entrenador entrenador = (Entrenador)factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 3);
+                        entrenador.setContratado(rconsultas.getBoolean("contratado"));
+                        club.setEntrenador(entrenador);
                     }
 
                     consultas = "SELECT nombre,apellidos,dni,contratado FROM gerentes JOIN personas ON id_persona = idpersonas WHERE idgerentes = ?";
@@ -599,8 +608,9 @@ public class DAO{
 
                     rconsultas = statement.executeQuery();
                     if(rconsultas.next()){
-                        factoria.setContratado(rconsultas.getBoolean("contratado"));
-                        club.setGerente((Gerente) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 2));
+                        Gerente gerente = (Gerente) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 2);
+                        gerente.setContratado(rconsultas.getBoolean("contratado"));
+                        club.setGerente(gerente);
                     }
                     
                     consultas = "SELECT nombre,apellidos,dni,edad,login,password FROM usuarios JOIN jugadores ON id_usuario = idusuarios JOIN personas ON id_persona = idpersonas WHERE id_club = ?";
@@ -609,12 +619,13 @@ public class DAO{
 
                     rconsultas = statement.executeQuery();
                     while(rconsultas.next()){
-                        factoria.setClub(club);
-                        factoria.setEdad(rconsultas.getInt("edad"));
-                        factoria.setUser(rconsultas.getString("login"));
-                        factoria.setPassword(rconsultas.getString("password"));
+                        Jugador jugador = (Jugador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 1);
+                        jugador.setClub(club);
+                        jugador.setEdad(rconsultas.getInt("edad"));
+                        jugador.setLogin(rconsultas.getString("login"));
+                        jugador.setContraseña(rconsultas.getString("password"));
                         
-                        club.addJugador((Jugador) factoria.crearPersona(rconsultas.getString("nombre"), rconsultas.getString("apellidos"), rconsultas.getString("dni"), 1));
+                        club.addJugador(jugador);
                     }
                     
                     clubes.add(club);
@@ -693,8 +704,9 @@ public class DAO{
 
                             tcconsultas = statement.executeQuery();
                             if(tcconsultas.next()){
-                                factoria.setContratado(tcconsultas.getBoolean("contratado"));
-                                club.setEntrenador((Entrenador) factoria.crearPersona(tcconsultas.getString("nombre"), tcconsultas.getString("apellidos"), tcconsultas.getString("dni"), 3));
+                                Entrenador entrenador = (Entrenador) factoria.crearPersona(tcconsultas.getString("nombre"), tcconsultas.getString("apellidos"), tcconsultas.getString("dni"), 3);
+                                entrenador.setContratado(tcconsultas.getBoolean("contratado"));
+                                club.setEntrenador(entrenador);
                             }
 
                             nconsultas = "SELECT nombre,apellidos,dni,contratado FROM gerentes JOIN personas ON id_persona = idpersonas WHERE idgerentes = ?";
@@ -703,8 +715,9 @@ public class DAO{
 
                             tcconsultas = statement.executeQuery();
                             if(tcconsultas.next()){
-                                factoria.setContratado(tcconsultas.getBoolean("contratado"));
-                                club.setGerente((Gerente) factoria.crearPersona(tcconsultas.getString("nombre"), tcconsultas.getString("apellidos"), tcconsultas.getString("dni"), 2));
+                                Gerente gerente = (Gerente) factoria.crearPersona(tcconsultas.getString("nombre"), tcconsultas.getString("apellidos"), tcconsultas.getString("dni"), 2);
+                                gerente.setContratado(tcconsultas.getBoolean("contratado"));
+                                club.setGerente(gerente);
                             }
 
                             nconsultas = "SELECT nombre,apellidos,dni,edad,login,password FROM usuarios JOIN jugadores ON id_usuario = idusuarios JOIN personas ON id_persona = idpersonas WHERE id_club = ?";
@@ -713,12 +726,13 @@ public class DAO{
 
                             tcconsultas = statement.executeQuery();
                             while(tcconsultas.next()){
-                                factoria.setClub(club);
-                                factoria.setEdad(tcconsultas.getInt("edad"));
-                                factoria.setUser(tcconsultas.getString("login"));
-                                factoria.setPassword(tcconsultas.getString("password"));
+                                Jugador jugador = (Jugador) factoria.crearPersona(tcconsultas.getString("nombre"), tcconsultas.getString("apellidos"), tcconsultas.getString("dni"), 1);
+                                jugador.setClub(club);
+                                jugador.setEdad(tcconsultas.getInt("edad"));
+                                jugador.setLogin(tcconsultas.getString("login"));
+                                jugador.setContraseña(tcconsultas.getString("password"));
 
-                                club.addJugador((Jugador) factoria.crearPersona(tcconsultas.getString("nombre"), tcconsultas.getString("apellidos"), tcconsultas.getString("dni"), 1));
+                                club.addJugador(jugador);
                             }
 
                             torneo.addClub(club);                         
@@ -774,8 +788,9 @@ public class DAO{
 
                                 ncconsultas = statement.executeQuery();
                                 if(ncconsultas.next()){
-                                    factoria.setContratado(ncconsultas.getBoolean("contratado"));
-                                    club_jugador.setEntrenador((Entrenador) factoria.crearPersona(ncconsultas.getString("nombre"), ncconsultas.getString("apellidos"), ncconsultas.getString("dni"), 3));
+                                    Entrenador entrenador = (Entrenador) factoria.crearPersona(ncconsultas.getString("nombre"), ncconsultas.getString("apellidos"), ncconsultas.getString("dni"), 3);
+                                    entrenador.setContratado(ncconsultas.getBoolean("contratado"));
+                                    club_jugador.setEntrenador(entrenador);
                                 }
 
                                 nconsultas = "SELECT nombre,apellidos,dni,contratado FROM gerentes JOIN personas ON id_persona = idpersonas WHERE idgerentes = ?";
@@ -784,16 +799,18 @@ public class DAO{
 
                                 ncconsultas = statement.executeQuery();
                                 if(ncconsultas.next()){
-                                    factoria.setContratado(ncconsultas.getBoolean("contratado"));
-                                    club_jugador.setGerente((Gerente) factoria.crearPersona(ncconsultas.getString("nombre"), ncconsultas.getString("apellidos"), ncconsultas.getString("dni"), 2));
+                                    Gerente gerente = (Gerente) factoria.crearPersona(ncconsultas.getString("nombre"), ncconsultas.getString("apellidos"), ncconsultas.getString("dni"), 2);
+                                    gerente.setContratado(ncconsultas.getBoolean("contratado"));
+                                    club_jugador.setGerente(gerente);
                                 }                       
                             }
-                            factoria.setClub(club_jugador);
-                            factoria.setEdad(jresultados.getInt("edad"));
-                            factoria.setUser(jresultados.getString("login"));
-                            factoria.setPassword(jresultados.getString("password"));
+                            Jugador jugador = (Jugador) factoria.crearPersona(jresultados.getString("nombre"), jresultados.getString("apellidos"), jresultados.getString("dni"), 1);
+                            jugador.setClub(club_jugador);
+                            jugador.setEdad(jresultados.getInt("edad"));
+                            jugador.setLogin(jresultados.getString("login"));
+                            jugador.setContraseña(jresultados.getString("password"));
 
-                            torneo.addJugador((Jugador) factoria.crearPersona(jresultados.getString("nombre"), jresultados.getString("apellidos"), jresultados.getString("dni"), 1));
+                            torneo.addJugador(jugador);
                         }                        
                     }
                     torneos.add(torneo);
