@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -36,8 +37,9 @@ public class DAO{
                 statement.setString(3, entr.getDNI());
                 
                 if (statement.executeUpdate() > 0) {
-                    String consulta = "SELECT count(*) FROM personas";
+                    String consulta = "SELECT idpersonas FROM personas WHERE dni = ?";
                     statement=connection.prepareStatement(consulta);
+                    statement.setString(1, entr.getDNI());
                     resultados = statement.executeQuery();
                     if(resultados.next()){
                         int i = resultados.getInt(1);
@@ -47,16 +49,24 @@ public class DAO{
                         statement.setInt(2, i);
                         if(statement.executeUpdate() > 0){
                             hecho = true;
-                            System.out.println(entr);
                         }
                     }         
                 }
             }
         } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }       
-        
-        conexion.desconectar();
+            System.out.println("Error en la petición a la BD: " + e.getMessage());
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
+        }
         
         return hecho;
     }
@@ -79,8 +89,9 @@ public class DAO{
                 statement.setString(3, ger.getDNI());
                 
                 if (statement.executeUpdate() > 0) {
-                    String consulta = "SELECT count(*) FROM personas";
+                    String consulta = "SELECT idpersonas FROM personas WHERE dni = ?";
                     statement=connection.prepareStatement(consulta);
+                    statement.setString(1, ger.getDNI());
                     resultados = statement.executeQuery();
                     if(resultados.next()){
                         int i = resultados.getInt(1);
@@ -90,16 +101,24 @@ public class DAO{
                         statement.setInt(2, i);
                         if(statement.executeUpdate() > 0){
                             hecho = true;
-                            System.out.println(ger);
                         }
                     }         
                 }
             }
         } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }       
-        
-        conexion.desconectar();
+            System.out.println("Error en la petición a la BD: " + e.getMessage());
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
+        }
         
         return hecho;
     }
@@ -120,17 +139,26 @@ public class DAO{
                 
                 if (statement.executeUpdate() > 0) {
                     hecho = true;
-                    System.out.println(fede);
+                    //se indica que se deben aplicar los cambios en la base de datos
+                    connection.commit();
                 }
             }
         } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            System.out.println("Error en la petición a la BD RegistrarFederacion: " + e.getMessage());
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
         }
         
-        conexion.desconectar();
-        
-        return hecho;
-        
+        return hecho;        
        }
 
     public ArrayList<Federacion> getFederaciones(FactoriaPersona factoria) {
@@ -364,11 +392,13 @@ public class DAO{
                     Administrador administrador = (Administrador) factoria.crearPersona(resultados.getString("nombre"), resultados.getString("apellidos"), resultados.getString("dni"), 4);
                     administrador.setLogin(resultados.getString("login"));
                     administrador.setContraseña(resultados.getString("password"));
+                    administrador.setTipousuario(1);
+                    administrador.setLiga(factoria.getLiga());
                     administradores.add(administrador);
                     }
                 }           
         } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            System.out.println("Error en la petición a la BD getAdministradores: " + e.getMessage());
         }
         
         conexion.desconectar();
@@ -452,6 +482,8 @@ public class DAO{
                     jugador.setEdad(resultados.getInt("edad"));
                     jugador.setLogin(resultados.getString("login"));
                     jugador.setContraseña(resultados.getString("password"));
+                    jugador.setTipousuario(0);
+                    jugador.setLiga(factoria.getLiga());
                     
                     ResultSet torneos = null;
                     String tconsulta = "SELECT id_torneo FROM torneo_jugador WHERE id_jugador = ?";
@@ -480,7 +512,7 @@ public class DAO{
                 }
             }           
         } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            System.out.println("Error en la petición a la BD getJugadores: " + e.getMessage());
         }
         
         conexion.desconectar();
@@ -544,7 +576,7 @@ public class DAO{
             }
             
         }catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            System.out.println("Error en la petición a la BD getGerentes: " + e.getMessage());
         }
         conexion.desconectar();
         
@@ -588,6 +620,27 @@ public class DAO{
                     rconsultas = statement.executeQuery();
                     if(rconsultas.next()){
                         Sede sede_club = new Sede(rconsultas.getString("nombre_sede"));
+                        ResultSet nconsultas = null;
+                        consultas = "SELECT idfranjashorarias, hora FROM franjas_horarias WHERE id_sede = ?";
+                        statement=connection.prepareStatement(consultas);
+                        statement.setInt(1, resultados.getInt("id_sede"));
+
+                        nconsultas = statement.executeQuery();
+                        while(nconsultas.next()){
+                            FranjaHoraria franja = new FranjaHoraria(nconsultas.getString("hora"));
+                            ResultSet nvconsultas = null;
+                            consultas = "SELECT dnijugador, fecha FROM reservas WHERE id_franja = ?";
+                            statement=connection.prepareStatement(consultas);
+                            statement.setInt(1, nconsultas.getInt("idfranjashorarias"));
+
+                            nvconsultas = statement.executeQuery();
+                            while(nvconsultas.next()){
+                                Reserva reserva = new Reserva(nvconsultas.getDate("fecha"), nvconsultas.getString("dnijugador"));
+                                franja.addReserva(reserva);
+                            }
+                            sede_club.addFranja(franja);
+                        }
+                        
                         club.setSede(sede_club);                            
                     }
 
@@ -633,7 +686,7 @@ public class DAO{
             }
             
         }catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            System.out.println("Error en la petición a la BD getClubes: " + e.getMessage());
         }
         conexion.desconectar();
         
@@ -818,7 +871,7 @@ public class DAO{
             }
             
         }catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            System.out.println("Error en la petición a la BD getTorneos: " + e.getMessage());
         }
         conexion.desconectar();
         
@@ -843,17 +896,18 @@ public class DAO{
                 statement.setString(3, jugador.getDNI());
                 
                 if (statement.executeUpdate() > 0) {
-                    String consulta = "SELECT count(*) FROM personas";
+                    String consulta = "SELECT idpersonas FROM personas WHERE dni = ?";
                     statement=connection.prepareStatement(consulta);
+                    statement.setString(1, jugador.getDNI());
                     resultados = statement.executeQuery();
                     if(resultados.next()){
-                        int i = resultados.getInt(1);
+                        int idpersona = resultados.getInt(1);
                         String registrousuario = "insert into usuarios(login,password,tipo,id_persona) values (?,?,?,?)";
                         statement=connection.prepareStatement(registrousuario);
                         statement.setString(1, jugador.getLogin());
                         statement.setString(2, jugador.getPassword());
                         statement.setInt(3, jugador.getTipo());
-                        statement.setInt(4, i);
+                        statement.setInt(4, idpersona);
                         if(statement.executeUpdate() > 0){
                             String consulta2 = "SELECT idclubes FROM clubes WHERE nombre_club = ?";
                             statement=connection.prepareStatement(consulta2);
@@ -861,8 +915,9 @@ public class DAO{
                             resultados = statement.executeQuery();
                             if(resultados.next()){
                                 int idclub = resultados.getInt(1);
-                                String consulta3 = "SELECT count(*) FROM usuarios";
+                                String consulta3 = "SELECT idusuarios FROM usuarios WHERE id_persona = ?";
                                 statement=connection.prepareStatement(consulta3);
+                                statement.setInt(1, idpersona);
                                 resultados = statement.executeQuery();
                                 if(resultados.next()){
                                     int idusuario = resultados.getInt(1);
@@ -873,7 +928,6 @@ public class DAO{
                                     statement.setInt(3, idusuario);
                                     if(statement.executeUpdate() > 0){
                                         hecho = true;
-                                        System.out.println(jugador);
                                     }
                                 }                            
                             }
@@ -882,10 +936,19 @@ public class DAO{
                 }
             }
         } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }       
-        
-        conexion.desconectar();
+            System.out.println("Error en la petición a la BD: " + e.getMessage());
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
+        }
         
         return hecho;
     }
@@ -933,10 +996,19 @@ public class DAO{
                 }
             }
          } catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }       
-        
-        conexion.desconectar();
+            System.out.println("Error en la petición a la BD: " + e.getMessage());
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
+        }
         
         return hecho;
     }
@@ -947,10 +1019,9 @@ public class DAO{
 	Conexion conexion=new Conexion();
         PreparedStatement statement=null;
         ResultSet resultados = null;
-        
         connection = conexion.getConnection();
         
-        try {                   
+        try {            
             if (connection!=null) {
                 String registrosede = "insert into sedes(nombre_sede) values (?)";
                 statement=connection.prepareStatement(registrosede);
@@ -958,13 +1029,25 @@ public class DAO{
                 System.out.println("insertar sede");
                 if(statement.executeUpdate() > 0){
                     System.out.println("buscar sede");
-                    String consulta = "SELECT count(*) FROM sedes";
+                    String consulta = "SELECT idsedes FROM sedes WHERE nombre_sede = ?";                    
                     statement=connection.prepareStatement(consulta);
+                    statement.setString(1, club.getSede().getNombre());
                     resultados = statement.executeQuery();
                     
                     if(resultados.next()){
-                        System.out.println("buscar federacion");
                         int idsede = resultados.getInt(1);
+                        ArrayList<FranjaHoraria> franja = club.getSede().getFranjaHoraria();
+                        System.out.println("Franja tamaño: " + franja.size());
+                        for(int i = 0;i<franja.size();i++ ){
+                            String registrofranjas = "insert into franjas_horarias(hora, id_sede) values (?,?)";
+                            statement=connection.prepareStatement(registrofranjas);
+                            statement.setString(1, franja.get(i).getHora());
+                            statement.setInt(2, idsede);
+                            if(statement.executeUpdate() > 0){
+                                System.out.println("Franja creada");
+                            }
+                        }
+                        System.out.println("buscar federacion");
                         String consulta2 = "SELECT idfederaciones FROM federaciones WHERE nombre_federacion = ?";
                         statement=connection.prepareStatement(consulta2);
                         statement.setString(1, club.getFederacion().getNombre());
@@ -1018,11 +1101,20 @@ public class DAO{
                 }
             }
         }catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }       
-        
-        conexion.desconectar();
-        
+            System.out.println("Error en la petición a la BD: " + e.getMessage());
+            
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
+        }
         return hecho;
     }
 
@@ -1064,10 +1156,19 @@ public class DAO{
                 }
             }
         }catch (SQLException e) { // Error al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }       
-        
-        conexion.desconectar();
+            System.out.println("Error en la petición a la BD: " + e.getMessage());
+        }finally{
+        try {
+                 if(statement!=null)
+                     statement.close();             
+                 if(connection!=null)
+                     connection.close();
+                 conexion.desconectar();
+             } catch (SQLException ex) {
+                 System.err.println( ex.getMessage() );    
+             }
+                
+        }
         
         return hecho;
     }

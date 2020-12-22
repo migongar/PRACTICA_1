@@ -51,6 +51,10 @@ public class FactoriaPersona implements Serializable{
     public void setLiga(Liga liga) {
         this.liga = liga;
     }
+
+    public Liga getLiga() {
+        return liga;
+    }
     
     
 }

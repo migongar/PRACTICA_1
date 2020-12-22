@@ -303,7 +303,7 @@ public class RegistroClub extends javax.swing.JFrame {
         
         if(datosGerente != null || datosEntrenador != null){
             if(!administrador.registrarClub(club, federacion, sede, datosGerente.getDNI(), datosEntrenador.getDNI())){
-            JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al registrar el jugador", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);

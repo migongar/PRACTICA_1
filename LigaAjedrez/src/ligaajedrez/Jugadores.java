@@ -91,7 +91,11 @@ public class Jugadores extends javax.swing.JFrame {
 
         jL_Nombre.setText("nombre");
 
+        jTF_Nombre.setEditable(false);
+
         jL_Club.setText("club");
+
+        jTF_Club.setEditable(false);
 
         jB_Salir.setText("Salir");
         jB_Salir.addActionListener(new java.awt.event.ActionListener() {

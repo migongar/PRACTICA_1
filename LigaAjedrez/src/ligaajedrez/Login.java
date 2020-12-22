@@ -7,10 +7,6 @@ package ligaajedrez;
 
 import Fachada.Fachada;
 import javax.swing.JOptionPane;
-import modelo.Administrador;
-import modelo.GestorLiga;
-import modelo.Jugador;
-import modelo.Usuario;
 
 /**
  *
@@ -20,8 +16,6 @@ public class Login extends javax.swing.JFrame {
     private Administracion administracion;
     private Jugadores jugadores;
     private RegistroJugador registrar;
-    private GestorLiga gestor;
-    private Usuario usuario;
     private Fachada fachada;
 
     /**
@@ -31,9 +25,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        fachada = new Fachada();
-        //gestor = new GestorLiga();        
-        //usuario = new Usuario(gestor.getLiga());        
+        fachada = new Fachada();    
     }
 
     /**

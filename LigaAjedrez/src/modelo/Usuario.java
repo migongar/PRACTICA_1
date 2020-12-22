@@ -124,5 +124,9 @@ public class Usuario extends Persona implements Serializable{
         
         return Character.isLetter(dni.charAt(dni.length()-1));
     }
+
+    public ArrayList buscarHorasDisponibles(String dni, Date fecha) {
+        return liga.buscarHorasDisponibles(dni, fecha);
+    }
     
 }

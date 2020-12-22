@@ -115,4 +115,8 @@ public class Fachada {
     public boolean registrarTorneo(String nombreTorneo, DefaultListModel listaTorneo, String federacion) {
         return administrador.registrarTorneo(nombreTorneo, listaTorneo, federacion);
     }
+
+    public ArrayList buscarHorasDisponibles(String dni, Date fecha) {
+        return usuario.buscarHorasDisponibles(dni, fecha);
+    }
 }

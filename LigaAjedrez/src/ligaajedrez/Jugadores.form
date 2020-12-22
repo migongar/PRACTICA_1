@@ -142,6 +142,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTF_Nombre">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jL_Club">
       <Properties>
@@ -149,6 +152,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTF_Club">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jB_Salir">
       <Properties>

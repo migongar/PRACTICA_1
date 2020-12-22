@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Administrador;
-import modelo.DatosTorneo;
+//import modelo.DatosTorneo;
 
 /**
  *
@@ -19,7 +19,7 @@ import modelo.DatosTorneo;
 public class AsignarSede extends javax.swing.JFrame {
     private JFrame pganterior;
     private Fachada administrador;
-    private ArrayList<DatosTorneo> datosTorneo = null;
+    //private ArrayList<DatosTorneo> datosTorneo = null;
 
     /**
      * Creates new form AsignarSede

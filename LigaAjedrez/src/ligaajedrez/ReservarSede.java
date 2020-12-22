@@ -6,6 +6,9 @@
 package ligaajedrez;
 
 import Fachada.Fachada;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -44,20 +47,20 @@ public class ReservarSede extends javax.swing.JFrame {
         jB_Salir = new javax.swing.JButton();
         jL_ReservarSede = new javax.swing.JLabel();
         jL_Entrenador = new javax.swing.JLabel();
-        jTF_Entrenador = new javax.swing.JTextField();
+        jTF_DNIJugador = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDC_fecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jL_Horarios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "8:00", "10:00", "12:00", "14:00", "18:00", "20:00", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jL_Horarios);
 
         jB_Buscar.setText("Buscar");
+        jB_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_BuscarActionPerformed(evt);
+            }
+        });
 
         jB_Reservar.setText("Reservar");
         jB_Reservar.addActionListener(new java.awt.event.ActionListener() {
@@ -84,15 +87,6 @@ public class ReservarSede extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jB_Salir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jB_Reservar)))
-                .addGap(32, 32, 32))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -105,11 +99,20 @@ public class ReservarSede extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTF_Entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTF_DNIJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jB_Buscar))
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jDC_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jB_Salir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB_Reservar)))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,15 +122,15 @@ public class ReservarSede extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDC_fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Buscar)
-                    .addComponent(jTF_Entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_DNIJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jL_Entrenador))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Reservar)
                     .addComponent(jB_Salir))
@@ -147,17 +150,43 @@ public class ReservarSede extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Sede Reservada:");
     }//GEN-LAST:event_jB_ReservarActionPerformed
 
+    private void jB_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_BuscarActionPerformed
+        String dni = jTF_DNIJugador.getText();
+        
+        if(!usuario.comprobarDNI(dni)){
+            JOptionPane.showMessageDialog(null, "DNI no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            ArrayList horasDisponibles = usuario.buscarHorasDisponibles(dni,jDC_fecha.getCalendar().getTime());
+            
+            jL_Horarios.clearSelection();
+
+            DefaultListModel lista = new DefaultListModel();
+            if(!horasDisponibles.isEmpty()){
+                for(int i = 0; i < horasDisponibles.size(); i++){
+                    lista.addElement(horasDisponibles.get(i));                   
+                }
+            }                
+            else{
+                JOptionPane.showMessageDialog(null,"No hay horarios disponibles para este jugador", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            jL_Horarios.setModel(lista);
+        }
+            
+    }//GEN-LAST:event_jB_BuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Buscar;
     private javax.swing.JButton jB_Reservar;
     private javax.swing.JButton jB_Salir;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDC_fecha;
     private javax.swing.JLabel jL_Entrenador;
     private javax.swing.JList<String> jL_Horarios;
     private javax.swing.JLabel jL_ReservarSede;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTF_Entrenador;
+    private javax.swing.JTextField jTF_DNIJugador;
     // End of variables declaration//GEN-END:variables
 }

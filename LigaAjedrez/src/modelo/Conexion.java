@@ -5,9 +5,7 @@
  */
 package modelo;
 
-import java.io.Serializable;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.TimeZone;
 
 /**

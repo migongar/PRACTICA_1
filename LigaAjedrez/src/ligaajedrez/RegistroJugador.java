@@ -11,7 +11,6 @@ import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.Usuario;
 
 /**
  *
@@ -30,7 +29,7 @@ public class RegistroJugador extends javax.swing.JFrame {
         this.usuario = user;
         this.pganterior = pgant;
         ArrayList lista = new ArrayList();
-        lista = usuario.getLiga().getFederaciones();
+        lista = usuario.getGestor().getLiga().getFederaciones();
         for(int i = 0; i<lista.size();i++){
             jCB_federacion.addItem(lista.get(i).toString());
         }
@@ -282,13 +281,6 @@ public class RegistroJugador extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Registrado correctamente.\n", "AVISO",JOptionPane.INFORMATION_MESSAGE);
                 
-                ArrayList lista = new ArrayList();
-                lista = usuario.getLiga().getJugadores();
-
-                for(int i = 0; i<lista.size();i++){
-                    System.out.println("Jugador " + (i+1) + ": " + lista.get(i).toString());
-                }
-
                 pganterior.setVisible(true);
                 this.dispose();
             }

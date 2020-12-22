@@ -45,31 +45,27 @@ public class Liga implements Serializable{
         factoria.setLiga(this);
         
         administradores = cargarDatos.getAdministradores(factoria);
-        jugadores = cargarDatos.getJugadores(factoria);
-        federaciones = cargarDatos.getFederaciones(factoria);
-        gerentes = cargarDatos.getGerentes(factoria);
-        entrenadores = cargarDatos.getEntrenadores(factoria);
-        clubes = cargarDatos.getClubes(factoria);
-        torneos = cargarDatos.getTorneos(factoria);
-        
         System.out.println( "Administradores:"); 
             
         for(int i = 0; i < administradores.size(); i++) {
             System.out.println( administradores.get(i));                
         }
-
+        
+        jugadores = cargarDatos.getJugadores(factoria);
         System.out.println( "Jugadores:"); 
 
         for(int i = 0; i < jugadores.size(); i++) {
             System.out.println( jugadores.get(i));                
         }
-
+        
+        federaciones = cargarDatos.getFederaciones(factoria);
         System.out.println( "Federaciones:"); 
 
         for(int i = 0; i < federaciones.size(); i++) {
             System.out.println( federaciones.get(i));                
         }
-
+        
+        gerentes = cargarDatos.getGerentes(factoria);
         System.out.println( "Gerentes:"); 
 
         for(int i = 0; i < gerentes.size(); i++) {
@@ -80,7 +76,8 @@ public class Liga implements Serializable{
             else
                 System.out.println("No");
         }
-
+        
+        entrenadores = cargarDatos.getEntrenadores(factoria);
         System.out.println( "Entrenadores:"); 
 
         for(int i = 0; i < entrenadores.size(); i++) {
@@ -91,13 +88,16 @@ public class Liga implements Serializable{
             else
                 System.out.println("No");
         }
-
+        
+        clubes = cargarDatos.getClubes(factoria);
         System.out.println( "Clubes:"); 
 
         for(int i = 0; i < clubes.size(); i++) {
             System.out.println( clubes.get(i));                
         }
-
+        
+        torneos = cargarDatos.getTorneos(factoria);
+        
         System.out.println( "Torneos:"); 
 
         for(int i = 0; i < torneos.size(); i++) {                
@@ -110,7 +110,7 @@ public class Liga implements Serializable{
                 System.out.println("Iniciado");
             else
                 System.out.println("No iniciado");
-        }
+        }      
         
         /*ArrayList arrayList;
         
@@ -353,6 +353,7 @@ public class Liga implements Serializable{
             jugador.setEdad(edad);
             jugador.setLogin(user);
             jugador.setContraseña(pass);
+            jugador.setTipousuario(0);
 
             if(jugadorDAO.registrarJugador(jugador)){
                 System.out.println("Nuevo Jugador: " + jugador);                
@@ -562,6 +563,7 @@ public class Liga implements Serializable{
         
         if(!repetido){
             Sede sede = new Sede(nomSede/*,fede*/);
+            sede.crearFranjaHoraria();
             System.out.println("Nueva Sede: " + sede);
             return sede;
         }
@@ -636,7 +638,6 @@ public class Liga implements Serializable{
             if(nuevasede != null){
                 Gerente gerenteclub = this.contratarGerente(gerente);
                 Entrenador entrenadorclub = this.contratarEntrenador(entrenador);
-                System.out.println("gerente contratado: " + gerenteclub.getDNI()); 
                 Club nuevoclub = new Club(club,fede,nuevasede,gerenteclub,entrenadorclub,this);
 
                 if(clubDAO.registrarClub(nuevoclub)){
@@ -935,5 +936,37 @@ public class Liga implements Serializable{
         }
         
         return (torneojugador && torneoenc);
+    }
+
+    public ArrayList buscarHorasDisponibles(String dni, Date fecha) {
+        ArrayList horasDisponibles = new ArrayList();        
+        int ind_jugador = this.buscarJugador(dni);
+        
+        if(ind_jugador>=0){
+            int ind_club= this.buscarClub(jugadores.get(ind_jugador).getClub().getNombre());
+            
+            if(ind_club>=0){
+                horasDisponibles = clubes.get(ind_club).getSede().buscarHorasDisponibles(dni, fecha);
+            }
+        }
+        
+        return horasDisponibles;        
+    }
+    
+    public int buscarClub(String nombre) {
+        boolean encontrado = false;
+        int i = 0;
+        
+        while(!encontrado && i < clubes.size()){
+            if(clubes.get(i).getNombre().equals(nombre)){
+                encontrado = true;
+            }
+            i++;
+        }
+        
+        if(encontrado)
+            return (i-1);
+        else
+            return (-1);
     }
 }
